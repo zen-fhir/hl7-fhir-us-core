@@ -1,0 +1,73 @@
+{ns hl7-fhir-us-core.us-core-implantable-device,
+ import
+ #{hl7-fhir-r4-core.Device
+   hl7-fhir-r4-core.BackboneElement
+   zen.fhir
+   hl7-fhir-r4-core.dateTime
+   hl7-fhir-r4-core.string
+   hl7-fhir-us-core.us-core-patient
+   hl7-fhir-r4-core.Reference
+   hl7-fhir-r4-core.base64Binary
+   hl7-fhir-r4-core.Element
+   hl7-fhir-r4-core.CodeableConcept
+   hl7-fhir-r4-core.value-set.device-kind},
+ schema
+ {:zen.fhir/version "0.5.21-6",
+  :confirms #{hl7-fhir-r4-core.Device/schema zen.fhir/Resource},
+  :zen/tags #{zen.fhir/profile-schema zen/schema},
+  :zen.fhir/profileUri
+  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-implantable-device",
+  :require #{:patient :type},
+  :type zen/map,
+  :zen/desc
+  "Defines constraints and extensions on the Device resource for the minimal set of data to query and retrieve a patient's implantable device(s).",
+  :keys
+  {:patient
+   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+    :fhir/flags #{:MS},
+    :zen.fhir/reference
+    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
+   :serialNumber
+   {:confirms #{hl7-fhir-r4-core.string/schema}, :fhir/flags #{:MS}},
+   :_manufactureDate {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :type
+   {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+    :fhir/flags #{:MS},
+    :zen.fhir/value-set
+    {:symbol hl7-fhir-r4-core.value-set.device-kind/value-set,
+     :strength :extensible}},
+   :_expirationDate {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :distinctIdentifier
+   {:confirms #{hl7-fhir-r4-core.string/schema}, :fhir/flags #{:MS}},
+   :lotNumber
+   {:confirms #{hl7-fhir-r4-core.string/schema}, :fhir/flags #{:MS}},
+   :_distinctIdentifier {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :_serialNumber {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :_lotNumber {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :manufactureDate
+   {:confirms #{hl7-fhir-r4-core.dateTime/schema}, :fhir/flags #{:MS}},
+   :expirationDate
+   {:confirms #{hl7-fhir-r4-core.dateTime/schema}, :fhir/flags #{:MS}},
+   :udiCarrier
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.BackboneElement/schema},
+     :type zen/map,
+     :keys
+     {:deviceIdentifier
+      {:confirms #{hl7-fhir-r4-core.string/schema},
+       :fhir/flags #{:MS}},
+      :_deviceIdentifier
+      {:confirms #{hl7-fhir-r4-core.Element/schema}},
+      :carrierAIDC
+      {:confirms #{hl7-fhir-r4-core.base64Binary/schema},
+       :fhir/flags #{:MS}},
+      :_carrierAIDC {:confirms #{hl7-fhir-r4-core.Element/schema}},
+      :carrierHRF
+      {:confirms #{hl7-fhir-r4-core.string/schema},
+       :fhir/flags #{:MS}},
+      :_carrierHRF {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+     :require #{:deviceIdentifier},
+     :fhir/flags #{:MS}},
+    :maxItems 1}},
+  :zen.fhir/type "Device"}}

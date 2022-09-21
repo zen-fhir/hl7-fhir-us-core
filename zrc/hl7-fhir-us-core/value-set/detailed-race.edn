@@ -1,0 +1,12 @@
+{ns hl7-fhir-us-core.value-set.detailed-race,
+ import #{zen.fhir},
+ value-set
+ {:zen/tags #{zen.fhir/value-set},
+  :zen/desc
+  "The 900+ [CDC Race codes](http://www.cdc.gov/phin/resources/vocabulary/index.html) that are grouped under one of the 5 OMB race category codes.",
+  :zen.fhir/version "0.5.21-6",
+  :fhir/code-systems
+  #{{:fhir/url "urn:oid:2.16.840.1.113883.6.238",
+     :zen.fhir/content :bundled}},
+  :uri "http://hl7.org/fhir/us/core/ValueSet/detailed-race",
+  :version "3.1.1"}}

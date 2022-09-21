@@ -1,0 +1,9 @@
+{ns hl7-fhir-us-core.search.us-core-race,
+ import #{zen.fhir},
+ search
+ {:zen/tags #{zen.fhir/search},
+  :fhir/id "us-core-race",
+  :fhir/url "http://hl7.org/fhir/us/core/SearchParameter/us-core-race",
+  :fhir/type "token",
+  :name "race",
+  :expr {:Patient {:jsonpath [], :data-types #{}, :template :token}}}}

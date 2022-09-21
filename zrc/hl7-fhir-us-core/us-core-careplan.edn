@@ -1,0 +1,74 @@
+{ns hl7-fhir-us-core.us-core-careplan,
+ import
+ #{hl7-fhir-r4-core.value-set.request-status
+   hl7-fhir-r4-core.CarePlan
+   hl7-fhir-r4-core.code
+   zen.fhir
+   hl7-fhir-r4-core.value-set.care-plan-intent
+   hl7-fhir-us-core.us-core-patient
+   hl7-fhir-r4-core.Reference
+   hl7-fhir-r4-core.Element
+   hl7-fhir-r4-core.Narrative
+   hl7-fhir-r4-core.CodeableConcept
+   hl7-fhir-us-core.value-set.us-core-narrative-status},
+ schema
+ {:zen.fhir/version "0.5.21-6",
+  :confirms #{hl7-fhir-r4-core.CarePlan/schema zen.fhir/Resource},
+  :zen/tags #{zen.fhir/profile-schema zen/schema},
+  :zen.fhir/profileUri
+  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-careplan",
+  :require #{:category :status :intent :subject :text},
+  :type zen/map,
+  :zen/desc
+  "Defines constraints and extensions on the CarePlan resource for the minimal set of data to query and retrieve a patient's Care Plan.",
+  :keys
+  {:text
+   {:confirms #{hl7-fhir-r4-core.Narrative/schema},
+    :type zen/map,
+    :keys
+    {:status
+     {:confirms #{hl7-fhir-r4-core.code/schema},
+      :fhir/flags #{:MS},
+      :zen.fhir/value-set
+      {:symbol
+       hl7-fhir-us-core.value-set.us-core-narrative-status/value-set,
+       :strength :required}},
+     :_status {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+    :fhir/flags #{:MS}},
+   :status
+   {:confirms #{hl7-fhir-r4-core.code/schema},
+    :fhir/flags #{:MS},
+    :zen.fhir/value-set
+    {:symbol hl7-fhir-r4-core.value-set.request-status/value-set,
+     :strength :required}},
+   :_status {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :intent
+   {:confirms #{hl7-fhir-r4-core.code/schema},
+    :fhir/flags #{:MS},
+    :zen.fhir/value-set
+    {:symbol hl7-fhir-r4-core.value-set.care-plan-intent/value-set,
+     :strength :required}},
+   :_intent {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :category
+   {:slicing
+    {:slices
+     {"AssessPlan"
+      {:schema {:type zen/vector, :minItems 1, :maxItems 1},
+       :filter
+       {:engine :match,
+        :match
+        {:coding
+         #{{:system
+            "http://hl7.org/fhir/us/core/CodeSystem/careplan-category",
+            :code "assess-plan"}}}}}}},
+    :type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+     :fhir/flags #{:MS}},
+    :minItems 1},
+   :subject
+   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+    :fhir/flags #{:MS},
+    :zen.fhir/reference
+    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}}},
+  :zen.fhir/type "CarePlan"}}

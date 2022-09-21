@@ -1,0 +1,114 @@
+{ns hl7-fhir-us-core.us-core-encounter,
+ import
+ #{hl7-fhir-r4-core.Period
+   hl7-fhir-r4-core.BackboneElement
+   hl7-fhir-r4-core.code
+   zen.fhir
+   hl7-fhir-us-core.us-core-practitioner
+   hl7-fhir-r4-core.string
+   hl7-fhir-us-core.us-core-patient
+   hl7-fhir-r4-core.Coding
+   hl7-fhir-r4-core.uri
+   hl7-fhir-us-core.value-set.us-core-encounter-type
+   hl7-fhir-r4-core.Reference
+   hl7-fhir-r4-core.Element
+   hl7-fhir-r4-core.Encounter
+   hl7-fhir-r4-core.CodeableConcept
+   hl7-fhir-r4-core.Identifier
+   hl7-fhir-r4-core.Location},
+ schema
+ {:zen.fhir/version "0.5.21-6",
+  :confirms #{zen.fhir/Resource hl7-fhir-r4-core.Encounter/schema},
+  :zen/tags #{zen.fhir/profile-schema zen/schema},
+  :zen.fhir/profileUri
+  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-encounter",
+  :require #{:type :status :class :subject},
+  :type zen/map,
+  :zen/desc "The Encounter referenced in the US Core profiles.",
+  :keys
+  {:_status {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :reasonCode
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+     :fhir/flags #{:MS}}},
+   :type
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+     :fhir/flags #{:MS},
+     :zen.fhir/value-set
+     {:symbol
+      hl7-fhir-us-core.value-set.us-core-encounter-type/value-set,
+      :strength :extensible}},
+    :minItems 1},
+   :participant
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.BackboneElement/schema},
+     :type zen/map,
+     :keys
+     {:type
+      {:type zen/vector,
+       :every
+       {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+        :fhir/flags #{:MS}}},
+      :period
+      {:confirms #{hl7-fhir-r4-core.Period/schema},
+       :fhir/flags #{:MS}},
+      :individual
+      {:confirms
+       #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+       :fhir/flags #{:MS},
+       :zen.fhir/reference
+       {:refers #{hl7-fhir-us-core.us-core-practitioner/schema}}}},
+     :fhir/flags #{:MS}}},
+   :status
+   {:confirms #{hl7-fhir-r4-core.code/schema}, :fhir/flags #{:MS}},
+   :class
+   {:confirms #{hl7-fhir-r4-core.Coding/schema}, :fhir/flags #{:MS}},
+   :identifier
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.Identifier/schema},
+     :type zen/map,
+     :keys
+     {:system
+      {:confirms #{hl7-fhir-r4-core.uri/schema}, :fhir/flags #{:MS}},
+      :_system {:confirms #{hl7-fhir-r4-core.Element/schema}},
+      :value
+      {:confirms #{hl7-fhir-r4-core.string/schema},
+       :fhir/flags #{:MS}},
+      :_value {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+     :require #{:system :value},
+     :fhir/flags #{:MS}}},
+   :hospitalization
+   {:confirms #{hl7-fhir-r4-core.BackboneElement/schema},
+    :type zen/map,
+    :keys
+    {:dischargeDisposition
+     {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+      :fhir/flags #{:MS}}},
+    :fhir/flags #{:MS}},
+   :period
+   {:confirms #{hl7-fhir-r4-core.Period/schema}, :fhir/flags #{:MS}},
+   :location
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.BackboneElement/schema},
+     :type zen/map,
+     :keys
+     {:location
+      {:confirms
+       #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+       :fhir/flags #{:MS},
+       :zen.fhir/reference
+       {:refers #{hl7-fhir-r4-core.Location/schema}}}},
+     :require #{:location},
+     :fhir/flags #{:MS}}},
+   :subject
+   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+    :fhir/flags #{:MS},
+    :zen.fhir/reference
+    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}}},
+  :zen.fhir/type "Encounter"}}

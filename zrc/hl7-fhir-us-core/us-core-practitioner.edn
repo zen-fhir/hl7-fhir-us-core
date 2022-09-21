@@ -1,0 +1,56 @@
+{ns hl7-fhir-us-core.us-core-practitioner,
+ import
+ #{zen.fhir
+   hl7-fhir-r4-core.string
+   hl7-fhir-r4-core.HumanName
+   hl7-fhir-r4-core.uri
+   hl7-fhir-r4-core.Element
+   hl7-fhir-r4-core.Practitioner
+   hl7-fhir-r4-core.Identifier},
+ schema
+ {:zen.fhir/version "0.5.21-6",
+  :confirms #{hl7-fhir-r4-core.Practitioner/schema zen.fhir/Resource},
+  :zen/tags #{zen.fhir/profile-schema zen/schema},
+  :zen.fhir/profileUri
+  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-practitioner",
+  :require #{:name :identifier},
+  :type zen/map,
+  :zen/desc "The practitioner(s) referenced in US Core profiles.",
+  :keys
+  {:identifier
+   {:slicing
+    {:slices
+     {"NPI"
+      {:schema {:type zen/vector, :maxItems 1},
+       :filter
+       {:engine :match,
+        :match {:system "http://hl7.org/fhir/sid/us-npi"}}}}},
+    :type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.Identifier/schema},
+     :type zen/map,
+     :keys
+     {:system
+      {:confirms #{hl7-fhir-r4-core.uri/schema}, :fhir/flags #{:MS}},
+      :_system {:confirms #{hl7-fhir-r4-core.Element/schema}},
+      :value
+      {:confirms #{hl7-fhir-r4-core.string/schema},
+       :fhir/flags #{:MS}},
+      :_value {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+     :require #{:system :value},
+     :fhir/flags #{:MS}},
+    :minItems 1},
+   :name
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.HumanName/schema},
+     :type zen/map,
+     :keys
+     {:family
+      {:confirms #{hl7-fhir-r4-core.string/schema},
+       :fhir/flags #{:MS}},
+      :_family {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+     :require #{:family},
+     :fhir/flags #{:MS}},
+    :minItems 1}},
+  :zen.fhir/type "Practitioner"}}

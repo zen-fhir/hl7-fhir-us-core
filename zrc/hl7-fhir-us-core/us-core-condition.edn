@@ -1,0 +1,59 @@
+{ns hl7-fhir-us-core.us-core-condition,
+ import
+ #{hl7-fhir-r4-core.Condition
+   zen.fhir
+   hl7-fhir-r4-core.value-set.condition-ver-status
+   hl7-fhir-us-core.value-set.us-core-condition-code
+   hl7-fhir-us-core.us-core-patient
+   hl7-fhir-r4-core.value-set.condition-clinical
+   hl7-fhir-r4-core.Reference
+   hl7-fhir-r4-core.CodeableConcept
+   hl7-fhir-us-core.value-set.us-core-condition-category},
+ schema
+ {:zen.fhir/version "0.5.21-6",
+  :confirms #{zen.fhir/Resource hl7-fhir-r4-core.Condition/schema},
+  :zen/tags #{zen.fhir/profile-schema zen/schema},
+  :zen.fhir/profileUri
+  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-condition",
+  :require #{:category :code :subject},
+  :type zen/map,
+  :zen/desc
+  "Defines constraints and extensions on the Condition resource for the minimal set of data to query and retrieve problems and health concerns information.",
+  :keys
+  {:clinicalStatus
+   {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+    :fhir/flags #{:MS},
+    :zen.fhir/value-set
+    {:symbol hl7-fhir-r4-core.value-set.condition-clinical/value-set,
+     :strength :required}},
+   :verificationStatus
+   {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+    :fhir/flags #{:MS},
+    :zen.fhir/value-set
+    {:symbol hl7-fhir-r4-core.value-set.condition-ver-status/value-set,
+     :strength :required}},
+   :category
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+     :fhir/flags #{:MS},
+     :zen.fhir/value-set
+     {:symbol
+      hl7-fhir-us-core.value-set.us-core-condition-category/value-set,
+      :strength :extensible},
+     :zen/desc
+     "problem-list-item | encounter-diagnosis | health-concern"},
+    :minItems 1},
+   :code
+   {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+    :fhir/flags #{:MS},
+    :zen.fhir/value-set
+    {:symbol
+     hl7-fhir-us-core.value-set.us-core-condition-code/value-set,
+     :strength :extensible}},
+   :subject
+   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+    :fhir/flags #{:MS},
+    :zen.fhir/reference
+    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}}},
+  :zen.fhir/type "Condition"}}

@@ -1,0 +1,17 @@
+{ns hl7-fhir-us-core.value-set.us-core-condition-category,
+ import #{zen.fhir},
+ value-set
+ {:zen/tags #{zen.fhir/value-set},
+  :zen/desc
+  "The US Core Condition Category Codes support the separate concepts of problems and health concerns in Condition.category in order for API consumers to be able to separate health concerns and problems. However this is not mandatory for 2015 certification",
+  :zen.fhir/version "0.5.21-6",
+  :fhir/code-systems
+  #{{:fhir/url
+     "http://hl7.org/fhir/us/core/CodeSystem/condition-category",
+     :zen.fhir/content :bundled}
+    {:fhir/url
+     "http://terminology.hl7.org/CodeSystem/condition-category",
+     :zen.fhir/content :bundled}},
+  :uri
+  "http://hl7.org/fhir/us/core/ValueSet/us-core-condition-category",
+  :version "3.1.1"}}

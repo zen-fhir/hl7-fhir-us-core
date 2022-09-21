@@ -1,0 +1,84 @@
+{ns hl7-fhir-us-core.us-core-practitionerrole,
+ import
+ #{hl7-fhir-r4-core.code
+   zen.fhir
+   hl7-fhir-us-core.us-core-practitioner
+   hl7-fhir-us-core.value-set.us-core-provider-role
+   hl7-fhir-r4-core.ContactPoint
+   hl7-fhir-r4-core.string
+   hl7-fhir-us-core.us-core-organization
+   hl7-fhir-us-core.value-set.us-core-provider-specialty
+   hl7-fhir-r4-core.PractitionerRole
+   hl7-fhir-r4-core.Reference
+   hl7-fhir-r4-core.Element
+   hl7-fhir-r4-core.CodeableConcept
+   hl7-fhir-r4-core.Location},
+ schema
+ {:zen.fhir/version "0.5.21-6",
+  :confirms
+  #{hl7-fhir-r4-core.PractitionerRole/schema zen.fhir/Resource},
+  :zen/tags #{zen.fhir/profile-schema zen/schema},
+  :zen.fhir/profileUri
+  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-practitionerrole",
+  :require #{:organization :practitioner},
+  :type zen/map,
+  :zen/desc
+  "The practitioner roles referenced in the US Core profiles.",
+  :keys
+  {:practitioner
+   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+    :fhir/flags #{:MS},
+    :zen.fhir/reference
+    {:refers #{hl7-fhir-us-core.us-core-practitioner/schema}}},
+   :organization
+   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+    :fhir/flags #{:MS},
+    :zen.fhir/reference
+    {:refers #{hl7-fhir-us-core.us-core-organization/schema}}},
+   :code
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+     :fhir/flags #{:MS},
+     :zen.fhir/value-set
+     {:symbol
+      hl7-fhir-us-core.value-set.us-core-provider-role/value-set,
+      :strength :extensible}}},
+   :specialty
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+     :fhir/flags #{:MS},
+     :zen.fhir/value-set
+     {:symbol
+      hl7-fhir-us-core.value-set.us-core-provider-specialty/value-set,
+      :strength :extensible}}},
+   :location
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+     :fhir/flags #{:MS},
+     :zen.fhir/reference
+     {:refers #{hl7-fhir-r4-core.Location/schema}}}},
+   :telecom
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.ContactPoint/schema},
+     :type zen/map,
+     :keys
+     {:system
+      {:confirms #{hl7-fhir-r4-core.code/schema}, :fhir/flags #{:MS}},
+      :_system {:confirms #{hl7-fhir-r4-core.Element/schema}},
+      :value
+      {:confirms #{hl7-fhir-r4-core.string/schema},
+       :fhir/flags #{:MS}},
+      :_value {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+     :require #{:system :value},
+     :fhir/flags #{:MS}}},
+   :endpoint
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+     :fhir/flags #{:MS},
+     :zen.fhir/reference {:refers #{}}}}},
+  :zen.fhir/type "PractitionerRole"}}

@@ -1,0 +1,15 @@
+{ns hl7-fhir-us-core.value-set.us-core-careteam-provider-roles,
+ import #{zen.fhir},
+ value-set
+ {:zen/tags #{zen.fhir/value-set},
+  :zen/desc
+  "Provider roles codes consist of NUCC Health Care Provider Taxonomy Code Set for providers and SNOMED-CT for - non clinical and organization roles including codes from the SCTID 223366009 Healthcare professional (occupation) heirarchy and the SCTID 224930009 Services (qualifier value) heirarchy.",
+  :zen.fhir/version "0.5.21-6",
+  :fhir/code-systems
+  #{{:fhir/url "http://nucc.org/provider-taxonomy",
+     :zen.fhir/content :not-present}
+    {:fhir/url "http://snomed.info/sct",
+     :zen.fhir/content :not-present}},
+  :uri
+  "http://hl7.org/fhir/us/core/ValueSet/us-core-careteam-provider-roles",
+  :version "3.1.1"}}

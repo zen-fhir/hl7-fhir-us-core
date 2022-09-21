@@ -1,0 +1,13 @@
+{ns hl7-fhir-us-core.value-set.us-core-ndc-vaccine-codes,
+ import #{zen.fhir},
+ value-set
+ {:zen/tags #{zen.fhir/value-set},
+  :zen/desc
+  "This value set includes all the Vaccine National Drug Codes (NDC).  This source of this data is provided by the [CDC](https://www2a.cdc.gov/vaccines/iis/iisstandards/ndc_crosswalk.asp)",
+  :zen.fhir/version "0.5.21-6",
+  :fhir/code-systems
+  #{{:fhir/url "http://hl7.org/fhir/sid/ndc",
+     :zen.fhir/content :bundled}},
+  :uri
+  "http://hl7.org/fhir/us/core/ValueSet/us-core-ndc-vaccine-codes",
+  :version "3.1.1"}}

@@ -1,0 +1,53 @@
+{ns hl7-fhir-us-core.us-core-goal,
+ import
+ #{hl7-fhir-r4-core.BackboneElement
+   hl7-fhir-r4-core.code
+   zen.fhir
+   hl7-fhir-r4-core.Goal
+   hl7-fhir-us-core.us-core-patient
+   hl7-fhir-r4-core.date
+   hl7-fhir-r4-core.Reference
+   hl7-fhir-r4-core.value-set.goal-status
+   hl7-fhir-r4-core.Element
+   hl7-fhir-r4-core.CodeableConcept},
+ schema
+ {:zen.fhir/version "0.5.21-6",
+  :confirms #{hl7-fhir-r4-core.Goal/schema zen.fhir/Resource},
+  :zen/tags #{zen.fhir/profile-schema zen/schema},
+  :zen.fhir/profileUri
+  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-goal",
+  :require #{:description :subject :lifecycleStatus},
+  :type zen/map,
+  :zen/desc
+  "Defines constraints and extensions on the Goal resource for the minimal set of data to query and retrieve a patient's goal(s).",
+  :keys
+  {:lifecycleStatus
+   {:confirms #{hl7-fhir-r4-core.code/schema},
+    :fhir/flags #{:MS},
+    :zen.fhir/value-set
+    {:symbol hl7-fhir-r4-core.value-set.goal-status/value-set,
+     :strength :required}},
+   :_lifecycleStatus {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :description
+   {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+    :fhir/flags #{:MS}},
+   :subject
+   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+    :fhir/flags #{:MS},
+    :zen.fhir/reference
+    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
+   :target
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.BackboneElement/schema},
+     :type zen/map,
+     :keys
+     {:due
+      {:type zen/map,
+       :keys
+       {:date
+        {:confirms #{hl7-fhir-r4-core.date/schema},
+         :fhir/flags #{:MS}},
+        :_date {:confirms #{hl7-fhir-r4-core.Element/schema}}}}},
+     :fhir/flags #{:MS}}}},
+  :zen.fhir/type "Goal"}}

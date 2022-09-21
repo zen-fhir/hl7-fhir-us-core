@@ -1,0 +1,67 @@
+{ns hl7-fhir-us-core.us-core-careteam,
+ import
+ #{hl7-fhir-r4-core.CareTeam
+   hl7-fhir-r4-core.value-set.care-team-status
+   hl7-fhir-r4-core.BackboneElement
+   hl7-fhir-r4-core.code
+   zen.fhir
+   hl7-fhir-us-core.us-core-practitioner
+   hl7-fhir-us-core.value-set.us-core-careteam-provider-roles
+   hl7-fhir-us-core.us-core-organization
+   hl7-fhir-us-core.us-core-patient
+   hl7-fhir-r4-core.Reference
+   hl7-fhir-r4-core.Element
+   hl7-fhir-r4-core.CodeableConcept},
+ schema
+ {:zen.fhir/version "0.5.21-6",
+  :confirms #{hl7-fhir-r4-core.CareTeam/schema zen.fhir/Resource},
+  :zen/tags #{zen.fhir/profile-schema zen/schema},
+  :zen.fhir/profileUri
+  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-careteam",
+  :require #{:participant :subject},
+  :type zen/map,
+  :zen/desc
+  "Defines constraints and extensions on the CareTeam resource for the minimal set of data to query and retrieve a patient's Care Team.",
+  :keys
+  {:status
+   {:confirms #{hl7-fhir-r4-core.code/schema},
+    :fhir/flags #{:MS},
+    :zen.fhir/value-set
+    {:symbol hl7-fhir-r4-core.value-set.care-team-status/value-set,
+     :strength :required}},
+   :_status {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :subject
+   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+    :fhir/flags #{:MS},
+    :zen.fhir/reference
+    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
+   :participant
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.BackboneElement/schema},
+     :type zen/map,
+     :keys
+     {:role
+      {:type zen/vector,
+       :every
+       {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+        :fhir/flags #{:MS},
+        :zen.fhir/value-set
+        {:symbol
+         hl7-fhir-us-core.value-set.us-core-careteam-provider-roles/value-set,
+         :strength :extensible}},
+       :minItems 1,
+       :maxItems 1},
+      :member
+      {:confirms
+       #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+       :fhir/flags #{:MS},
+       :zen.fhir/reference
+       {:refers
+        #{hl7-fhir-us-core.us-core-organization/schema
+          hl7-fhir-us-core.us-core-patient/schema
+          hl7-fhir-us-core.us-core-practitioner/schema}}}},
+     :require #{:role :member},
+     :fhir/flags #{:MS}},
+    :minItems 1}},
+  :zen.fhir/type "CareTeam"}}

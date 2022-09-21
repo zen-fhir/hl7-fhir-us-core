@@ -1,0 +1,68 @@
+{ns hl7-fhir-us-core.us-core-location,
+ import
+ #{hl7-fhir-r4-core.code
+   zen.fhir
+   hl7-fhir-r4-core.ContactPoint
+   hl7-fhir-r4-core.string
+   hl7-fhir-us-core.us-core-organization
+   hl7-fhir-us-core.value-set.us-core-usps-state
+   hl7-fhir-r4-core.Reference
+   hl7-fhir-r4-core.Element
+   hl7-fhir-r4-core.Location
+   hl7-fhir-r4-core.Address},
+ schema
+ {:zen.fhir/version "0.5.21-6",
+  :confirms #{hl7-fhir-r4-core.Location/schema zen.fhir/Resource},
+  :zen/tags #{zen.fhir/profile-schema zen/schema},
+  :zen.fhir/profileUri
+  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-location",
+  :require #{:name},
+  :type zen/map,
+  :zen/desc
+  "Defines basic constraints and extensions on the Location resource for use with other US Core resources",
+  :keys
+  {:status
+   {:confirms #{hl7-fhir-r4-core.code/schema}, :fhir/flags #{:MS}},
+   :_status {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :name
+   {:confirms #{hl7-fhir-r4-core.string/schema}, :fhir/flags #{:MS}},
+   :_name {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :telecom
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.ContactPoint/schema},
+     :fhir/flags #{:MS}}},
+   :address
+   {:confirms #{hl7-fhir-r4-core.Address/schema},
+    :type zen/map,
+    :keys
+    {:line
+     {:type zen/vector,
+      :every
+      {:confirms #{hl7-fhir-r4-core.string/schema},
+       :fhir/flags #{:MS}}},
+     :_line
+     {:type zen/vector,
+      :every {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+     :city
+     {:confirms #{hl7-fhir-r4-core.string/schema}, :fhir/flags #{:MS}},
+     :_city {:confirms #{hl7-fhir-r4-core.Element/schema}},
+     :state
+     {:confirms #{hl7-fhir-r4-core.string/schema},
+      :fhir/flags #{:MS},
+      :zen.fhir/value-set
+      {:symbol hl7-fhir-us-core.value-set.us-core-usps-state/value-set,
+       :strength :extensible}},
+     :_state {:confirms #{hl7-fhir-r4-core.Element/schema}},
+     :postalCode
+     {:confirms #{hl7-fhir-r4-core.string/schema},
+      :fhir/flags #{:MS},
+      :zen/desc "US Zip Codes"},
+     :_postalCode {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+    :fhir/flags #{:MS}},
+   :managingOrganization
+   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+    :fhir/flags #{:MS},
+    :zen.fhir/reference
+    {:refers #{hl7-fhir-us-core.us-core-organization/schema}}}},
+  :zen.fhir/type "Location"}}

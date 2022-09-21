@@ -1,0 +1,69 @@
+{ns hl7-fhir-us-core.us-core-allergyintolerance,
+ import
+ #{hl7-fhir-r4-core.BackboneElement
+   zen.fhir
+   hl7-fhir-us-core.us-core-patient
+   hl7-fhir-r4-core.value-set.allergyintolerance-clinical
+   hl7-fhir-us-core.value-set.us-core-allergy-substance
+   hl7-fhir-r4-core.AllergyIntolerance
+   hl7-fhir-r4-core.Reference
+   hl7-fhir-r4-core.value-set.allergyintolerance-verification
+   hl7-fhir-r4-core.CodeableConcept
+   hl7-fhir-r4-core.value-set.clinical-findings},
+ schema
+ {:zen.fhir/version "0.5.21-6",
+  :confirms
+  #{zen.fhir/Resource hl7-fhir-r4-core.AllergyIntolerance/schema},
+  :zen/tags #{zen.fhir/profile-schema zen/schema},
+  :zen.fhir/profileUri
+  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-allergyintolerance",
+  :require #{:patient :code},
+  :type zen/map,
+  :zen/desc
+  "Defines constraints and extensions on the AllergyIntolerance resource for the minimal set of data to query and retrieve allergy information.",
+  :keys
+  {:clinicalStatus
+   {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+    :fhir/flags #{:MS},
+    :zen.fhir/value-set
+    {:symbol
+     hl7-fhir-r4-core.value-set.allergyintolerance-clinical/value-set,
+     :strength :required}},
+   :verificationStatus
+   {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+    :fhir/flags #{:MS},
+    :zen.fhir/value-set
+    {:symbol
+     hl7-fhir-r4-core.value-set.allergyintolerance-verification/value-set,
+     :strength :required}},
+   :code
+   {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+    :fhir/flags #{:MS},
+    :zen.fhir/value-set
+    {:symbol
+     hl7-fhir-us-core.value-set.us-core-allergy-substance/value-set,
+     :strength :extensible}},
+   :patient
+   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+    :fhir/flags #{:MS},
+    :zen.fhir/reference
+    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
+   :reaction
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.BackboneElement/schema},
+     :type zen/map,
+     :keys
+     {:manifestation
+      {:type zen/vector,
+       :every
+       {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+        :fhir/flags #{:MS},
+        :zen.fhir/value-set
+        {:symbol
+         hl7-fhir-r4-core.value-set.clinical-findings/value-set,
+         :strength :extensible}},
+       :minItems 1}},
+     :require #{:manifestation},
+     :fhir/flags #{:MS}}}},
+  :zen.fhir/type "AllergyIntolerance"}}

@@ -1,0 +1,155 @@
+{ns hl7-fhir-us-core.us-core-pulse-oximetry,
+ import
+ #{hl7-fhir-r4-core.decimal
+   hl7-fhir-r4-core.BackboneElement
+   hl7-fhir-r4-core.code
+   zen.fhir
+   hl7-fhir-r4-core.string
+   hl7-fhir-r4-core.Coding
+   hl7-fhir-r4-core.Quantity
+   hl7-fhir-r4-core.uri
+   hl7-fhir-r4-core.Element
+   hl7-fhir-r4-core.CodeableConcept
+   hl7-fhir-r4-core.oxygensat},
+ schema
+ {:zen/tags #{zen.fhir/profile-schema zen/schema},
+  :zen/desc
+  "Defines constraints and extensions on the Observation resource for use in querying and retrieving inspired O2 by pulse oximetry observations.",
+  :zen.fhir/type "Observation",
+  :zen.fhir/profileUri
+  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-pulse-oximetry",
+  :zen.fhir/version "0.5.21-6",
+  :confirms #{hl7-fhir-r4-core.oxygensat/schema zen.fhir/Resource},
+  :type zen/map,
+  :keys
+  {:code
+   {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+    :type zen/map,
+    :keys
+    {:coding
+     {:slicing
+      {:slices
+       {"PulseOx"
+        {:schema
+         {:type zen/vector,
+          :minItems 1,
+          :maxItems 1,
+          :every
+          {:type zen/map,
+           :keys
+           {:system
+            {:const {:value "http://loinc.org"},
+             :confirms #{hl7-fhir-r4-core.uri/schema},
+             :fhir/flags #{:MS}},
+            :_system {:confirms #{hl7-fhir-r4-core.Element/schema}},
+            :code
+            {:const {:value "59408-5"},
+             :confirms #{hl7-fhir-r4-core.code/schema},
+             :fhir/flags #{:MS}},
+            :_code {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+           :require #{:system :code}}},
+         :filter
+         {:engine :match,
+          :match {:code "59408-5", :system "http://loinc.org"}}}}},
+      :type zen/vector,
+      :every
+      {:confirms #{hl7-fhir-r4-core.Coding/schema},
+       :fhir/flags #{:MS}}}},
+    :fhir/flags #{:MS},
+    :zen/desc "Oxygen Saturation by Pulse Oximetry"},
+   :component
+   {:slicing
+    {:slices
+     {"FlowRate"
+      {:schema
+       {:type zen/vector,
+        :maxItems 1,
+        :every
+        {:type zen/map,
+         :keys
+         {:code
+          {:match
+           {:coding #{{:system "http://loinc.org", :code "3151-8"}}},
+           :confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+           :fhir/flags #{:MS}},
+          :value
+          {:type zen/map,
+           :keys
+           {:Quantity
+            {:confirms #{hl7-fhir-r4-core.Quantity/schema},
+             :type zen/map,
+             :keys
+             {:value
+              {:confirms #{hl7-fhir-r4-core.decimal/schema},
+               :fhir/flags #{:MS}},
+              :_value {:confirms #{hl7-fhir-r4-core.Element/schema}},
+              :unit
+              {:confirms #{hl7-fhir-r4-core.string/schema},
+               :fhir/flags #{:MS}},
+              :_unit {:confirms #{hl7-fhir-r4-core.Element/schema}},
+              :system
+              {:const {:value "http://unitsofmeasure.org"},
+               :confirms #{hl7-fhir-r4-core.uri/schema},
+               :fhir/flags #{:MS}},
+              :_system {:confirms #{hl7-fhir-r4-core.Element/schema}},
+              :code
+              {:const {:value "L/min"},
+               :confirms #{hl7-fhir-r4-core.code/schema},
+               :fhir/flags #{:MS}},
+              :_code {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+             :require #{:system :unit :value :code},
+             :fhir/flags #{:MS}}}}}}},
+       :filter
+       {:engine :match,
+        :match
+        {:code
+         {:coding #{{:system "http://loinc.org", :code "3151-8"}}}}}},
+      "Concentration"
+      {:schema
+       {:type zen/vector,
+        :maxItems 1,
+        :every
+        {:type zen/map,
+         :keys
+         {:code
+          {:match
+           {:coding #{{:system "http://loinc.org", :code "3150-0"}}},
+           :confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+           :fhir/flags #{:MS}},
+          :value
+          {:type zen/map,
+           :keys
+           {:Quantity
+            {:confirms #{hl7-fhir-r4-core.Quantity/schema},
+             :type zen/map,
+             :keys
+             {:value
+              {:confirms #{hl7-fhir-r4-core.decimal/schema},
+               :fhir/flags #{:MS}},
+              :_value {:confirms #{hl7-fhir-r4-core.Element/schema}},
+              :unit
+              {:confirms #{hl7-fhir-r4-core.string/schema},
+               :fhir/flags #{:MS}},
+              :_unit {:confirms #{hl7-fhir-r4-core.Element/schema}},
+              :system
+              {:const {:value "http://unitsofmeasure.org"},
+               :confirms #{hl7-fhir-r4-core.uri/schema},
+               :fhir/flags #{:MS}},
+              :_system {:confirms #{hl7-fhir-r4-core.Element/schema}},
+              :code
+              {:const {:value "%"},
+               :confirms #{hl7-fhir-r4-core.code/schema},
+               :fhir/flags #{:MS}},
+              :_code {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+             :require #{:system :unit :value :code},
+             :fhir/flags #{:MS}}}}}}},
+       :filter
+       {:engine :match,
+        :match
+        {:code
+         {:coding
+          #{{:system "http://loinc.org", :code "3150-0"}}}}}}}},
+    :type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.BackboneElement/schema},
+     :fhir/flags #{:MS}}}}}}
