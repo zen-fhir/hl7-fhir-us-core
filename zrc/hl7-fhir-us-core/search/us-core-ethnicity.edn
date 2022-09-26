@@ -7,4 +7,6 @@
   "http://hl7.org/fhir/us/core/SearchParameter/us-core-ethnicity",
   :fhir/type "token",
   :name "ethnicity",
-  :expr {:Patient {:jsonpath [], :data-types #{}, :template :token}}}}
+  :expr
+  {:Patient
+   {:knife [], :jsonpath [], :data-types #{}, :template :token}}}}
