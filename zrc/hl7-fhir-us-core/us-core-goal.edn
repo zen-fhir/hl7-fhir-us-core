@@ -1,9 +1,11 @@
 {ns hl7-fhir-us-core.us-core-goal,
  import
- #{hl7-fhir-r4-core.BackboneElement
+ #{hl7-fhir-r4-core.Duration
+   hl7-fhir-r4-core.BackboneElement
    hl7-fhir-r4-core.code
    zen.fhir
    hl7-fhir-r4-core.Goal
+   hl7-fhir-us-core.value-set.us-core-goal-description
    hl7-fhir-us-core.us-core-patient
    hl7-fhir-r4-core.date
    hl7-fhir-r4-core.Reference
@@ -11,15 +13,15 @@
    hl7-fhir-r4-core.Element
    hl7-fhir-r4-core.CodeableConcept},
  schema
- {:zen.fhir/version "0.5.21-14",
-  :confirms #{hl7-fhir-r4-core.Goal/schema zen.fhir/Resource},
-  :zen/tags #{zen.fhir/profile-schema zen/schema},
+ {:zen/tags #{zen.fhir/profile-schema zen/schema},
+  :zen/desc
+  "This profile sets minimum expectations for the Goal resource to record, search, and fetch Goal information associated with a patient to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases",
+  :zen.fhir/type "Goal",
   :zen.fhir/profileUri
   "http://hl7.org/fhir/us/core/StructureDefinition/us-core-goal",
-  :require #{:description :subject :lifecycleStatus},
+  :zen.fhir/version "0.5.22",
+  :confirms #{hl7-fhir-r4-core.Goal/schema zen.fhir/Resource},
   :type zen/map,
-  :zen/desc
-  "Defines constraints and extensions on the Goal resource for the minimal set of data to query and retrieve a patient's goal(s).",
   :keys
   {:lifecycleStatus
    {:confirms #{hl7-fhir-r4-core.code/schema},
@@ -30,7 +32,11 @@
    :_lifecycleStatus {:confirms #{hl7-fhir-r4-core.Element/schema}},
    :description
    {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-    :fhir/flags #{:MS}},
+    :fhir/flags #{:MS},
+    :zen.fhir/value-set
+    {:symbol
+     hl7-fhir-us-core.value-set.us-core-goal-description/value-set,
+     :strength :extensible}},
    :subject
    {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
     :fhir/flags #{:MS},
@@ -43,11 +49,12 @@
      :type zen/map,
      :keys
      {:due
-      {:type zen/map,
+      {:fhir/polymorphic true,
+       :exclusive-keys #{#{:date :Duration}},
+       :type zen/map,
        :keys
-       {:date
-        {:confirms #{hl7-fhir-r4-core.date/schema},
-         :fhir/flags #{:MS}},
-        :_date {:confirms #{hl7-fhir-r4-core.Element/schema}}}}},
-     :fhir/flags #{:MS}}}},
-  :zen.fhir/type "Goal"}}
+       {:date {:confirms #{hl7-fhir-r4-core.date/schema}},
+        :_date {:confirms #{hl7-fhir-r4-core.Element/schema}},
+        :Duration {:confirms #{hl7-fhir-r4-core.Duration/schema}}},
+       :fhir/flags #{:MS}}},
+     :fhir/flags #{:MS}}}}}}

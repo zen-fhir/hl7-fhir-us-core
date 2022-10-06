@@ -1,0 +1,80 @@
+{ns hl7-fhir-us-core.us-core-servicerequest,
+ import
+ #{hl7-fhir-r4-core.Period
+   hl7-fhir-r4-core.Device
+   hl7-fhir-r4-core.code
+   zen.fhir
+   hl7-fhir-us-core.us-core-practitioner
+   hl7-fhir-r4-core.dateTime
+   hl7-fhir-us-core.us-core-relatedperson
+   hl7-fhir-r4-core.Timing
+   hl7-fhir-us-core.us-core-organization
+   hl7-fhir-us-core.us-core-patient
+   hl7-fhir-r4-core.PractitionerRole
+   hl7-fhir-us-core.value-set.us-core-procedure-code
+   hl7-fhir-r4-core.Reference
+   hl7-fhir-r4-core.ServiceRequest
+   hl7-fhir-r4-core.Element
+   hl7-fhir-r4-core.CodeableConcept},
+ schema
+ {:zen.fhir/version "0.5.22",
+  :confirms
+  #{hl7-fhir-r4-core.ServiceRequest/schema zen.fhir/Resource},
+  :zen/tags #{zen.fhir/profile-schema zen/schema},
+  :zen.fhir/profileUri
+  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-servicerequest",
+  :require #{:category :code},
+  :type zen/map,
+  :zen/desc
+  "This profile sets minimum expectations for recording, searching, and fetching  using the ServiceRequest resource to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
+  :keys
+  {:category
+   {:slicing {:slices {}},
+    :type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+     :fhir/flags #{:MS}},
+    :minItems 1},
+   :_authoredOn {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :_status {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :authoredOn
+   {:confirms #{hl7-fhir-r4-core.dateTime/schema}, :fhir/flags #{:MS}},
+   :_intent {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :requester
+   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+    :fhir/flags #{:MS},
+    :zen.fhir/reference
+    {:refers
+     #{hl7-fhir-us-core.us-core-organization/schema
+       hl7-fhir-us-core.us-core-relatedperson/schema
+       hl7-fhir-r4-core.PractitionerRole/schema
+       hl7-fhir-us-core.us-core-patient/schema
+       hl7-fhir-r4-core.Device/schema
+       hl7-fhir-us-core.us-core-practitioner/schema}}},
+   :status
+   {:confirms #{hl7-fhir-r4-core.code/schema}, :fhir/flags #{:MS}},
+   :code
+   {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+    :fhir/flags #{:MS},
+    :zen.fhir/value-set
+    {:symbol
+     hl7-fhir-us-core.value-set.us-core-procedure-code/value-set,
+     :strength :extensible}},
+   :intent
+   {:confirms #{hl7-fhir-r4-core.code/schema}, :fhir/flags #{:MS}},
+   :subject
+   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+    :fhir/flags #{:MS},
+    :zen.fhir/reference
+    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
+   :occurrence
+   {:fhir/polymorphic true,
+    :exclusive-keys #{#{:dateTime :Period :Timing}},
+    :type zen/map,
+    :keys
+    {:Period {:confirms #{hl7-fhir-r4-core.Period/schema}},
+     :dateTime {:confirms #{hl7-fhir-r4-core.dateTime/schema}},
+     :_dateTime {:confirms #{hl7-fhir-r4-core.Element/schema}},
+     :Timing {:confirms #{hl7-fhir-r4-core.Timing/schema}}},
+    :fhir/flags #{:MS}}},
+  :zen.fhir/type "ServiceRequest"}}

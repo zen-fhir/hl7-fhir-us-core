@@ -1,6 +1,7 @@
 {ns hl7-fhir-us-core.us-core-careplan,
  import
  #{hl7-fhir-r4-core.value-set.request-status
+   hl7-fhir-r4-core.xhtml
    hl7-fhir-r4-core.CarePlan
    hl7-fhir-r4-core.code
    zen.fhir
@@ -12,15 +13,15 @@
    hl7-fhir-r4-core.CodeableConcept
    hl7-fhir-us-core.value-set.us-core-narrative-status},
  schema
- {:zen.fhir/version "0.5.21-14",
+ {:zen.fhir/version "0.5.22",
   :confirms #{hl7-fhir-r4-core.CarePlan/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
   "http://hl7.org/fhir/us/core/StructureDefinition/us-core-careplan",
-  :require #{:category :status :intent :subject :text},
+  :require #{:category :text},
   :type zen/map,
   :zen/desc
-  "Defines constraints and extensions on the CarePlan resource for the minimal set of data to query and retrieve a patient's Care Plan.",
+  "This profile sets minimum expectations for the CarePlan resource to record, search, and fetch assessment and plan of treatment data associated with a patient to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
   :keys
   {:text
    {:confirms #{hl7-fhir-r4-core.Narrative/schema},
@@ -33,7 +34,10 @@
       {:symbol
        hl7-fhir-us-core.value-set.us-core-narrative-status/value-set,
        :strength :required}},
-     :_status {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+     :_status {:confirms #{hl7-fhir-r4-core.Element/schema}},
+     :div
+     {:confirms #{hl7-fhir-r4-core.xhtml/schema}, :fhir/flags #{:MS}},
+     :_div {:confirms #{hl7-fhir-r4-core.Element/schema}}},
     :fhir/flags #{:MS}},
    :status
    {:confirms #{hl7-fhir-r4-core.code/schema},

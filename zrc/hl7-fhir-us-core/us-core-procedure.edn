@@ -4,23 +4,26 @@
    hl7-fhir-r4-core.code
    zen.fhir
    hl7-fhir-r4-core.dateTime
+   hl7-fhir-r4-core.Range
+   hl7-fhir-r4-core.string
    hl7-fhir-us-core.us-core-patient
    hl7-fhir-us-core.value-set.us-core-procedure-code
    hl7-fhir-r4-core.value-set.event-status
    hl7-fhir-r4-core.Reference
    hl7-fhir-r4-core.Element
    hl7-fhir-r4-core.Procedure
-   hl7-fhir-r4-core.CodeableConcept},
+   hl7-fhir-r4-core.CodeableConcept
+   hl7-fhir-r4-core.Age},
  schema
- {:zen.fhir/version "0.5.21-14",
+ {:zen.fhir/version "0.5.22",
   :confirms #{hl7-fhir-r4-core.Procedure/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
   "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure",
-  :require #{:performed :status :code :subject},
+  :require #{:code},
   :type zen/map,
   :zen/desc
-  "Defines constraints and extensions on the Procedure resource for the minimal set of data to query and retrieve patient's procedure information.",
+  "The US Core Procedure Profile is based upon the core FHIR Procedure Resource and meets the U.S. Core Data for Interoperability (USCDI) v2 'Procedures' requirements. This profile sets minimum expectations for the Procedure resource to record, search, and fetch procedures associated with a patient to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
   :keys
   {:status
    {:confirms #{hl7-fhir-r4-core.code/schema},
@@ -35,9 +38,7 @@
     :zen.fhir/value-set
     {:symbol
      hl7-fhir-us-core.value-set.us-core-procedure-code/value-set,
-     :strength :extensible},
-    :zen/desc
-    "Procedure codes from SNOMED CT, CPT, HCPCS II, ICD-10PC, or CDT"},
+     :strength :extensible}},
    :subject
    {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
     :fhir/flags #{:MS},
@@ -45,11 +46,15 @@
     {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
    :performed
    {:fhir/polymorphic true,
-    :exclusive-keys #{#{:dateTime :Period}},
+    :exclusive-keys #{#{:string :dateTime :Range :Period :Age}},
     :type zen/map,
     :keys
     {:dateTime {:confirms #{hl7-fhir-r4-core.dateTime/schema}},
      :_dateTime {:confirms #{hl7-fhir-r4-core.Element/schema}},
-     :Period {:confirms #{hl7-fhir-r4-core.Period/schema}}},
+     :Period {:confirms #{hl7-fhir-r4-core.Period/schema}},
+     :string {:confirms #{hl7-fhir-r4-core.string/schema}},
+     :_string {:confirms #{hl7-fhir-r4-core.Element/schema}},
+     :Age {:confirms #{hl7-fhir-r4-core.Age/schema}},
+     :Range {:confirms #{hl7-fhir-r4-core.Range/schema}}},
     :fhir/flags #{:MS}}},
   :zen.fhir/type "Procedure"}}

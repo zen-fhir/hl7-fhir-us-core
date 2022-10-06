@@ -1,14 +1,15 @@
 {ns hl7-fhir-us-core.us-core-documentreference,
  import
  #{hl7-fhir-r4-core.Period
+   hl7-fhir-r4-core.Device
    hl7-fhir-r4-core.BackboneElement
    hl7-fhir-us-core.value-set.us-core-documentreference-type
    hl7-fhir-r4-core.code
    hl7-fhir-r4-core.url
    zen.fhir
    hl7-fhir-us-core.us-core-practitioner
+   hl7-fhir-us-core.us-core-relatedperson
    hl7-fhir-us-core.us-core-organization
-   hl7-fhir-us-core.value-set.us-core-documentreference-category
    hl7-fhir-r4-core.instant
    hl7-fhir-us-core.us-core-patient
    hl7-fhir-r4-core.Coding
@@ -21,27 +22,26 @@
    hl7-fhir-r4-core.CodeableConcept
    hl7-fhir-r4-core.Identifier
    hl7-fhir-us-core.us-core-encounter
+   hl7-fhir-us-core.us-core-practitionerrole
    hl7-fhir-r4-core.value-set.formatcodes},
  schema
- {:zen.fhir/version "0.5.21-14",
+ {:zen.fhir/version "0.5.22",
   :confirms
   #{hl7-fhir-r4-core.DocumentReference/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
   "http://hl7.org/fhir/us/core/StructureDefinition/us-core-documentreference",
-  :require #{:category :content :type :status :subject},
+  :require #{:category :type :subject},
   :type zen/map,
-  :zen/desc "The document reference profile used in US Core.",
+  :zen/desc
+  "To promote interoperability and adoption through common implementation, this profile sets minimum expectations for searching and fetching patient documents including Clinical Notes using the DocumentReference resource. It identifies the mandatory core elements, extensions, vocabularies and value sets which **SHALL** be present in the DocumentReference resource when using this profile. It provides the floor for standards development for specific uses cases. Prior to reviewing this profile, implementers are encouraged to read the Clinical Notes Guidance to understand the overlap of US Core DocumentReference Profile and US Core DiagnosticReport Profile for Report and Note exchange.",
   :keys
   {:category
-   {:type zen/vector,
+   {:slicing {:slices {}},
+    :type zen/vector,
     :every
     {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-     :fhir/flags #{:MS},
-     :zen.fhir/value-set
-     {:symbol
-      hl7-fhir-us-core.value-set.us-core-documentreference-category/value-set,
-      :strength :extensible}},
+     :fhir/flags #{:MS}},
     :minItems 1},
    :date
    {:confirms #{hl7-fhir-r4-core.instant/schema}, :fhir/flags #{:MS}},
@@ -66,7 +66,6 @@
         :url
         {:confirms #{hl7-fhir-r4-core.url/schema}, :fhir/flags #{:MS}},
         :_url {:confirms #{hl7-fhir-r4-core.Element/schema}}},
-       :require #{:contentType},
        :fhir/flags #{:MS}},
       :format
       {:confirms #{hl7-fhir-r4-core.Coding/schema},
@@ -74,9 +73,7 @@
        :zen.fhir/value-set
        {:symbol hl7-fhir-r4-core.value-set.formatcodes/value-set,
         :strength :extensible}}},
-     :require #{:attachment},
-     :fhir/flags #{:MS}},
-    :minItems 1},
+     :fhir/flags #{:MS}}},
    :_date {:confirms #{hl7-fhir-r4-core.Element/schema}},
    :_status {:confirms #{hl7-fhir-r4-core.Element/schema}},
    :type
@@ -93,14 +90,12 @@
      :fhir/flags #{:MS},
      :zen.fhir/reference
      {:refers
-      #{hl7-fhir-us-core.us-core-organization/schema
+      #{hl7-fhir-us-core.us-core-practitionerrole/schema
+        hl7-fhir-us-core.us-core-organization/schema
+        hl7-fhir-us-core.us-core-relatedperson/schema
         hl7-fhir-us-core.us-core-patient/schema
+        hl7-fhir-r4-core.Device/schema
         hl7-fhir-us-core.us-core-practitioner/schema}}}},
-   :custodian
-   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-    :fhir/flags #{:MS},
-    :zen.fhir/reference
-    {:refers #{hl7-fhir-us-core.us-core-organization/schema}}},
    :status
    {:confirms #{hl7-fhir-r4-core.code/schema},
     :fhir/flags #{:MS},

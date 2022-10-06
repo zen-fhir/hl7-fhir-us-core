@@ -13,8 +13,8 @@
    hl7-fhir-r4-core.date
    hl7-fhir-r4-core.HumanName
    hl7-fhir-r4-core.uri
+   hl7-fhir-us-core.us-core-genderIdentity
    hl7-fhir-us-core.value-set.us-core-usps-state
-   hl7-fhir-us-core.value-set.birthsex
    hl7-fhir-us-core.value-set.simple-language
    hl7-fhir-r4-core.Element
    hl7-fhir-r4-core.CodeableConcept
@@ -24,7 +24,7 @@
    hl7-fhir-r4-core.value-set.contact-point-system
    hl7-fhir-r4-core.Address},
  schema
- {:zen.fhir/version "0.5.21-14",
+ {:zen.fhir/version "0.5.22",
   :confirms #{hl7-fhir-r4-core.Patient/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -32,7 +32,7 @@
   :require #{:name :identifier :gender},
   :type zen/map,
   :zen/desc
-  "Defines constraints and extensions on the patient resource for the minimal set of data to query and retrieve patient demographic information.",
+  "The US Core Patient Profile meets the U.S. Core Data for Interoperability (USCDI) v2 'Patient Demographics' requirements. This profile sets minimum expectations for the Patient resource to record, search, and fetch basic demographics and other administrative information about an individual patient. It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
   :keys
   {:address
    {:type zen/vector,
@@ -43,6 +43,7 @@
      {:_line
       {:type zen/vector,
        :every {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+      :use {:confirms #{hl7-fhir-r4-core.code/schema}},
       :city
       {:confirms #{hl7-fhir-r4-core.string/schema},
        :fhir/flags #{:MS}},
@@ -67,31 +68,40 @@
       :_postalCode {:confirms #{hl7-fhir-r4-core.Element/schema}},
       :period
       {:confirms #{hl7-fhir-r4-core.Period/schema},
-       :fhir/flags #{:MS}}},
+       :fhir/flags #{:MS}},
+      :_use {:confirms #{hl7-fhir-r4-core.Element/schema}}},
      :fhir/flags #{:MS}}},
    :race
    {:confirms #{hl7-fhir-us-core.us-core-race/schema},
     :fhir/extensionUri
-    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race",
-    :fhir/flags #{:MS}},
+    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race"},
    :name
    {:type zen/vector,
     :every
     {:confirms #{hl7-fhir-r4-core.HumanName/schema},
      :type zen/map,
      :keys
-     {:family
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS}},
-      :_family {:confirms #{hl7-fhir-r4-core.Element/schema}},
+     {:_family {:confirms #{hl7-fhir-r4-core.Element/schema}},
+      :suffix
+      {:type zen/vector,
+       :every {:confirms #{hl7-fhir-r4-core.string/schema}}},
+      :_suffix
+      {:type zen/vector,
+       :every {:confirms #{hl7-fhir-r4-core.Element/schema}}},
       :given
       {:type zen/vector,
        :every
        {:confirms #{hl7-fhir-r4-core.string/schema},
         :fhir/flags #{:MS}}},
+      :family
+      {:confirms #{hl7-fhir-r4-core.string/schema},
+       :fhir/flags #{:MS}},
+      :use {:confirms #{hl7-fhir-r4-core.code/schema}},
       :_given
       {:type zen/vector,
-       :every {:confirms #{hl7-fhir-r4-core.Element/schema}}}},
+       :every {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+      :period {:confirms #{hl7-fhir-r4-core.Period/schema}},
+      :_use {:confirms #{hl7-fhir-r4-core.Element/schema}}},
      :fhir/flags #{:MS}},
     :minItems 1},
    :_gender {:confirms #{hl7-fhir-r4-core.Element/schema}},
@@ -100,8 +110,7 @@
    :ethnicity
    {:confirms #{hl7-fhir-us-core.us-core-ethnicity/schema},
     :fhir/extensionUri
-    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity",
-    :fhir/flags #{:MS}},
+    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity"},
    :_birthDate {:confirms #{hl7-fhir-r4-core.Element/schema}},
    :communication
    {:type zen/vector,
@@ -114,9 +123,7 @@
        :fhir/flags #{:MS},
        :zen.fhir/value-set
        {:symbol hl7-fhir-us-core.value-set.simple-language/value-set,
-        :strength :extensible}}},
-     :require #{:language},
-     :fhir/flags #{:MS}}},
+        :strength :extensible}}}}},
    :identifier
    {:type zen/vector,
     :every
@@ -134,6 +141,10 @@
      :require #{:system :value},
      :fhir/flags #{:MS}},
     :minItems 1},
+   :genderIdentity
+   {:confirms #{hl7-fhir-us-core.us-core-genderIdentity/schema},
+    :fhir/extensionUri
+    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-genderIdentity"},
    :telecom
    {:type zen/vector,
     :every
@@ -159,8 +170,7 @@
        {:symbol hl7-fhir-r4-core.value-set.contact-point-use/value-set,
         :strength :required}},
       :_use {:confirms #{hl7-fhir-r4-core.Element/schema}}},
-     :require #{:system :value},
-     :fhir/flags #{:MS}}},
+     :require #{:system :value}}},
    :gender
    {:confirms #{hl7-fhir-r4-core.code/schema},
     :fhir/flags #{:MS},
@@ -171,9 +181,5 @@
    :birthsex
    {:confirms #{hl7-fhir-us-core.us-core-birthsex/schema},
     :fhir/extensionUri
-    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex",
-    :fhir/flags #{:MS},
-    :zen.fhir/value-set
-    {:symbol hl7-fhir-us-core.value-set.birthsex/value-set,
-     :strength :required}}},
+    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex"}},
   :zen.fhir/type "Patient"}}

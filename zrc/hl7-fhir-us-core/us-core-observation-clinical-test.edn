@@ -1,0 +1,117 @@
+{ns hl7-fhir-us-core.us-core-observation-clinical-test,
+ import
+ #{hl7-fhir-r4-core.integer
+   hl7-fhir-r4-core.Period
+   hl7-fhir-r4-core.Observation
+   hl7-fhir-r4-core.Ratio
+   hl7-fhir-r4-core.time
+   hl7-fhir-r4-core.code
+   zen.fhir
+   hl7-fhir-us-core.value-set.us-core-clinical-test-codes
+   hl7-fhir-r4-core.boolean
+   hl7-fhir-r4-core.dateTime
+   hl7-fhir-r4-core.Timing
+   hl7-fhir-r4-core.Range
+   hl7-fhir-r4-core.string
+   hl7-fhir-r4-core.instant
+   hl7-fhir-us-core.us-core-patient
+   hl7-fhir-r4-core.SampledData
+   hl7-fhir-r4-core.Quantity
+   hl7-fhir-r4-core.Reference
+   hl7-fhir-r4-core.Element
+   hl7-fhir-r4-core.CodeableConcept},
+ schema
+ {:zen.fhir/version "0.5.22",
+  :confirms #{hl7-fhir-r4-core.Observation/schema zen.fhir/Resource},
+  :zen/tags #{zen.fhir/profile-schema zen/schema},
+  :zen.fhir/profileUri
+  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-clinical-test",
+  :require #{:category :subject},
+  :type zen/map,
+  :zen/desc
+  "The US Core Observation Clinical Test Result Profile is based upon the core FHIR Observation Resource, and, along with the US Core DiagnosticReport Profile for Report and Note exchange, meets the U.S. Core Data for Interoperability (USCDI) v2 ‘Clinical Tests’ requirements. Clinical tests includes non-imaging and non-laboratory tests performed on a patient that results in structured or unstructured (narrative) findings specific to the patient, such as electrocardiogram (ECG), visual acuity exam, macular exam, or graded exercise testing (GXT), to facilitate the diagnosis and management of conditions. The US Core Observation Clinical Test Result Profile profile sets minimum expectations for the Observation resource to record, search, and fetch clinical tests for a patient to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
+  :keys
+  {:status
+   {:confirms #{hl7-fhir-r4-core.code/schema}, :fhir/flags #{:MS}},
+   :_status {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :category
+   {:slicing
+    {:slices
+     {"clinical-test"
+      {:schema {:type zen/vector, :minItems 1, :maxItems 1},
+       :filter
+       {:engine :match,
+        :match
+        {:coding
+         #{{:system
+            "http://hl7.org/fhir/us/core/CodeSystem/us-core-observation-category",
+            :code "clinical-test"}}}}}}},
+    :type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+     :fhir/flags #{:MS}},
+    :minItems 1},
+   :code
+   {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+    :fhir/flags #{:MS},
+    :zen.fhir/value-set
+    {:symbol
+     hl7-fhir-us-core.value-set.us-core-clinical-test-codes/value-set,
+     :strength :extensible},
+    :zen/desc "Clinical Test Name"},
+   :subject
+   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+    :fhir/flags #{:MS},
+    :zen.fhir/reference
+    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
+   :effective
+   {:fhir/polymorphic true,
+    :exclusive-keys #{#{:instant :dateTime :Period :Timing}},
+    :type zen/map,
+    :keys
+    {:dateTime {:confirms #{hl7-fhir-r4-core.dateTime/schema}},
+     :_dateTime {:confirms #{hl7-fhir-r4-core.Element/schema}},
+     :Period {:confirms #{hl7-fhir-r4-core.Period/schema}},
+     :Timing {:confirms #{hl7-fhir-r4-core.Timing/schema}},
+     :instant {:confirms #{hl7-fhir-r4-core.instant/schema}},
+     :_instant {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+    :fhir/flags #{:MS}},
+   :value
+   {:fhir/polymorphic true,
+    :exclusive-keys
+    #{#{:time
+        :SampledData
+        :string
+        :dateTime
+        :Range
+        :integer
+        :Ratio
+        :Period
+        :CodeableConcept
+        :Quantity
+        :boolean}},
+    :type zen/map,
+    :keys
+    {:_dateTime {:confirms #{hl7-fhir-r4-core.Element/schema}},
+     :time {:confirms #{hl7-fhir-r4-core.time/schema}},
+     :SampledData {:confirms #{hl7-fhir-r4-core.SampledData/schema}},
+     :string {:confirms #{hl7-fhir-r4-core.string/schema}},
+     :dateTime {:confirms #{hl7-fhir-r4-core.dateTime/schema}},
+     :_time {:confirms #{hl7-fhir-r4-core.Element/schema}},
+     :Range {:confirms #{hl7-fhir-r4-core.Range/schema}},
+     :integer {:confirms #{hl7-fhir-r4-core.integer/schema}},
+     :Ratio {:confirms #{hl7-fhir-r4-core.Ratio/schema}},
+     :_boolean {:confirms #{hl7-fhir-r4-core.Element/schema}},
+     :Period {:confirms #{hl7-fhir-r4-core.Period/schema}},
+     :_integer {:confirms #{hl7-fhir-r4-core.Element/schema}},
+     :CodeableConcept
+     {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema}},
+     :Quantity {:confirms #{hl7-fhir-r4-core.Quantity/schema}},
+     :boolean {:confirms #{hl7-fhir-r4-core.boolean/schema}},
+     :_string {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+    :fhir/flags #{:MS},
+    :zen/desc "Result Value"},
+   :dataAbsentReason
+   {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+    :fhir/flags #{:MS}}},
+  :zen.fhir/type "Observation"}}

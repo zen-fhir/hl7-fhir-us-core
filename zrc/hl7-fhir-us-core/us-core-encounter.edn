@@ -1,13 +1,20 @@
 {ns hl7-fhir-us-core.us-core-encounter,
  import
  #{hl7-fhir-r4-core.Period
+   hl7-fhir-r4-core.Observation
    hl7-fhir-r4-core.BackboneElement
+   hl7-fhir-us-core.value-set.us-core-discharge-disposition
    hl7-fhir-r4-core.code
+   hl7-fhir-r4-core.ImmunizationRecommendation
    zen.fhir
    hl7-fhir-us-core.us-core-practitioner
+   hl7-fhir-us-core.us-core-condition-encounter-diagnosis
+   hl7-fhir-us-core.us-core-relatedperson
    hl7-fhir-r4-core.string
+   hl7-fhir-us-core.us-core-organization
    hl7-fhir-us-core.us-core-patient
    hl7-fhir-r4-core.Coding
+   hl7-fhir-us-core.us-core-procedure
    hl7-fhir-r4-core.uri
    hl7-fhir-us-core.value-set.us-core-encounter-type
    hl7-fhir-r4-core.Reference
@@ -15,18 +22,25 @@
    hl7-fhir-r4-core.Encounter
    hl7-fhir-r4-core.CodeableConcept
    hl7-fhir-r4-core.Identifier
-   hl7-fhir-r4-core.Location},
+   hl7-fhir-us-core.us-core-condition-problems-health-concerns
+   hl7-fhir-us-core.us-core-practitionerrole},
  schema
- {:zen.fhir/version "0.5.21-14",
+ {:zen.fhir/version "0.5.22",
   :confirms #{zen.fhir/Resource hl7-fhir-r4-core.Encounter/schema},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
   "http://hl7.org/fhir/us/core/StructureDefinition/us-core-encounter",
-  :require #{:type :status :class :subject},
+  :require #{:type :subject},
   :type zen/map,
-  :zen/desc "The Encounter referenced in the US Core profiles.",
+  :zen/desc
+  "This profile sets minimum expectations for the Encounter resource to record, search, and fetch basic encounter information for an individual patient to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
   :keys
   {:_status {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :serviceProvider
+   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+    :fhir/flags #{:MS},
+    :zen.fhir/reference
+    {:refers #{hl7-fhir-us-core.us-core-organization/schema}}},
    :reasonCode
    {:type zen/vector,
     :every
@@ -61,7 +75,10 @@
        #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
        :fhir/flags #{:MS},
        :zen.fhir/reference
-       {:refers #{hl7-fhir-us-core.us-core-practitioner/schema}}}},
+       {:refers
+        #{hl7-fhir-us-core.us-core-practitionerrole/schema
+          hl7-fhir-us-core.us-core-relatedperson/schema
+          hl7-fhir-us-core.us-core-practitioner/schema}}}},
      :fhir/flags #{:MS}}},
    :status
    {:confirms #{hl7-fhir-r4-core.code/schema}, :fhir/flags #{:MS}},
@@ -88,7 +105,11 @@
     :keys
     {:dischargeDisposition
      {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-      :fhir/flags #{:MS}}},
+      :fhir/flags #{:MS},
+      :zen.fhir/value-set
+      {:symbol
+       hl7-fhir-us-core.value-set.us-core-discharge-disposition/value-set,
+       :strength :preferred}}},
     :fhir/flags #{:MS}},
    :period
    {:confirms #{hl7-fhir-r4-core.Period/schema}, :fhir/flags #{:MS}},
@@ -102,13 +123,23 @@
       {:confirms
        #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
        :fhir/flags #{:MS},
-       :zen.fhir/reference
-       {:refers #{hl7-fhir-r4-core.Location/schema}}}},
-     :require #{:location},
+       :zen.fhir/reference {:refers #{}}}},
      :fhir/flags #{:MS}}},
    :subject
    {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
     :fhir/flags #{:MS},
     :zen.fhir/reference
-    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}}},
+    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
+   :reasonReference
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+     :fhir/flags #{:MS},
+     :zen.fhir/reference
+     {:refers
+      #{hl7-fhir-us-core.us-core-condition-encounter-diagnosis/schema
+        hl7-fhir-r4-core.Observation/schema
+        hl7-fhir-us-core.us-core-condition-problems-health-concerns/schema
+        hl7-fhir-r4-core.ImmunizationRecommendation/schema
+        hl7-fhir-us-core.us-core-procedure/schema}}}}},
   :zen.fhir/type "Encounter"}}

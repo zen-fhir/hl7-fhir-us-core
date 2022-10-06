@@ -1,6 +1,7 @@
 {ns hl7-fhir-us-core.us-core-organization,
  import
- #{zen.fhir
+ #{hl7-fhir-r4-core.code
+   zen.fhir
    hl7-fhir-r4-core.ContactPoint
    hl7-fhir-r4-core.boolean
    hl7-fhir-r4-core.string
@@ -11,7 +12,7 @@
    hl7-fhir-r4-core.Organization
    hl7-fhir-r4-core.Address},
  schema
- {:zen.fhir/version "0.5.21-14",
+ {:zen.fhir/version "0.5.22",
   :confirms #{hl7-fhir-r4-core.Organization/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -19,7 +20,7 @@
   :require #{:name :active},
   :type zen/map,
   :zen/desc
-  "Defines basic constraints and extensions on the Organization resource for use with other US Core resources",
+  "This profile sets minimum expectations for the Organization resource to searching for and fetching an Organization associated with a patient or provider to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
   :keys
   {:identifier
    {:slicing
@@ -57,6 +58,15 @@
    {:type zen/vector,
     :every
     {:confirms #{hl7-fhir-r4-core.ContactPoint/schema},
+     :type zen/map,
+     :keys
+     {:system
+      {:confirms #{hl7-fhir-r4-core.code/schema}, :fhir/flags #{:MS}},
+      :_system {:confirms #{hl7-fhir-r4-core.Element/schema}},
+      :value
+      {:confirms #{hl7-fhir-r4-core.string/schema},
+       :fhir/flags #{:MS}},
+      :_value {:confirms #{hl7-fhir-r4-core.Element/schema}}},
      :fhir/flags #{:MS}}},
    :address
    {:type zen/vector,

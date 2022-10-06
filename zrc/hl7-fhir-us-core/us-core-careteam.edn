@@ -6,14 +6,17 @@
    hl7-fhir-r4-core.code
    zen.fhir
    hl7-fhir-us-core.us-core-practitioner
-   hl7-fhir-us-core.value-set.us-core-careteam-provider-roles
+   hl7-fhir-us-core.us-core-relatedperson
+   us-nlm-vsac.value-set.2.16.840.1.113762.1.4.1099.30
    hl7-fhir-us-core.us-core-organization
    hl7-fhir-us-core.us-core-patient
    hl7-fhir-r4-core.Reference
    hl7-fhir-r4-core.Element
-   hl7-fhir-r4-core.CodeableConcept},
+   hl7-fhir-r4-core.CodeableConcept
+   hl7-fhir-us-core.us-core-careteam
+   hl7-fhir-us-core.us-core-practitionerrole},
  schema
- {:zen.fhir/version "0.5.21-14",
+ {:zen.fhir/version "0.5.22",
   :confirms #{hl7-fhir-r4-core.CareTeam/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -21,7 +24,7 @@
   :require #{:participant :subject},
   :type zen/map,
   :zen/desc
-  "Defines constraints and extensions on the CareTeam resource for the minimal set of data to query and retrieve a patient's Care Team.",
+  "This profile sets minimum expectations for the CareTeam resource for identifying the Care Team members associated with a patient to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
   :keys
   {:status
    {:confirms #{hl7-fhir-r4-core.code/schema},
@@ -48,7 +51,7 @@
         :fhir/flags #{:MS},
         :zen.fhir/value-set
         {:symbol
-         hl7-fhir-us-core.value-set.us-core-careteam-provider-roles/value-set,
+         us-nlm-vsac.value-set.2.16.840.1.113762.1.4.1099.30/value-set,
          :strength :extensible}},
        :minItems 1,
        :maxItems 1},
@@ -58,9 +61,12 @@
        :fhir/flags #{:MS},
        :zen.fhir/reference
        {:refers
-        #{hl7-fhir-us-core.us-core-organization/schema
+        #{hl7-fhir-us-core.us-core-practitionerrole/schema
+          hl7-fhir-us-core.us-core-organization/schema
+          hl7-fhir-us-core.us-core-relatedperson/schema
           hl7-fhir-us-core.us-core-patient/schema
-          hl7-fhir-us-core.us-core-practitioner/schema}}}},
+          hl7-fhir-us-core.us-core-practitioner/schema
+          hl7-fhir-us-core.us-core-careteam/schema}}}},
      :require #{:role :member},
      :fhir/flags #{:MS}},
     :minItems 1}},

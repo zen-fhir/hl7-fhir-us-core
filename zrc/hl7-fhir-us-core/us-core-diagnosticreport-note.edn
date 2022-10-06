@@ -1,6 +1,7 @@
 {ns hl7-fhir-us-core.us-core-diagnosticreport-note,
  import
  #{hl7-fhir-r4-core.Period
+   hl7-fhir-r4-core.BackboneElement
    hl7-fhir-r4-core.code
    zen.fhir
    hl7-fhir-us-core.us-core-practitioner
@@ -10,34 +11,35 @@
    hl7-fhir-r4-core.instant
    hl7-fhir-us-core.value-set.us-core-diagnosticreport-report-and-note-codes
    hl7-fhir-us-core.us-core-patient
+   hl7-fhir-us-core.us-core-observation-clinical-test
+   hl7-fhir-us-core.us-core-observation-lab
    hl7-fhir-r4-core.value-set.diagnostic-report-status
    hl7-fhir-r4-core.Reference
    hl7-fhir-r4-core.Attachment
    hl7-fhir-r4-core.Element
    hl7-fhir-r4-core.CodeableConcept
+   hl7-fhir-us-core.us-core-careteam
    hl7-fhir-us-core.us-core-encounter
-   hl7-fhir-us-core.value-set.us-core-diagnosticreport-category},
+   hl7-fhir-us-core.us-core-practitionerrole
+   hl7-fhir-us-core.us-core-observation-imaging},
  schema
- {:zen.fhir/version "0.5.21-14",
+ {:zen.fhir/version "0.5.22",
   :confirms
   #{hl7-fhir-r4-core.DiagnosticReport/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
   "http://hl7.org/fhir/us/core/StructureDefinition/us-core-diagnosticreport-note",
-  :require #{:category :status :effective :code :subject},
+  :require #{:category :subject},
   :type zen/map,
   :zen/desc
-  "Defines constraints and extensions on the DiagnosticReport resource  for the minimal set of data to query and retrieve diagnostic reports associated with clinical notes for a patient",
+  "To promote interoperability and adoption through common implementation, this profile sets minimum expectations for searching and fetching Diagnostic Reports and Notes using the DiagnosticReport resource. This profile identifies the mandatory core elements, extensions, vocabularies and value sets which **SHALL** be present in the DiagnosticReport when using this profile. It provides the floor for standards development for specific uses cases. Prior to reviewing this profile, implementers are encouraged to read the Clinical Notes Guidance to understand the overlap of US Core DiagnosticReport Profile for Report and Note exchange and US Core DocumentReference Profile.",
   :keys
   {:category
-   {:type zen/vector,
+   {:slicing {:slices {}},
+    :type zen/vector,
     :every
     {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-     :fhir/flags #{:MS},
-     :zen.fhir/value-set
-     {:symbol
-      hl7-fhir-us-core.value-set.us-core-diagnosticreport-category/value-set,
-      :strength :extensible}},
+     :fhir/flags #{:MS}},
     :minItems 1},
    :_issued {:confirms #{hl7-fhir-r4-core.Element/schema}},
    :encounter
@@ -53,6 +55,16 @@
     {:symbol
      hl7-fhir-r4-core.value-set.diagnostic-report-status/value-set,
      :strength :required}},
+   :result
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+     :fhir/flags #{:MS},
+     :zen.fhir/reference
+     {:refers
+      #{hl7-fhir-us-core.us-core-observation-clinical-test/schema
+        hl7-fhir-us-core.us-core-observation-lab/schema
+        hl7-fhir-us-core.us-core-observation-imaging/schema}}}},
    :effective
    {:fhir/polymorphic true,
     :exclusive-keys #{#{:dateTime :Period}},
@@ -62,7 +74,8 @@
      :_dateTime {:confirms #{hl7-fhir-r4-core.Element/schema}},
      :Period {:confirms #{hl7-fhir-r4-core.Period/schema}}},
     :fhir/flags #{:MS},
-    :zen/desc "Time of the report or note"},
+    :zen/desc
+    "Diagnostically relevant time (typically the time of the procedure)"},
    :code
    {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
     :fhir/flags #{:MS},
@@ -78,13 +91,23 @@
     :every
     {:confirms #{hl7-fhir-r4-core.Attachment/schema},
      :fhir/flags #{:MS}}},
+   :media
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.BackboneElement/schema},
+     :type zen/map,
+     :keys
+     {:link
+      {:confirms
+       #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+       :fhir/flags #{:MS},
+       :zen.fhir/reference {:refers #{}}}},
+     :fhir/flags #{:MS}}},
    :subject
    {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-    :fhir/flags #{:SU :MS},
+    :fhir/flags #{:MS},
     :zen.fhir/reference
-    {:refers #{hl7-fhir-us-core.us-core-patient/schema}},
-    :zen/desc
-    "The subject of the report - usually, but not always, the patient"},
+    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
    :performer
    {:type zen/vector,
     :every
@@ -92,6 +115,8 @@
      :fhir/flags #{:MS},
      :zen.fhir/reference
      {:refers
-      #{hl7-fhir-us-core.us-core-organization/schema
-        hl7-fhir-us-core.us-core-practitioner/schema}}}}},
+      #{hl7-fhir-us-core.us-core-practitionerrole/schema
+        hl7-fhir-us-core.us-core-organization/schema
+        hl7-fhir-us-core.us-core-practitioner/schema
+        hl7-fhir-us-core.us-core-careteam/schema}}}}},
   :zen.fhir/type "DiagnosticReport"}}

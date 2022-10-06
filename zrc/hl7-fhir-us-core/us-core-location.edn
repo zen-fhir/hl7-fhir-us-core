@@ -11,7 +11,7 @@
    hl7-fhir-r4-core.Location
    hl7-fhir-r4-core.Address},
  schema
- {:zen.fhir/version "0.5.21-14",
+ {:zen.fhir/version "0.5.22",
   :confirms #{hl7-fhir-r4-core.Location/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -19,7 +19,7 @@
   :require #{:name},
   :type zen/map,
   :zen/desc
-  "Defines basic constraints and extensions on the Location resource for use with other US Core resources",
+  "This profile sets minimum expectations for the Location resource for recording, searching for and fetching a Location associated with a patient, provider or organization to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
   :keys
   {:status
    {:confirms #{hl7-fhir-r4-core.code/schema}, :fhir/flags #{:MS}},

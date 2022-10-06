@@ -1,0 +1,16 @@
+{ns hl7-fhir-us-core.search.us-core-condition-asserted-date,
+ import #{zen.fhir},
+ search
+ {:zen/tags #{zen.fhir/search},
+  :fhir/id "us-core-condition-asserted-date",
+  :fhir/url
+  "http://hl7.org/fhir/us/core/SearchParameter/us-core-condition-asserted-date",
+  :fhir/type "date",
+  :name "asserted-date",
+  :expr
+  {:Condition
+   {:knife [],
+    :jsonpath [],
+    :data-types #{},
+    :template :date,
+    :sql {:where [:or]}}}}}

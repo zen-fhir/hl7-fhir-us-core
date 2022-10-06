@@ -1,0 +1,15 @@
+{ns hl7-fhir-us-core.search.us-core-questionnaireresponse-tag,
+ import #{zen.fhir},
+ search
+ {:zen/tags #{zen.fhir/search},
+  :fhir/id "us-core-questionnaireresponse-tag",
+  :fhir/url
+  "http://hl7.org/fhir/us/core/SearchParameter/us-core-questionnaireresponse-tag",
+  :fhir/type "token",
+  :name "_tag",
+  :expr
+  {:QuestionnaireResponse
+   {:knife [["meta" "tag"]],
+    :jsonpath ["$.\"meta\".\"tag\"[*]"],
+    :data-types #{},
+    :template :token}}}}

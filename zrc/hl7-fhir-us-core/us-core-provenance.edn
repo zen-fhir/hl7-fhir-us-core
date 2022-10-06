@@ -1,8 +1,11 @@
 {ns hl7-fhir-us-core.us-core-provenance,
  import
- #{hl7-fhir-r4-core.BackboneElement
+ #{hl7-fhir-r4-core.Device
+   hl7-fhir-r4-core.BackboneElement
    zen.fhir
    hl7-fhir-us-core.us-core-practitioner
+   hl7-fhir-us-core.us-core-relatedperson
+   hl7-fhir-r4-core.string
    hl7-fhir-us-core.us-core-organization
    hl7-fhir-r4-core.instant
    hl7-fhir-us-core.us-core-patient
@@ -10,26 +13,32 @@
    hl7-fhir-r4-core.Element
    hl7-fhir-r4-core.Provenance
    hl7-fhir-r4-core.CodeableConcept
-   hl7-fhir-us-core.value-set.us-core-provenance-participant-type},
+   hl7-fhir-us-core.value-set.us-core-provenance-participant-type
+   hl7-fhir-us-core.us-core-practitionerrole},
  schema
- {:zen.fhir/version "0.5.21-14",
-  :confirms #{zen.fhir/Resource hl7-fhir-r4-core.Provenance/schema},
-  :zen/tags #{zen.fhir/profile-schema zen/schema},
+ {:zen/tags #{zen.fhir/profile-schema zen/schema},
+  :zen/desc
+  "This profile sets minimum expectations for the Provenance resource to record, search, and fetch Provenance information associated with a record to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  This FHIR Provenance profile here covers the minimal (basic) information to support lineage of information.  It provides the floor for standards development for specific uses cases.  Prior to reviewing this profile, implementers are encouraged to read the Basic Provenance guidance page which documents several key use cases, specifically, what organization was responsible for the most recent action on the resource.",
+  :zen.fhir/type "Provenance",
   :zen.fhir/profileUri
   "http://hl7.org/fhir/us/core/StructureDefinition/us-core-provenance",
-  :require #{:recorded :agent :target},
+  :zen.fhir/version "0.5.22",
+  :confirms #{zen.fhir/Resource hl7-fhir-r4-core.Provenance/schema},
   :type zen/map,
-  :zen/desc
-  "Draft set of requirements to satisfy Basic Provenance Requirements.",
   :keys
   {:target
    {:type zen/vector,
     :every
     {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+     :type zen/map,
+     :keys
+     {:reference
+      {:confirms #{hl7-fhir-r4-core.string/schema},
+       :fhir/flags #{:MS}},
+      :_reference {:confirms #{hl7-fhir-r4-core.Element/schema}}},
      :fhir/flags #{:MS},
      :zen.fhir/reference {:refers #{}},
-     :zen/desc "The Resource this Provenance record supports"},
-    :minItems 1},
+     :zen/desc "The Resource this Provenance record supports"}},
    :recorded
    {:confirms #{hl7-fhir-r4-core.instant/schema},
     :fhir/flags #{:MS},
@@ -64,7 +73,6 @@
       "ProvenanceTransmitter"
       {:schema
        {:type zen/vector,
-        :maxItems 1,
         :every
         {:type zen/map,
          :keys
@@ -103,8 +111,11 @@
        :fhir/flags #{:MS},
        :zen.fhir/reference
        {:refers
-        #{hl7-fhir-us-core.us-core-organization/schema
+        #{hl7-fhir-us-core.us-core-practitionerrole/schema
+          hl7-fhir-us-core.us-core-organization/schema
+          hl7-fhir-us-core.us-core-relatedperson/schema
           hl7-fhir-us-core.us-core-patient/schema
+          hl7-fhir-r4-core.Device/schema
           hl7-fhir-us-core.us-core-practitioner/schema}}},
       :onBehalfOf
       {:confirms
@@ -112,7 +123,4 @@
        :fhir/flags #{:MS},
        :zen.fhir/reference
        {:refers #{hl7-fhir-us-core.us-core-organization/schema}}}},
-     :require #{:who},
-     :fhir/flags #{:MS}},
-    :minItems 1}},
-  :zen.fhir/type "Provenance"}}
+     :fhir/flags #{:MS}}}}}}

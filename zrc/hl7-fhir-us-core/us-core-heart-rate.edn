@@ -1,0 +1,57 @@
+{ns hl7-fhir-us-core.us-core-heart-rate,
+ import
+ #{hl7-fhir-r4-core.decimal
+   hl7-fhir-r4-core.code
+   zen.fhir
+   hl7-fhir-r4-core.string
+   hl7-fhir-r4-core.Quantity
+   hl7-fhir-r4-core.uri
+   hl7-fhir-r4-core.Element
+   hl7-fhir-us-core.us-core-vital-signs
+   hl7-fhir-r4-core.CodeableConcept},
+ schema
+ {:zen/tags #{zen.fhir/profile-schema zen/schema},
+  :zen/desc
+  "To promote interoperability and adoption through common implementation, this profile sets minimum expectations for the Observation resource to record, search, and fetch heart rate observations with a standard LOINC code and UCUM units of measure. It is based on the US Core Vital Signs Profile and identifies the *additional* mandatory core elements, extensions, vocabularies and value sets which **SHALL** be present in the Observation resource when using this profile. It provides the floor for standards development for specific uses cases.",
+  :zen.fhir/type "Observation",
+  :zen.fhir/profileUri
+  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-heart-rate",
+  :zen.fhir/version "0.5.22",
+  :confirms
+  #{zen.fhir/Resource hl7-fhir-us-core.us-core-vital-signs/schema},
+  :type zen/map,
+  :keys
+  {:code
+   {:match {:coding #{{:system "http://loinc.org", :code "8867-4"}}},
+    :confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+    :fhir/flags #{:MS},
+    :zen/desc "Heart Rate"},
+   :value
+   {:type zen/map,
+    :keys
+    {:Quantity
+     {:confirms #{hl7-fhir-r4-core.Quantity/schema},
+      :type zen/map,
+      :keys
+      {:value
+       {:confirms #{hl7-fhir-r4-core.decimal/schema},
+        :fhir/flags #{:MS}},
+       :_value {:confirms #{hl7-fhir-r4-core.Element/schema}},
+       :unit
+       {:confirms #{hl7-fhir-r4-core.string/schema},
+        :fhir/flags #{:MS}},
+       :_unit {:confirms #{hl7-fhir-r4-core.Element/schema}},
+       :system
+       {:const {:value "http://unitsofmeasure.org"},
+        :confirms #{hl7-fhir-r4-core.uri/schema},
+        :fhir/flags #{:MS}},
+       :_system {:confirms #{hl7-fhir-r4-core.Element/schema}},
+       :code
+       {:const {:value "/min"},
+        :confirms #{hl7-fhir-r4-core.code/schema},
+        :fhir/flags #{:MS},
+        :zen/desc
+        "Coded responses from the common UCUM units for vital signs value set."},
+       :_code {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+      :require #{:system :unit :value :code},
+      :fhir/flags #{:MS}}}}}}}

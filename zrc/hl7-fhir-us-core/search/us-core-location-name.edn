@@ -9,8 +9,8 @@
   :name "name",
   :expr
   {:Location
-   {:knife [["name"]],
-    :jsonpath ["$.\"name\"[*]"],
+   {:knife [["name"] ["alias"]],
+    :jsonpath ["$.\"name\"[*]" "$.\"alias\"[*]"],
     :data-types #{{:type "string", :polymorphic? false}},
     :template :string,
     :sql
@@ -22,6 +22,15 @@
          [:pg/sql "{{table}}.resource"]
          [:pg/cast
           "($.\"name\"[*]).** ? (@.type() == \"string\")"
+          :jsonpath]]
+        :text]
+       [:pg/sql "{{param}}"]]
+      [:ilike
+       [:pg/cast
+        [:pg/jsonb-path-query-array
+         [:pg/sql "{{table}}.resource"]
+         [:pg/cast
+          "($.\"alias\"[*]).** ? (@.type() == \"string\")"
           :jsonpath]]
         :text]
        [:pg/sql "{{param}}"]]],
