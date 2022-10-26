@@ -4,7 +4,7 @@
  {:zen/tags #{zen.fhir/value-set},
   :zen/desc
   "This describes the problem. Diagnosis/Problem List is broadly defined as a series of brief statements that catalog a patient's medical, nursing, dental, social, preventative and psychiatric events and issues that are relevant to that patient's healthcare (e.g., signs, symptoms, and defined conditions). ICD-10 is appropriate for Diagnosis information, and ICD-9 for historical information.",
-  :zen.fhir/version "0.5.25-1",
+  :zen.fhir/version "0.5.26",
   :fhir/code-systems
   #{{:fhir/url "http://hl7.org/fhir/sid/icd-10-cm",
      :zen.fhir/content :not-present}
@@ -14,4 +14,11 @@
     {:fhir/url "http://snomed.info/sct",
      :zen.fhir/content :not-present}},
   :uri "http://hl7.org/fhir/us/core/ValueSet/us-core-condition-code",
-  :version "5.0.1"}}
+  :version "5.0.1",
+  :ftr
+  {:module "ig",
+   :source-url "node_modules/hl7.fhir.us.core",
+   :source-type :ig,
+   :ftr-path "ftr",
+   :zen/package-name "hl7-fhir-us-core",
+   :tag "init"}}}

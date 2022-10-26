@@ -4,8 +4,15 @@
  {:zen/tags #{zen.fhir/value-set},
   :zen/desc
   "This value set includes codes from [BCP-47](http://tools.ietf.org/html/bcp47). This value set matches the ONC 2015 Edition LanguageCommunication data element value set within C-CDA to use a 2 character language code if one exists,   and a 3 character code if a 2 character code does not exist. It points back to [RFC 5646](https://tools.ietf.org/html/rfc5646), however only the language codes are required, all other elements are optional.",
-  :zen.fhir/version "0.5.25-1",
+  :zen.fhir/version "0.5.26",
   :fhir/code-systems
   #{{:fhir/url "urn:ietf:bcp:47", :zen.fhir/content :not-present}},
   :uri "http://hl7.org/fhir/us/core/ValueSet/simple-language",
-  :version "5.0.1"}}
+  :version "5.0.1",
+  :ftr
+  {:module "ig",
+   :source-url "node_modules/hl7.fhir.us.core",
+   :source-type :ig,
+   :ftr-path "ftr",
+   :zen/package-name "hl7-fhir-us-core",
+   :tag "init"}}}

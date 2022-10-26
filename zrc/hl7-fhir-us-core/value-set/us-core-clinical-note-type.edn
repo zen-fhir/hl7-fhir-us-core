@@ -4,9 +4,16 @@
  {:zen/tags #{zen.fhir/value-set},
   :zen/desc
   "The US Core Clinical Note Type Value Set is a 'starter set' of types supported for fetching and storing clinical notes.",
-  :zen.fhir/version "0.5.25-1",
+  :zen.fhir/version "0.5.26",
   :fhir/code-systems
   #{{:fhir/url "http://loinc.org", :zen.fhir/content :bundled}},
   :uri
   "http://hl7.org/fhir/us/core/ValueSet/us-core-clinical-note-type",
-  :version "5.0.1"}}
+  :version "5.0.1",
+  :ftr
+  {:module "ig",
+   :source-url "node_modules/hl7.fhir.us.core",
+   :source-type :ig,
+   :ftr-path "ftr",
+   :zen/package-name "hl7-fhir-us-core",
+   :tag "init"}}}

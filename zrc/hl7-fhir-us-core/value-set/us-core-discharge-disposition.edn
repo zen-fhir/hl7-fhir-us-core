@@ -4,10 +4,17 @@
  {:zen/tags #{zen.fhir/value-set},
   :zen/desc
   "[National Uniform Billing Committee](http://www.nubc.org/), manual UB-04, UB form locator 17.",
-  :zen.fhir/version "0.5.25-1",
+  :zen.fhir/version "0.5.26",
   :fhir/code-systems
   #{{:fhir/url "http://www.nubc.org/patient-discharge",
      :zen.fhir/content :not-present}},
   :uri
   "http://hl7.org/fhir/us/core/ValueSet/us-core-discharge-disposition",
-  :version "5.0.1"}}
+  :version "5.0.1",
+  :ftr
+  {:module "ig",
+   :source-url "node_modules/hl7.fhir.us.core",
+   :source-type :ig,
+   :ftr-path "ftr",
+   :zen/package-name "hl7-fhir-us-core",
+   :tag "init"}}}

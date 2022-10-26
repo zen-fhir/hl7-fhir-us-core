@@ -4,11 +4,18 @@
  {:zen/tags #{zen.fhir/value-set},
   :zen/desc
   "The codes for the concepts 'Unknown', 'Asked but no answer', 'other, and the 41 [CDC ethnicity codes](http://www.cdc.gov/phin/resources/vocabulary/index.html) that are grouped under one of the 2 OMB ethnicity category codes.",
-  :zen.fhir/version "0.5.25-1",
+  :zen.fhir/version "0.5.26",
   :fhir/code-systems
   #{{:fhir/url "urn:oid:2.16.840.1.113883.6.238",
      :zen.fhir/content :not-present}
     {:fhir/url "http://terminology.hl7.org/CodeSystem/v3-NullFlavor",
      :zen.fhir/content :bundled}},
   :uri "http://hl7.org/fhir/us/core/ValueSet/detailed-ethnicity",
-  :version "5.0.1"}}
+  :version "5.0.1",
+  :ftr
+  {:module "ig",
+   :source-url "node_modules/hl7.fhir.us.core",
+   :source-type :ig,
+   :ftr-path "ftr",
+   :zen/package-name "hl7-fhir-us-core",
+   :tag "init"}}}
