@@ -4,7 +4,7 @@
  {:zen/tags #{zen.fhir/value-set},
   :zen/desc
   "This value set includes all LOINC values whose CLASSTYPE is SURVEY in the LOINC database (Refer to [Appendix A](https://loinc.org/kb/users-guide/loinc-database-structure/) of LOINC Users' Guide)",
-  :zen.fhir/version "0.5.26-1",
+  :zen.fhir/version "0.5.26-2",
   :fhir/code-systems
   #{{:fhir/url "http://loinc.org", :zen.fhir/content :not-present}},
   :uri "http://hl7.org/fhir/us/core/ValueSet/us-core-survey-codes",

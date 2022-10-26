@@ -13,7 +13,7 @@
   :zen.fhir/type "Observation",
   :zen.fhir/profileUri
   "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-sdoh-assessment",
-  :zen.fhir/version "0.5.26-1",
+  :zen.fhir/version "0.5.26-2",
   :confirms
   #{hl7-fhir-us-core.us-core-observation-survey/schema
     zen.fhir/Resource},
