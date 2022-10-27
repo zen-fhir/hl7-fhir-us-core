@@ -4,7 +4,7 @@
  {:zen/tags #{zen.fhir/value-set},
   :zen/desc
   "A set of SNOMED CT and LOINC concepts to classify a requested service",
-  :zen.fhir/version "0.5.26-2",
+  :zen.fhir/version "0.5.26-3",
   :fhir/code-systems
   #{{:fhir/url "http://snomed.info/sct", :zen.fhir/content :bundled}
     {:fhir/url "http://hl7.org/fhir/us/core/CodeSystem/us-core-tags",

@@ -11,7 +11,7 @@
    hl7-fhir-r4-core.CodeableConcept
    us-nlm-vsac.value-set.2.16.840.1.113883.11.20.9.38},
  schema
- {:zen.fhir/version "0.5.26-2",
+ {:zen.fhir/version "0.5.26-3",
   :confirms #{hl7-fhir-r4-core.Observation/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
