@@ -6,7 +6,7 @@
    hl7-fhir-r4-core.Coding
    hl7-fhir-us-core.value-set.detailed-ethnicity},
  schema
- {:zen.fhir/version "0.5.31-1",
+ {:zen.fhir/version "0.5.32-2",
   :zen/tags #{zen/schema zen.fhir/structure-schema},
   :zen.fhir/profileUri
   "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity",

@@ -4,7 +4,7 @@
  {:zen/tags #{zen.fhir/value-set},
   :zen/desc
   "Used to tag patient submitted resources for writing and searching from EHRs",
-  :zen.fhir/version "0.5.31-1",
+  :zen.fhir/version "0.5.32-2",
   :fhir/code-systems
   #{{:fhir/url "http://hl7.org/fhir/us/core/CodeSystem/us-core-tags",
      :zen.fhir/content :bundled}},
