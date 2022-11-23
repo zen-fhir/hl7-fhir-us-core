@@ -12,12 +12,12 @@
    hl7-fhir-r4-core.CodeableConcept
    us-nlm-vsac.value-set.2.16.840.1.113883.11.20.9.38},
  schema
- {:zen.fhir/version "0.6.1",
+ {:zen.fhir/version "0.6.2",
   :confirms #{hl7-fhir-r4-core.Observation/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
   "http://hl7.org/fhir/us/core/StructureDefinition/us-core-smokingstatus",
-  :require #{:category :subject},
+  :require #{:category :value :effective :subject},
   :type zen/map,
   :zen/desc
   "The US Core Smoking Status Observation Profile is based upon the core FHIR Observation Resource and implementers the U.S. Core Data for Interoperability (USCDI) v2 Smoking status' requirements. This profile sets minimum expectations for the Observation resource to record, search, and fetch smoking status data associated with a patient to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
