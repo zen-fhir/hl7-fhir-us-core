@@ -1,29 +1,20 @@
 {ns hl7-fhir-us-core.us-core-diagnosticreport-note,
  import
- #{hl7-fhir-r4-core.Period
-   hl7-fhir-r4-core.BackboneElement
-   hl7-fhir-r4-core.code
-   zen.fhir
+ #{zen.fhir
    hl7-fhir-us-core.us-core-practitioner
-   hl7-fhir-r4-core.dateTime
    hl7-fhir-r4-core.DiagnosticReport
    hl7-fhir-us-core.us-core-organization
-   hl7-fhir-r4-core.instant
    hl7-fhir-us-core.value-set.us-core-diagnosticreport-report-and-note-codes
    hl7-fhir-us-core.us-core-patient
    hl7-fhir-us-core.us-core-observation-clinical-test
    hl7-fhir-us-core.us-core-observation-lab
    hl7-fhir-r4-core.value-set.diagnostic-report-status
-   hl7-fhir-r4-core.Reference
-   hl7-fhir-r4-core.Attachment
-   hl7-fhir-r4-core.Element
-   hl7-fhir-r4-core.CodeableConcept
    hl7-fhir-us-core.us-core-careteam
    hl7-fhir-us-core.us-core-encounter
    hl7-fhir-us-core.us-core-practitionerrole
    hl7-fhir-us-core.us-core-observation-imaging},
  schema
- {:zen.fhir/version "0.6.3",
+ {:zen.fhir/version "0.6.4",
   :confirms
   #{hl7-fhir-r4-core.DiagnosticReport/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -37,20 +28,15 @@
   {:category
    {:slicing {:slices {}},
     :type zen/vector,
-    :every
-    {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-     :fhir/flags #{:MS}},
+    :every #:fhir{:flags #{:MS}},
     :minItems 1},
-   :_issued {:confirms #{hl7-fhir-r4-core.Element/schema}},
    :encounter
-   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
+    :confirms #{zen.fhir/Reference},
     :zen.fhir/reference
     {:refers #{hl7-fhir-us-core.us-core-encounter/schema}}},
-   :_status {:confirms #{hl7-fhir-r4-core.Element/schema}},
    :status
-   {:confirms #{hl7-fhir-r4-core.code/schema},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
     :zen.fhir/value-set
     {:symbol
      hl7-fhir-r4-core.value-set.diagnostic-report-status/value-set,
@@ -58,8 +44,8 @@
    :result
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-     :fhir/flags #{:MS},
+    {:fhir/flags #{:MS},
+     :confirms #{zen.fhir/Reference},
      :zen.fhir/reference
      {:refers
       #{hl7-fhir-us-core.us-core-observation-clinical-test/schema
@@ -69,50 +55,39 @@
    {:fhir/polymorphic true,
     :exclusive-keys #{#{:dateTime :Period}},
     :type zen/map,
-    :keys
-    {:dateTime {:confirms #{hl7-fhir-r4-core.dateTime/schema}},
-     :_dateTime {:confirms #{hl7-fhir-r4-core.Element/schema}},
-     :Period {:confirms #{hl7-fhir-r4-core.Period/schema}}},
+    :keys {},
     :fhir/flags #{:MS},
     :zen/desc
     "Diagnostically relevant time (typically the time of the procedure)"},
    :code
-   {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
     :zen.fhir/value-set
     {:symbol
      hl7-fhir-us-core.value-set.us-core-diagnosticreport-report-and-note-codes/value-set,
      :strength :extensible},
     :zen/desc "US Core Report Code"},
-   :issued
-   {:confirms #{hl7-fhir-r4-core.instant/schema}, :fhir/flags #{:MS}},
-   :presentedForm
-   {:type zen/vector,
-    :every
-    {:confirms #{hl7-fhir-r4-core.Attachment/schema},
-     :fhir/flags #{:MS}}},
+   :issued #:fhir{:flags #{:MS}},
+   :presentedForm {:type zen/vector, :every #:fhir{:flags #{:MS}}},
    :media
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.BackboneElement/schema},
-     :type zen/map,
+    {:type zen/map,
      :keys
      {:link
-      {:confirms
-       #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-       :fhir/flags #{:MS},
+      {:fhir/flags #{:MS},
+       :confirms #{zen.fhir/Reference},
        :zen.fhir/reference {:refers #{}}}},
      :fhir/flags #{:MS}}},
    :subject
-   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
+    :confirms #{zen.fhir/Reference},
     :zen.fhir/reference
     {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
    :performer
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-     :fhir/flags #{:MS},
+    {:fhir/flags #{:MS},
+     :confirms #{zen.fhir/Reference},
      :zen.fhir/reference
      {:refers
       #{hl7-fhir-us-core.us-core-practitionerrole/schema

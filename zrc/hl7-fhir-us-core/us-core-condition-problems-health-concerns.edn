@@ -1,22 +1,14 @@
 {ns hl7-fhir-us-core.us-core-condition-problems-health-concerns,
  import
- #{hl7-fhir-r4-core.Period
-   hl7-fhir-r4-core.Condition
+ #{hl7-fhir-r4-core.Condition
    zen.fhir
    hl7-fhir-r4-core.value-set.condition-ver-status
-   hl7-fhir-r4-core.dateTime
-   hl7-fhir-r4-core.Range
-   hl7-fhir-r4-core.string
    hl7-fhir-us-core.value-set.us-core-condition-code
    hl7-fhir-us-core.us-core-patient
    hl7-fhir-r4-core.value-set.condition-clinical
-   hl7-fhir-r4-core.Reference
-   hl7-fhir-r4-core.Element
-   hl7-fhir-r4-core.CodeableConcept
-   hl7-fhir-r4-core.condition-assertedDate
-   hl7-fhir-r4-core.Age},
+   hl7-fhir-r4-core.condition-assertedDate},
  schema
- {:zen.fhir/version "0.6.3",
+ {:zen.fhir/version "0.6.4",
   :confirms #{zen.fhir/Resource hl7-fhir-r4-core.Condition/schema},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -30,14 +22,7 @@
    {:fhir/polymorphic true,
     :exclusive-keys #{#{:string :dateTime :Range :Period :Age}},
     :type zen/map,
-    :keys
-    {:dateTime {:confirms #{hl7-fhir-r4-core.dateTime/schema}},
-     :_dateTime {:confirms #{hl7-fhir-r4-core.Element/schema}},
-     :Age {:confirms #{hl7-fhir-r4-core.Age/schema}},
-     :Period {:confirms #{hl7-fhir-r4-core.Period/schema}},
-     :Range {:confirms #{hl7-fhir-r4-core.Range/schema}},
-     :string {:confirms #{hl7-fhir-r4-core.string/schema}},
-     :_string {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+    :keys {},
     :fhir/flags #{:MS}},
    :category
    {:slicing
@@ -52,14 +37,10 @@
             "http://hl7.org/fhir/us/core/CodeSystem/us-core-tags",
             :code "sdoh"}}}}}}},
     :type zen/vector,
-    :every
-    {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-     :fhir/flags #{:MS},
-     :zen/desc "category codes"},
+    :every {:fhir/flags #{:MS}, :zen/desc "category codes"},
     :minItems 1},
    :clinicalStatus
-   {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
     :zen.fhir/value-set
     {:symbol hl7-fhir-r4-core.value-set.condition-clinical/value-set,
      :strength :required}},
@@ -67,39 +48,28 @@
    {:fhir/polymorphic true,
     :exclusive-keys #{#{:string :dateTime :Range :Period :Age}},
     :type zen/map,
-    :keys
-    {:dateTime {:confirms #{hl7-fhir-r4-core.dateTime/schema}},
-     :_dateTime {:confirms #{hl7-fhir-r4-core.Element/schema}},
-     :Age {:confirms #{hl7-fhir-r4-core.Age/schema}},
-     :Period {:confirms #{hl7-fhir-r4-core.Period/schema}},
-     :Range {:confirms #{hl7-fhir-r4-core.Range/schema}},
-     :string {:confirms #{hl7-fhir-r4-core.string/schema}},
-     :_string {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+    :keys {},
     :fhir/flags #{:MS}},
-   :recordedDate
-   {:confirms #{hl7-fhir-r4-core.dateTime/schema}, :fhir/flags #{:MS}},
+   :recordedDate #:fhir{:flags #{:MS}},
    :assertedDate
    {:confirms #{hl7-fhir-r4-core.condition-assertedDate/schema},
     :fhir/extensionUri
     "http://hl7.org/fhir/StructureDefinition/condition-assertedDate",
     :fhir/flags #{:MS}},
-   :_recordedDate {:confirms #{hl7-fhir-r4-core.Element/schema}},
    :code
-   {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
     :zen.fhir/value-set
     {:symbol
      hl7-fhir-us-core.value-set.us-core-condition-code/value-set,
      :strength :extensible}},
    :verificationStatus
-   {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
     :zen.fhir/value-set
     {:symbol hl7-fhir-r4-core.value-set.condition-ver-status/value-set,
      :strength :required}},
    :subject
-   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
+    :confirms #{zen.fhir/Reference},
     :zen.fhir/reference
     {:refers #{hl7-fhir-us-core.us-core-patient/schema}}}},
   :zen.fhir/type "Condition"}}

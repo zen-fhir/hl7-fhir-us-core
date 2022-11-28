@@ -1,28 +1,20 @@
 {ns hl7-fhir-us-core.us-core-medicationrequest,
  import
  #{hl7-fhir-r4-core.Device
-   hl7-fhir-r4-core.code
    zen.fhir
    hl7-fhir-us-core.us-core-practitioner
-   hl7-fhir-r4-core.boolean
-   hl7-fhir-r4-core.dateTime
    hl7-fhir-us-core.us-core-relatedperson
-   hl7-fhir-r4-core.string
    us-nlm-vsac.value-set.2.16.840.1.113762.1.4.1010.4
    hl7-fhir-us-core.us-core-organization
    hl7-fhir-r4-core.MedicationRequest
    hl7-fhir-us-core.us-core-patient
-   hl7-fhir-r4-core.Dosage
-   hl7-fhir-r4-core.Reference
-   hl7-fhir-r4-core.Element
    hl7-fhir-us-core.us-core-medication
    hl7-fhir-r4-core.value-set.medicationrequest-intent
-   hl7-fhir-r4-core.CodeableConcept
    hl7-fhir-us-core.us-core-encounter
    hl7-fhir-us-core.us-core-practitionerrole
    hl7-fhir-r4-core.value-set.medicationrequest-status},
  schema
- {:zen.fhir/version "0.6.3",
+ {:zen.fhir/version "0.6.4",
   :confirms
   #{zen.fhir/Resource hl7-fhir-r4-core.MedicationRequest/schema},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -36,26 +28,19 @@
   {:category
    {:slicing {:slices {}},
     :type zen/vector,
-    :every
-    {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-     :fhir/flags #{:MS}}},
-   :_authoredOn {:confirms #{hl7-fhir-r4-core.Element/schema}},
+    :every #:fhir{:flags #{:MS}}},
    :encounter
-   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
+    :confirms #{zen.fhir/Reference},
     :zen.fhir/reference
     {:refers #{hl7-fhir-us-core.us-core-encounter/schema}}},
-   :_status {:confirms #{hl7-fhir-r4-core.Element/schema}},
    :reported
    {:fhir/polymorphic true,
     :exclusive-keys #{#{:boolean :Reference}},
     :type zen/map,
     :keys
-    {:boolean {:confirms #{hl7-fhir-r4-core.boolean/schema}},
-     :_boolean {:confirms #{hl7-fhir-r4-core.Element/schema}},
-     :Reference
-     {:confirms
-      #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+    {:Reference
+     {:confirms #{zen.fhir/Reference},
       :zen.fhir/reference
       {:refers
        #{hl7-fhir-us-core.us-core-practitionerrole/schema
@@ -64,12 +49,10 @@
          hl7-fhir-us-core.us-core-patient/schema
          hl7-fhir-us-core.us-core-practitioner/schema}}}},
     :fhir/flags #{:MS}},
-   :authoredOn
-   {:confirms #{hl7-fhir-r4-core.dateTime/schema}, :fhir/flags #{:MS}},
-   :_intent {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :authoredOn #:fhir{:flags #{:MS}},
    :requester
-   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
+    :confirms #{zen.fhir/Reference},
     :zen.fhir/reference
     {:refers
      #{hl7-fhir-us-core.us-core-practitionerrole/schema
@@ -79,8 +62,7 @@
        hl7-fhir-r4-core.Device/schema
        hl7-fhir-us-core.us-core-practitioner/schema}}},
    :status
-   {:confirms #{hl7-fhir-r4-core.code/schema},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
     :zen.fhir/value-set
     {:symbol
      hl7-fhir-r4-core.value-set.medicationrequest-status/value-set,
@@ -88,24 +70,18 @@
    :dosageInstruction
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.Dosage/schema},
-     :type zen/map,
-     :keys
-     {:text
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS}},
-      :_text {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+    {:type zen/map,
+     :keys {:text #:fhir{:flags #{:MS}}},
      :fhir/flags #{:MS}}},
    :intent
-   {:confirms #{hl7-fhir-r4-core.code/schema},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
     :zen.fhir/value-set
     {:symbol
      hl7-fhir-r4-core.value-set.medicationrequest-intent/value-set,
      :strength :required}},
    :subject
-   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
+    :confirms #{zen.fhir/Reference},
     :zen.fhir/reference
     {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
    :medication
@@ -113,11 +89,8 @@
     :exclusive-keys #{#{:CodeableConcept :Reference}},
     :type zen/map,
     :keys
-    {:CodeableConcept
-     {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema}},
-     :Reference
-     {:confirms
-      #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+    {:Reference
+     {:confirms #{zen.fhir/Reference},
       :zen.fhir/reference
       {:refers #{hl7-fhir-us-core.us-core-medication/schema}}}},
     :fhir/flags #{:MS},

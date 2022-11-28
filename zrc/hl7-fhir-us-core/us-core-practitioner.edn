@@ -1,18 +1,10 @@
 {ns hl7-fhir-us-core.us-core-practitioner,
  import
- #{hl7-fhir-r4-core.code
-   zen.fhir
-   hl7-fhir-r4-core.ContactPoint
-   hl7-fhir-r4-core.string
-   hl7-fhir-r4-core.HumanName
-   hl7-fhir-r4-core.uri
+ #{zen.fhir
    hl7-fhir-us-core.value-set.us-core-usps-state
-   hl7-fhir-r4-core.Element
-   hl7-fhir-r4-core.Practitioner
-   hl7-fhir-r4-core.Identifier
-   hl7-fhir-r4-core.Address},
+   hl7-fhir-r4-core.Practitioner},
  schema
- {:zen.fhir/version "0.6.3",
+ {:zen.fhir/version "0.6.4",
   :confirms #{hl7-fhir-r4-core.Practitioner/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -32,81 +24,43 @@
         :match {:system "http://hl7.org/fhir/sid/us-npi"}}}}},
     :type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.Identifier/schema},
-     :type zen/map,
+    {:type zen/map,
      :keys
-     {:system
-      {:confirms #{hl7-fhir-r4-core.uri/schema}, :fhir/flags #{:MS}},
-      :_system {:confirms #{hl7-fhir-r4-core.Element/schema}},
-      :value
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS}},
-      :_value {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+     {:system #:fhir{:flags #{:MS}}, :value #:fhir{:flags #{:MS}}},
      :require #{:system :value},
      :fhir/flags #{:MS}},
     :minItems 1},
    :name
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.HumanName/schema},
-     :type zen/map,
-     :keys
-     {:family
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS}},
-      :_family {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+    {:type zen/map,
+     :keys {:family #:fhir{:flags #{:MS}}},
      :require #{:family},
      :fhir/flags #{:MS}},
     :minItems 1},
    :telecom
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.ContactPoint/schema},
-     :type zen/map,
+    {:type zen/map,
      :keys
-     {:system
-      {:confirms #{hl7-fhir-r4-core.code/schema}, :fhir/flags #{:MS}},
-      :_system {:confirms #{hl7-fhir-r4-core.Element/schema}},
-      :value
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS}},
-      :_value {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+     {:system #:fhir{:flags #{:MS}}, :value #:fhir{:flags #{:MS}}},
      :fhir/flags #{:MS}}},
    :address
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.Address/schema},
-     :type zen/map,
+    {:type zen/map,
      :keys
-     {:_line
-      {:type zen/vector,
-       :every {:confirms #{hl7-fhir-r4-core.Element/schema}}},
-      :city
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS}},
-      :_city {:confirms #{hl7-fhir-r4-core.Element/schema}},
+     {:_line {:type zen/vector, :every {}},
+      :city #:fhir{:flags #{:MS}},
       :state
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS},
+      {:fhir/flags #{:MS},
        :zen.fhir/value-set
        {:symbol
         hl7-fhir-us-core.value-set.us-core-usps-state/value-set,
         :strength :extensible}},
-      :_state {:confirms #{hl7-fhir-r4-core.Element/schema}},
       :line
-      {:type zen/vector,
-       :every
-       {:confirms #{hl7-fhir-r4-core.string/schema},
-        :fhir/flags #{:MS}},
-       :maxItems 4},
-      :postalCode
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS},
-       :zen/desc "US Zip Codes"},
-      :_country {:confirms #{hl7-fhir-r4-core.Element/schema}},
-      :_postalCode {:confirms #{hl7-fhir-r4-core.Element/schema}},
-      :country
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS}}},
+      {:type zen/vector, :every #:fhir{:flags #{:MS}}, :maxItems 4},
+      :postalCode {:fhir/flags #{:MS}, :zen/desc "US Zip Codes"},
+      :country #:fhir{:flags #{:MS}}},
      :fhir/flags #{:MS}}}},
   :zen.fhir/type "Practitioner"}}

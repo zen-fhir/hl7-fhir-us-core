@@ -1,17 +1,11 @@
 {ns hl7-fhir-us-core.us-core-practitionerrole,
  import
- #{hl7-fhir-r4-core.code
-   zen.fhir
+ #{zen.fhir
    hl7-fhir-us-core.us-core-practitioner
    us-nlm-vsac.value-set.2.16.840.1.114222.4.11.1066
    hl7-fhir-us-core.value-set.us-core-provider-role
-   hl7-fhir-r4-core.ContactPoint
-   hl7-fhir-r4-core.string
    hl7-fhir-us-core.us-core-organization
-   hl7-fhir-r4-core.PractitionerRole
-   hl7-fhir-r4-core.Reference
-   hl7-fhir-r4-core.Element
-   hl7-fhir-r4-core.CodeableConcept},
+   hl7-fhir-r4-core.PractitionerRole},
  schema
  {:zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen/desc
@@ -19,26 +13,25 @@
   :zen.fhir/type "PractitionerRole",
   :zen.fhir/profileUri
   "http://hl7.org/fhir/us/core/StructureDefinition/us-core-practitionerrole",
-  :zen.fhir/version "0.6.3",
+  :zen.fhir/version "0.6.4",
   :confirms
   #{hl7-fhir-r4-core.PractitionerRole/schema zen.fhir/Resource},
   :type zen/map,
   :keys
   {:practitioner
-   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
+    :confirms #{zen.fhir/Reference},
     :zen.fhir/reference
     {:refers #{hl7-fhir-us-core.us-core-practitioner/schema}}},
    :organization
-   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
+    :confirms #{zen.fhir/Reference},
     :zen.fhir/reference
     {:refers #{hl7-fhir-us-core.us-core-organization/schema}}},
    :code
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-     :fhir/flags #{:MS},
+    {:fhir/flags #{:MS},
      :zen.fhir/value-set
      {:symbol
       hl7-fhir-us-core.value-set.us-core-provider-role/value-set,
@@ -46,8 +39,7 @@
    :specialty
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-     :fhir/flags #{:MS},
+    {:fhir/flags #{:MS},
      :zen.fhir/value-set
      {:symbol
       us-nlm-vsac.value-set.2.16.840.1.114222.4.11.1066/value-set,
@@ -55,32 +47,25 @@
    :location
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-     :fhir/flags #{:MS},
+    {:fhir/flags #{:MS},
+     :confirms #{zen.fhir/Reference},
      :zen.fhir/reference {:refers #{}}}},
    :healthcareService
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+    {:confirms #{zen.fhir/Reference},
      :zen.fhir/reference {:refers #{}}}},
    :telecom
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.ContactPoint/schema},
-     :type zen/map,
+    {:type zen/map,
      :keys
-     {:system
-      {:confirms #{hl7-fhir-r4-core.code/schema}, :fhir/flags #{:MS}},
-      :_system {:confirms #{hl7-fhir-r4-core.Element/schema}},
-      :value
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS}},
-      :_value {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+     {:system #:fhir{:flags #{:MS}}, :value #:fhir{:flags #{:MS}}},
      :require #{:system :value},
      :fhir/flags #{:MS}}},
    :endpoint
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-     :fhir/flags #{:MS},
+    {:fhir/flags #{:MS},
+     :confirms #{zen.fhir/Reference},
      :zen.fhir/reference {:refers #{}}}}}}}

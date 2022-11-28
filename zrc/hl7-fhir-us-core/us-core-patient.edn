@@ -1,30 +1,18 @@
 {ns hl7-fhir-us-core.us-core-patient,
  import
- #{hl7-fhir-r4-core.Period
-   hl7-fhir-r4-core.BackboneElement
-   hl7-fhir-us-core.us-core-birthsex
-   hl7-fhir-r4-core.code
+ #{hl7-fhir-us-core.us-core-birthsex
    zen.fhir
-   hl7-fhir-r4-core.ContactPoint
    hl7-fhir-us-core.us-core-race
-   hl7-fhir-r4-core.string
    hl7-fhir-r4-core.Patient
    hl7-fhir-r4-core.value-set.administrative-gender
-   hl7-fhir-r4-core.date
-   hl7-fhir-r4-core.HumanName
-   hl7-fhir-r4-core.uri
    hl7-fhir-us-core.us-core-genderIdentity
    hl7-fhir-us-core.value-set.us-core-usps-state
    hl7-fhir-us-core.value-set.simple-language
-   hl7-fhir-r4-core.Element
-   hl7-fhir-r4-core.CodeableConcept
-   hl7-fhir-r4-core.Identifier
    hl7-fhir-r4-core.value-set.contact-point-use
    hl7-fhir-us-core.us-core-ethnicity
-   hl7-fhir-r4-core.value-set.contact-point-system
-   hl7-fhir-r4-core.Address},
+   hl7-fhir-r4-core.value-set.contact-point-system},
  schema
- {:zen.fhir/version "0.6.3",
+ {:zen.fhir/version "0.6.4",
   :confirms #{hl7-fhir-r4-core.Patient/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -37,39 +25,19 @@
   {:address
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.Address/schema},
-     :type zen/map,
+    {:type zen/map,
      :keys
-     {:_line
-      {:type zen/vector,
-       :every {:confirms #{hl7-fhir-r4-core.Element/schema}}},
-      :use {:confirms #{hl7-fhir-r4-core.code/schema}},
-      :city
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS}},
-      :_city {:confirms #{hl7-fhir-r4-core.Element/schema}},
+     {:_line {:type zen/vector, :every {}},
+      :city #:fhir{:flags #{:MS}},
       :state
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS},
+      {:fhir/flags #{:MS},
        :zen.fhir/value-set
        {:symbol
         hl7-fhir-us-core.value-set.us-core-usps-state/value-set,
         :strength :extensible}},
-      :_state {:confirms #{hl7-fhir-r4-core.Element/schema}},
-      :line
-      {:type zen/vector,
-       :every
-       {:confirms #{hl7-fhir-r4-core.string/schema},
-        :fhir/flags #{:MS}}},
-      :postalCode
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS},
-       :zen/desc "US Zip Codes"},
-      :_postalCode {:confirms #{hl7-fhir-r4-core.Element/schema}},
-      :period
-      {:confirms #{hl7-fhir-r4-core.Period/schema},
-       :fhir/flags #{:MS}},
-      :_use {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+      :line {:type zen/vector, :every #:fhir{:flags #{:MS}}},
+      :postalCode {:fhir/flags #{:MS}, :zen/desc "US Zip Codes"},
+      :period #:fhir{:flags #{:MS}}},
      :fhir/flags #{:MS}}},
    :race
    {:confirms #{hl7-fhir-us-core.us-core-race/schema},
@@ -78,66 +46,39 @@
    :name
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.HumanName/schema},
-     :type zen/map,
+    {:type zen/map,
      :keys
-     {:_family {:confirms #{hl7-fhir-r4-core.Element/schema}},
-      :suffix
-      {:type zen/vector,
-       :every {:confirms #{hl7-fhir-r4-core.string/schema}}},
-      :_suffix
-      {:type zen/vector,
-       :every {:confirms #{hl7-fhir-r4-core.Element/schema}}},
-      :given
-      {:type zen/vector,
-       :every
-       {:confirms #{hl7-fhir-r4-core.string/schema},
-        :fhir/flags #{:MS}}},
-      :family
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS}},
-      :use {:confirms #{hl7-fhir-r4-core.code/schema}},
-      :_given
-      {:type zen/vector,
-       :every {:confirms #{hl7-fhir-r4-core.Element/schema}}},
-      :period {:confirms #{hl7-fhir-r4-core.Period/schema}},
-      :_use {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+     {:suffix {:type zen/vector, :every {}},
+      :_suffix {:type zen/vector, :every {}},
+      :given {:type zen/vector, :every #:fhir{:flags #{:MS}}},
+      :family #:fhir{:flags #{:MS}},
+      :_given {:type zen/vector, :every {}}},
      :fhir/flags #{:MS}},
     :minItems 1},
-   :_gender {:confirms #{hl7-fhir-r4-core.Element/schema}},
-   :birthDate
-   {:confirms #{hl7-fhir-r4-core.date/schema}, :fhir/flags #{:MS}},
+   :birthDate #:fhir{:flags #{:MS}},
    :ethnicity
    {:confirms #{hl7-fhir-us-core.us-core-ethnicity/schema},
     :fhir/extensionUri
     "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity"},
-   :_birthDate {:confirms #{hl7-fhir-r4-core.Element/schema}},
    :communication
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.BackboneElement/schema},
-     :type zen/map,
+    {:type zen/map,
      :keys
      {:language
-      {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-       :fhir/flags #{:MS},
+      {:fhir/flags #{:MS},
        :zen.fhir/value-set
        {:symbol hl7-fhir-us-core.value-set.simple-language/value-set,
         :strength :extensible}}}}},
    :identifier
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.Identifier/schema},
-     :type zen/map,
+    {:type zen/map,
      :keys
-     {:system
-      {:confirms #{hl7-fhir-r4-core.uri/schema}, :fhir/flags #{:MS}},
-      :_system {:confirms #{hl7-fhir-r4-core.Element/schema}},
+     {:system #:fhir{:flags #{:MS}},
       :value
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS},
-       :zen/desc "The value that is unique within the system."},
-      :_value {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+      {:fhir/flags #{:MS},
+       :zen/desc "The value that is unique within the system."}},
      :require #{:system :value},
      :fhir/flags #{:MS}},
     :minItems 1},
@@ -148,32 +89,23 @@
    :telecom
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.ContactPoint/schema},
-     :type zen/map,
+    {:type zen/map,
      :keys
      {:system
-      {:confirms #{hl7-fhir-r4-core.code/schema},
-       :fhir/flags #{:MS},
+      {:fhir/flags #{:MS},
        :zen.fhir/value-set
        {:symbol
         hl7-fhir-r4-core.value-set.contact-point-system/value-set,
         :strength :required}},
-      :_system {:confirms #{hl7-fhir-r4-core.Element/schema}},
-      :value
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS}},
-      :_value {:confirms #{hl7-fhir-r4-core.Element/schema}},
+      :value #:fhir{:flags #{:MS}},
       :use
-      {:confirms #{hl7-fhir-r4-core.code/schema},
-       :fhir/flags #{:MS},
+      {:fhir/flags #{:MS},
        :zen.fhir/value-set
        {:symbol hl7-fhir-r4-core.value-set.contact-point-use/value-set,
-        :strength :required}},
-      :_use {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+        :strength :required}}},
      :require #{:system :value}}},
    :gender
-   {:confirms #{hl7-fhir-r4-core.code/schema},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
     :zen.fhir/value-set
     {:symbol
      hl7-fhir-r4-core.value-set.administrative-gender/value-set,

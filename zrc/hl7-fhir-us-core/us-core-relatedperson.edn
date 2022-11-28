@@ -1,17 +1,10 @@
 {ns hl7-fhir-us-core.us-core-relatedperson,
  import
  #{zen.fhir
-   hl7-fhir-r4-core.ContactPoint
    hl7-fhir-r4-core.RelatedPerson
-   hl7-fhir-r4-core.boolean
-   hl7-fhir-us-core.us-core-patient
-   hl7-fhir-r4-core.HumanName
-   hl7-fhir-r4-core.Reference
-   hl7-fhir-r4-core.Element
-   hl7-fhir-r4-core.CodeableConcept
-   hl7-fhir-r4-core.Address},
+   hl7-fhir-us-core.us-core-patient},
  schema
- {:zen.fhir/version "0.6.3",
+ {:zen.fhir/version "0.6.4",
   :confirms #{zen.fhir/Resource hl7-fhir-r4-core.RelatedPerson/schema},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -21,32 +14,14 @@
   :zen/desc
   "This profile sets minimum expectations for the RelatedPerson resource to record, search, and fetch related persons associated with a patient to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
   :keys
-  {:active
-   {:confirms #{hl7-fhir-r4-core.boolean/schema}, :fhir/flags #{:MS}},
-   :_active {:confirms #{hl7-fhir-r4-core.Element/schema}},
+  {:active #:fhir{:flags #{:MS}},
    :patient
-   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
+    :confirms #{zen.fhir/Reference},
     :zen.fhir/reference
     {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
-   :relationship
-   {:type zen/vector,
-    :every
-    {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-     :fhir/flags #{:MS}}},
-   :name
-   {:type zen/vector,
-    :every
-    {:confirms #{hl7-fhir-r4-core.HumanName/schema},
-     :fhir/flags #{:MS}}},
-   :telecom
-   {:type zen/vector,
-    :every
-    {:confirms #{hl7-fhir-r4-core.ContactPoint/schema},
-     :fhir/flags #{:MS}}},
-   :address
-   {:type zen/vector,
-    :every
-    {:confirms #{hl7-fhir-r4-core.Address/schema},
-     :fhir/flags #{:MS}}}},
+   :relationship {:type zen/vector, :every #:fhir{:flags #{:MS}}},
+   :name {:type zen/vector, :every #:fhir{:flags #{:MS}}},
+   :telecom {:type zen/vector, :every #:fhir{:flags #{:MS}}},
+   :address {:type zen/vector, :every #:fhir{:flags #{:MS}}}},
   :zen.fhir/type "RelatedPerson"}}

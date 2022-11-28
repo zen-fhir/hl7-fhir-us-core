@@ -1,33 +1,16 @@
 {ns hl7-fhir-us-core.us-core-questionnaireresponse,
  import
- #{hl7-fhir-r4-core.integer
-   hl7-fhir-r4-core.Device
-   hl7-fhir-r4-core.decimal
-   hl7-fhir-r4-core.BackboneElement
-   hl7-fhir-r4-core.time
-   hl7-fhir-r4-core.canonical
-   hl7-fhir-r4-core.code
+ #{hl7-fhir-r4-core.Device
    zen.fhir
    hl7-fhir-us-core.us-core-practitioner
-   hl7-fhir-r4-core.boolean
-   hl7-fhir-r4-core.dateTime
    hl7-fhir-us-core.us-core-relatedperson
-   hl7-fhir-r4-core.string
    hl7-fhir-us-core.us-core-organization
    hl7-fhir-us-core.us-core-patient
-   hl7-fhir-r4-core.Coding
-   hl7-fhir-r4-core.date
    hl7-fhir-r4-core.PractitionerRole
-   hl7-fhir-r4-core.Quantity
    hl7-fhir-uv-sdc.sdc-questionnaireresponse
-   hl7-fhir-r4-core.uri
-   hl7-fhir-us-core.us-core-extension-questionnaire-uri
-   hl7-fhir-r4-core.Meta
-   hl7-fhir-r4-core.Reference
-   hl7-fhir-r4-core.Attachment
-   hl7-fhir-r4-core.Element},
+   hl7-fhir-us-core.us-core-extension-questionnaire-uri},
  schema
- {:zen.fhir/version "0.6.3",
+ {:zen.fhir/version "0.6.4",
   :confirms
   #{zen.fhir/Resource
     hl7-fhir-uv-sdc.sdc-questionnaireresponse/schema},
@@ -39,12 +22,9 @@
   :zen/desc
   "To promote interoperability and adoption through common implementation, this profile sets minimum expectations for the QuestionnaireResponse resource to record, search, and fetch retrieve captures the responses to form/survey and assessment tools such as the *Protocol for Responding to and Assessing Patients’ Assets, Risks, and Experiences (PRAPARE) Survey*.   This profile is based on the [Structured Data Capture (SDC) Questionnaire Response Profile](http://hl7.org/fhir/uv/sdc/STU3/StructureDefinition-sdc-questionnaireresponse.html) and identifies the *additional* core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile. It provides the floor for standards development for specific uses cases.",
   :keys
-  {:questionnaire
-   {:confirms #{hl7-fhir-r4-core.canonical/schema},
-    :fhir/flags #{:MS}},
+  {:questionnaire #:fhir{:flags #{:MS}},
    :meta
-   {:confirms #{hl7-fhir-r4-core.Meta/schema},
-    :type zen/map,
+   {:type zen/map,
     :keys
     {:tag
      {:slicing
@@ -59,29 +39,21 @@
            :code "sdoh"}}}}},
       :type zen/vector,
       :every
-      {:confirms #{hl7-fhir-r4-core.Coding/schema},
-       :type zen/map,
-       :keys
-       {:code {:confirms #{hl7-fhir-r4-core.code/schema}},
-        :_code {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+      {:type zen/map,
+       :keys {},
        :require #{:code},
        :fhir/flags #{:MS}}}},
     :fhir/flags #{:MS}},
    :item
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.BackboneElement/schema},
-     :type zen/map,
+    {:type zen/map,
      :keys
-     {:linkId
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS}},
-      :_linkId {:confirms #{hl7-fhir-r4-core.Element/schema}},
+     {:linkId #:fhir{:flags #{:MS}},
       :answer
       {:type zen/vector,
        :every
-       {:confirms #{hl7-fhir-r4-core.BackboneElement/schema},
-        :type zen/map,
+       {:type zen/map,
         :keys
         {:value
          {:fhir/polymorphic true,
@@ -100,37 +72,14 @@
               :Reference}},
           :type zen/map,
           :keys
-          {:_decimal {:confirms #{hl7-fhir-r4-core.Element/schema}},
-           :date {:confirms #{hl7-fhir-r4-core.date/schema}},
-           :_uri {:confirms #{hl7-fhir-r4-core.Element/schema}},
-           :_date {:confirms #{hl7-fhir-r4-core.Element/schema}},
-           :_dateTime {:confirms #{hl7-fhir-r4-core.Element/schema}},
-           :time {:confirms #{hl7-fhir-r4-core.time/schema}},
-           :string {:confirms #{hl7-fhir-r4-core.string/schema}},
-           :dateTime {:confirms #{hl7-fhir-r4-core.dateTime/schema}},
-           :_time {:confirms #{hl7-fhir-r4-core.Element/schema}},
-           :integer {:confirms #{hl7-fhir-r4-core.integer/schema}},
-           :_boolean {:confirms #{hl7-fhir-r4-core.Element/schema}},
-           :decimal {:confirms #{hl7-fhir-r4-core.decimal/schema}},
-           :Attachment
-           {:confirms #{hl7-fhir-r4-core.Attachment/schema}},
-           :Coding {:confirms #{hl7-fhir-r4-core.Coding/schema}},
-           :_integer {:confirms #{hl7-fhir-r4-core.Element/schema}},
-           :uri {:confirms #{hl7-fhir-r4-core.uri/schema}},
-           :Quantity {:confirms #{hl7-fhir-r4-core.Quantity/schema}},
-           :boolean {:confirms #{hl7-fhir-r4-core.boolean/schema}},
-           :_string {:confirms #{hl7-fhir-r4-core.Element/schema}},
-           :Reference
-           {:confirms
-            #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+          {:Reference
+           {:confirms #{zen.fhir/Reference},
             :zen.fhir/reference {:refers #{}}}},
           :fhir/flags #{:MS}}}}}},
      :fhir/flags #{:MS}}},
-   :_status {:confirms #{hl7-fhir-r4-core.Element/schema}},
-   :_authored {:confirms #{hl7-fhir-r4-core.Element/schema}},
    :author
-   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
+    :confirms #{zen.fhir/Reference},
     :zen.fhir/reference
     {:refers
      #{hl7-fhir-us-core.us-core-organization/schema
@@ -139,18 +88,15 @@
        hl7-fhir-us-core.us-core-patient/schema
        hl7-fhir-r4-core.Device/schema
        hl7-fhir-us-core.us-core-practitioner/schema}}},
-   :status
-   {:confirms #{hl7-fhir-r4-core.code/schema}, :fhir/flags #{:MS}},
-   :authored
-   {:confirms #{hl7-fhir-r4-core.dateTime/schema}, :fhir/flags #{:MS}},
+   :status #:fhir{:flags #{:MS}},
+   :authored #:fhir{:flags #{:MS}},
    :subject
-   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
+    :confirms #{zen.fhir/Reference},
     :zen.fhir/reference
     {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
    :_questionnaire
-   {:confirms #{hl7-fhir-r4-core.Element/schema},
-    :type zen/map,
+   {:type zen/map,
     :keys
     {:url
      {:confirms

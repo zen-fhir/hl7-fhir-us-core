@@ -1,29 +1,13 @@
 {ns hl7-fhir-us-core.us-core-observation-lab,
  import
- #{hl7-fhir-r4-core.integer
-   hl7-fhir-r4-core.Period
-   hl7-fhir-r4-core.Observation
-   hl7-fhir-r4-core.Ratio
-   hl7-fhir-r4-core.time
-   hl7-fhir-r4-core.code
+ #{hl7-fhir-r4-core.Observation
    zen.fhir
    hl7-fhir-r4-core.value-set.observation-status
-   hl7-fhir-r4-core.boolean
-   hl7-fhir-r4-core.dateTime
-   hl7-fhir-r4-core.Timing
-   hl7-fhir-r4-core.Range
-   hl7-fhir-r4-core.string
-   hl7-fhir-r4-core.instant
    hl7-fhir-us-core.us-core-patient
-   hl7-fhir-r4-core.SampledData
-   hl7-fhir-r4-core.Quantity
-   hl7-fhir-r4-core.Reference
    hl7-fhir-r4-core.value-set.data-absent-reason
-   hl7-fhir-r4-core.Element
-   hl7-fhir-r4-core.value-set.observation-codes
-   hl7-fhir-r4-core.CodeableConcept},
+   hl7-fhir-r4-core.value-set.observation-codes},
  schema
- {:zen.fhir/version "0.6.3",
+ {:zen.fhir/version "0.6.4",
   :confirms #{hl7-fhir-r4-core.Observation/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -34,12 +18,10 @@
   "The US Core Laboratory Result Observation Profile is based upon the core FHIR Observation Resource, and, along with the US Core DiagnosticReport Profile for Laboratory Results Reporting, meets the U.S. Core Data for Interoperability (USCDI) v2 ‘Laboratory’ requirements.  Laboratory results are grouped and summarized using the DiagnosticReport resource which reference Observation resources.  Each Observation resource represents an individual laboratory test and result value, a “nested” panel (such as a microbial susceptibility panel) which references other observations, or rarely a laboratory test with component result values. The US Core Laboratory Result Observation Profile sets minimum expectations for the Observation resource resource to record, search, and fetch laboratory test results associated with a patient to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
   :keys
   {:status
-   {:confirms #{hl7-fhir-r4-core.code/schema},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
     :zen.fhir/value-set
     {:symbol hl7-fhir-r4-core.value-set.observation-status/value-set,
      :strength :required}},
-   :_status {:confirms #{hl7-fhir-r4-core.Element/schema}},
    :category
    {:slicing
     {:slices
@@ -53,33 +35,24 @@
             "http://terminology.hl7.org/CodeSystem/observation-category",
             :code "laboratory"}}}}}}},
     :type zen/vector,
-    :every
-    {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-     :fhir/flags #{:MS}},
+    :every #:fhir{:flags #{:MS}},
     :minItems 1},
    :code
-   {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
     :zen.fhir/value-set
     {:symbol hl7-fhir-r4-core.value-set.observation-codes/value-set,
      :strength :extensible},
     :zen/desc "Laboratory Test Name"},
    :subject
-   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
+    :confirms #{zen.fhir/Reference},
     :zen.fhir/reference
     {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
    :effective
    {:fhir/polymorphic true,
     :exclusive-keys #{#{:instant :dateTime :Period :Timing}},
     :type zen/map,
-    :keys
-    {:dateTime {:confirms #{hl7-fhir-r4-core.dateTime/schema}},
-     :_dateTime {:confirms #{hl7-fhir-r4-core.Element/schema}},
-     :Period {:confirms #{hl7-fhir-r4-core.Period/schema}},
-     :Timing {:confirms #{hl7-fhir-r4-core.Timing/schema}},
-     :instant {:confirms #{hl7-fhir-r4-core.instant/schema}},
-     :_instant {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+    :keys {},
     :fhir/flags #{:MS}},
    :value
    {:fhir/polymorphic true,
@@ -96,29 +69,11 @@
         :Quantity
         :boolean}},
     :type zen/map,
-    :keys
-    {:_dateTime {:confirms #{hl7-fhir-r4-core.Element/schema}},
-     :time {:confirms #{hl7-fhir-r4-core.time/schema}},
-     :SampledData {:confirms #{hl7-fhir-r4-core.SampledData/schema}},
-     :string {:confirms #{hl7-fhir-r4-core.string/schema}},
-     :dateTime {:confirms #{hl7-fhir-r4-core.dateTime/schema}},
-     :_time {:confirms #{hl7-fhir-r4-core.Element/schema}},
-     :Range {:confirms #{hl7-fhir-r4-core.Range/schema}},
-     :integer {:confirms #{hl7-fhir-r4-core.integer/schema}},
-     :Ratio {:confirms #{hl7-fhir-r4-core.Ratio/schema}},
-     :_boolean {:confirms #{hl7-fhir-r4-core.Element/schema}},
-     :Period {:confirms #{hl7-fhir-r4-core.Period/schema}},
-     :_integer {:confirms #{hl7-fhir-r4-core.Element/schema}},
-     :CodeableConcept
-     {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema}},
-     :Quantity {:confirms #{hl7-fhir-r4-core.Quantity/schema}},
-     :boolean {:confirms #{hl7-fhir-r4-core.boolean/schema}},
-     :_string {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+    :keys {},
     :fhir/flags #{:MS},
     :zen/desc "Result Value"},
    :dataAbsentReason
-   {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
     :zen.fhir/value-set
     {:symbol hl7-fhir-r4-core.value-set.data-absent-reason/value-set,
      :strength :extensible}}},

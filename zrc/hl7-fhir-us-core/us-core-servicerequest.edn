@@ -1,23 +1,16 @@
 {ns hl7-fhir-us-core.us-core-servicerequest,
  import
- #{hl7-fhir-r4-core.Period
-   hl7-fhir-r4-core.Device
-   hl7-fhir-r4-core.code
+ #{hl7-fhir-r4-core.Device
    zen.fhir
    hl7-fhir-us-core.us-core-practitioner
-   hl7-fhir-r4-core.dateTime
    hl7-fhir-us-core.us-core-relatedperson
-   hl7-fhir-r4-core.Timing
    hl7-fhir-us-core.us-core-organization
    hl7-fhir-us-core.us-core-patient
    hl7-fhir-r4-core.PractitionerRole
    hl7-fhir-us-core.value-set.us-core-procedure-code
-   hl7-fhir-r4-core.Reference
-   hl7-fhir-r4-core.ServiceRequest
-   hl7-fhir-r4-core.Element
-   hl7-fhir-r4-core.CodeableConcept},
+   hl7-fhir-r4-core.ServiceRequest},
  schema
- {:zen.fhir/version "0.6.3",
+ {:zen.fhir/version "0.6.4",
   :confirms
   #{hl7-fhir-r4-core.ServiceRequest/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -31,18 +24,12 @@
   {:category
    {:slicing {:slices {}},
     :type zen/vector,
-    :every
-    {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-     :fhir/flags #{:MS}},
+    :every #:fhir{:flags #{:MS}},
     :minItems 1},
-   :_authoredOn {:confirms #{hl7-fhir-r4-core.Element/schema}},
-   :_status {:confirms #{hl7-fhir-r4-core.Element/schema}},
-   :authoredOn
-   {:confirms #{hl7-fhir-r4-core.dateTime/schema}, :fhir/flags #{:MS}},
-   :_intent {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :authoredOn #:fhir{:flags #{:MS}},
    :requester
-   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
+    :confirms #{zen.fhir/Reference},
     :zen.fhir/reference
     {:refers
      #{hl7-fhir-us-core.us-core-organization/schema
@@ -51,30 +38,23 @@
        hl7-fhir-us-core.us-core-patient/schema
        hl7-fhir-r4-core.Device/schema
        hl7-fhir-us-core.us-core-practitioner/schema}}},
-   :status
-   {:confirms #{hl7-fhir-r4-core.code/schema}, :fhir/flags #{:MS}},
+   :status #:fhir{:flags #{:MS}},
    :code
-   {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
     :zen.fhir/value-set
     {:symbol
      hl7-fhir-us-core.value-set.us-core-procedure-code/value-set,
      :strength :extensible}},
-   :intent
-   {:confirms #{hl7-fhir-r4-core.code/schema}, :fhir/flags #{:MS}},
+   :intent #:fhir{:flags #{:MS}},
    :subject
-   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
+    :confirms #{zen.fhir/Reference},
     :zen.fhir/reference
     {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
    :occurrence
    {:fhir/polymorphic true,
     :exclusive-keys #{#{:dateTime :Period :Timing}},
     :type zen/map,
-    :keys
-    {:Period {:confirms #{hl7-fhir-r4-core.Period/schema}},
-     :dateTime {:confirms #{hl7-fhir-r4-core.dateTime/schema}},
-     :_dateTime {:confirms #{hl7-fhir-r4-core.Element/schema}},
-     :Timing {:confirms #{hl7-fhir-r4-core.Timing/schema}}},
+    :keys {},
     :fhir/flags #{:MS}}},
   :zen.fhir/type "ServiceRequest"}}

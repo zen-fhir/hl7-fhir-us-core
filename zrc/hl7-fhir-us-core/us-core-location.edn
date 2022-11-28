@@ -1,17 +1,11 @@
 {ns hl7-fhir-us-core.us-core-location,
  import
- #{hl7-fhir-r4-core.code
-   zen.fhir
-   hl7-fhir-r4-core.ContactPoint
-   hl7-fhir-r4-core.string
+ #{zen.fhir
    hl7-fhir-us-core.us-core-organization
    hl7-fhir-us-core.value-set.us-core-usps-state
-   hl7-fhir-r4-core.Reference
-   hl7-fhir-r4-core.Element
-   hl7-fhir-r4-core.Location
-   hl7-fhir-r4-core.Address},
+   hl7-fhir-r4-core.Location},
  schema
- {:zen.fhir/version "0.6.3",
+ {:zen.fhir/version "0.6.4",
   :confirms #{hl7-fhir-r4-core.Location/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -21,48 +15,25 @@
   :zen/desc
   "This profile sets minimum expectations for the Location resource for recording, searching for and fetching a Location associated with a patient, provider or organization to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
   :keys
-  {:status
-   {:confirms #{hl7-fhir-r4-core.code/schema}, :fhir/flags #{:MS}},
-   :_status {:confirms #{hl7-fhir-r4-core.Element/schema}},
-   :name
-   {:confirms #{hl7-fhir-r4-core.string/schema}, :fhir/flags #{:MS}},
-   :_name {:confirms #{hl7-fhir-r4-core.Element/schema}},
-   :telecom
-   {:type zen/vector,
-    :every
-    {:confirms #{hl7-fhir-r4-core.ContactPoint/schema},
-     :fhir/flags #{:MS}}},
+  {:status #:fhir{:flags #{:MS}},
+   :name #:fhir{:flags #{:MS}},
+   :telecom {:type zen/vector, :every #:fhir{:flags #{:MS}}},
    :address
-   {:confirms #{hl7-fhir-r4-core.Address/schema},
-    :type zen/map,
+   {:type zen/map,
     :keys
-    {:line
-     {:type zen/vector,
-      :every
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS}}},
-     :_line
-     {:type zen/vector,
-      :every {:confirms #{hl7-fhir-r4-core.Element/schema}}},
-     :city
-     {:confirms #{hl7-fhir-r4-core.string/schema}, :fhir/flags #{:MS}},
-     :_city {:confirms #{hl7-fhir-r4-core.Element/schema}},
+    {:line {:type zen/vector, :every #:fhir{:flags #{:MS}}},
+     :_line {:type zen/vector, :every {}},
+     :city #:fhir{:flags #{:MS}},
      :state
-     {:confirms #{hl7-fhir-r4-core.string/schema},
-      :fhir/flags #{:MS},
+     {:fhir/flags #{:MS},
       :zen.fhir/value-set
       {:symbol hl7-fhir-us-core.value-set.us-core-usps-state/value-set,
        :strength :extensible}},
-     :_state {:confirms #{hl7-fhir-r4-core.Element/schema}},
-     :postalCode
-     {:confirms #{hl7-fhir-r4-core.string/schema},
-      :fhir/flags #{:MS},
-      :zen/desc "US Zip Codes"},
-     :_postalCode {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+     :postalCode {:fhir/flags #{:MS}, :zen/desc "US Zip Codes"}},
     :fhir/flags #{:MS}},
    :managingOrganization
-   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-    :fhir/flags #{:MS},
+   {:fhir/flags #{:MS},
+    :confirms #{zen.fhir/Reference},
     :zen.fhir/reference
     {:refers #{hl7-fhir-us-core.us-core-organization/schema}}}},
   :zen.fhir/type "Location"}}
