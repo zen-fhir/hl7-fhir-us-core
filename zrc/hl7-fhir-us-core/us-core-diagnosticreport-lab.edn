@@ -11,7 +11,7 @@
    hl7-fhir-us-core.us-core-careteam
    hl7-fhir-us-core.us-core-practitionerrole},
  schema
- {:zen.fhir/version "0.6.4",
+ {:zen.fhir/version "0.6.5",
   :confirms
   #{hl7-fhir-r4-core.DiagnosticReport/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -23,7 +23,8 @@
   "Laboratory results are grouped and summarized using the DiagnosticReport resource which typically reference Observation resource(s).  Each Observation resource represents an individual laboratory test and result value or component result values, or a nested panel (such as a microbial susceptibility panel) which references other observations.  They can also be presented in report form or as free text.  This profile sets minimum expectations for the DiagnosticReport resource to record, search, and fetch laboratory results associated with a patient to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile. It provides the floor for standards development for specific uses cases.",
   :keys
   {:category
-   {:slicing
+   {:type zen/vector,
+    :slicing
     {:slices
      {"LaboratorySlice"
       {:schema {:type zen/vector, :minItems 1, :maxItems 1},
@@ -33,7 +34,6 @@
         {:coding
          #{{:system "http://terminology.hl7.org/CodeSystem/v2-0074",
             :code "LAB"}}}}}}},
-    :type zen/vector,
     :every #:fhir{:flags #{:MS}},
     :minItems 1},
    :status
@@ -52,8 +52,6 @@
    :effective
    {:fhir/polymorphic true,
     :exclusive-keys #{#{:dateTime :Period}},
-    :type zen/map,
-    :keys {},
     :fhir/flags #{:MS},
     :zen/desc
     "Diagnostically relevant time (typically the time of specimen collection)"},

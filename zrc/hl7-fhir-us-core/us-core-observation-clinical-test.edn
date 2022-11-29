@@ -5,7 +5,7 @@
    hl7-fhir-us-core.value-set.us-core-clinical-test-codes
    hl7-fhir-us-core.us-core-patient},
  schema
- {:zen.fhir/version "0.6.4",
+ {:zen.fhir/version "0.6.5",
   :confirms #{hl7-fhir-r4-core.Observation/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -17,7 +17,8 @@
   :keys
   {:status #:fhir{:flags #{:MS}},
    :category
-   {:slicing
+   {:type zen/vector,
+    :slicing
     {:slices
      {"clinical-test"
       {:schema {:type zen/vector, :minItems 1, :maxItems 1},
@@ -28,7 +29,6 @@
          #{{:system
             "http://hl7.org/fhir/us/core/CodeSystem/us-core-observation-category",
             :code "clinical-test"}}}}}}},
-    :type zen/vector,
     :every #:fhir{:flags #{:MS}},
     :minItems 1},
    :code
@@ -46,8 +46,6 @@
    :effective
    {:fhir/polymorphic true,
     :exclusive-keys #{#{:instant :dateTime :Period :Timing}},
-    :type zen/map,
-    :keys {},
     :fhir/flags #{:MS}},
    :value
    {:fhir/polymorphic true,
@@ -63,8 +61,6 @@
         :CodeableConcept
         :Quantity
         :boolean}},
-    :type zen/map,
-    :keys {},
     :fhir/flags #{:MS},
     :zen/desc "Result Value"},
    :dataAbsentReason #:fhir{:flags #{:MS}}},

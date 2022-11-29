@@ -16,7 +16,7 @@
   :zen.fhir/type "Provenance",
   :zen.fhir/profileUri
   "http://hl7.org/fhir/us/core/StructureDefinition/us-core-provenance",
-  :zen.fhir/version "0.6.4",
+  :zen.fhir/version "0.6.5",
   :confirms #{zen.fhir/Resource hl7-fhir-r4-core.Provenance/schema},
   :type zen/map,
   :keys
@@ -33,7 +33,8 @@
    {:fhir/flags #{:MS},
     :zen/desc "Timestamp when the activity was recorded / updated"},
    :agent
-   {:slicing
+   {:type zen/vector,
+    :slicing
     {:slices
      {"ProvenanceAuthor"
       {:schema
@@ -79,7 +80,6 @@
           #{{:system
              "http://hl7.org/fhir/us/core/CodeSystem/us-core-provenance-participant-type",
              :code "transmitter"}}}}}}}},
-    :type zen/vector,
     :every
     {:type zen/map,
      :keys

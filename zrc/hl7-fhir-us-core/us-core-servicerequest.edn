@@ -10,7 +10,7 @@
    hl7-fhir-us-core.value-set.us-core-procedure-code
    hl7-fhir-r4-core.ServiceRequest},
  schema
- {:zen.fhir/version "0.6.4",
+ {:zen.fhir/version "0.6.5",
   :confirms
   #{hl7-fhir-r4-core.ServiceRequest/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -22,8 +22,8 @@
   "This profile sets minimum expectations for recording, searching, and fetching  using the ServiceRequest resource to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
   :keys
   {:category
-   {:slicing {:slices {}},
-    :type zen/vector,
+   {:type zen/vector,
+    :slicing {:slices {}},
     :every #:fhir{:flags #{:MS}},
     :minItems 1},
    :authoredOn #:fhir{:flags #{:MS}},
@@ -54,7 +54,5 @@
    :occurrence
    {:fhir/polymorphic true,
     :exclusive-keys #{#{:dateTime :Period :Timing}},
-    :type zen/map,
-    :keys {},
     :fhir/flags #{:MS}}},
   :zen.fhir/type "ServiceRequest"}}

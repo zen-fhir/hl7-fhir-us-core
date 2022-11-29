@@ -8,7 +8,7 @@
    hl7-fhir-r4-core.value-set.condition-clinical
    hl7-fhir-r4-core.condition-assertedDate},
  schema
- {:zen.fhir/version "0.6.4",
+ {:zen.fhir/version "0.6.5",
   :confirms #{zen.fhir/Resource hl7-fhir-r4-core.Condition/schema},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -21,11 +21,10 @@
   {:onset
    {:fhir/polymorphic true,
     :exclusive-keys #{#{:string :dateTime :Range :Period :Age}},
-    :type zen/map,
-    :keys {},
     :fhir/flags #{:MS}},
    :category
-   {:slicing
+   {:type zen/vector,
+    :slicing
     {:slices
      {"sdoh"
       {:schema {:type zen/vector, :maxItems 1},
@@ -36,7 +35,6 @@
          #{{:system
             "http://hl7.org/fhir/us/core/CodeSystem/us-core-tags",
             :code "sdoh"}}}}}}},
-    :type zen/vector,
     :every {:fhir/flags #{:MS}, :zen/desc "category codes"},
     :minItems 1},
    :clinicalStatus
@@ -47,8 +45,6 @@
    :abatement
    {:fhir/polymorphic true,
     :exclusive-keys #{#{:string :dateTime :Range :Period :Age}},
-    :type zen/map,
-    :keys {},
     :fhir/flags #{:MS}},
    :recordedDate #:fhir{:flags #{:MS}},
    :assertedDate

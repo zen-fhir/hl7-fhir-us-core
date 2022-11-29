@@ -4,7 +4,7 @@
    hl7-fhir-us-core.value-set.us-core-usps-state
    hl7-fhir-r4-core.Organization},
  schema
- {:zen.fhir/version "0.6.4",
+ {:zen.fhir/version "0.6.5",
   :confirms #{hl7-fhir-r4-core.Organization/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -15,7 +15,8 @@
   "This profile sets minimum expectations for the Organization resource to searching for and fetching an Organization associated with a patient or provider to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
   :keys
   {:identifier
-   {:slicing
+   {:type zen/vector,
+    :slicing
     {:slices
      {"NPI"
       {:schema {:type zen/vector, :maxItems 1},
@@ -27,7 +28,6 @@
        :filter
        {:engine :match,
         :match {:system "urn:oid:2.16.840.1.113883.4.7"}}}}},
-    :type zen/vector,
     :every
     {:type zen/map,
      :keys
@@ -47,8 +47,7 @@
     :every
     {:type zen/map,
      :keys
-     {:_line {:type zen/vector, :every {}},
-      :city #:fhir{:flags #{:MS}},
+     {:city #:fhir{:flags #{:MS}},
       :state
       {:fhir/flags #{:MS},
        :zen.fhir/value-set

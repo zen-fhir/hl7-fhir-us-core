@@ -7,7 +7,7 @@
    hl7-fhir-us-core.us-core-patient
    hl7-fhir-us-core.value-set.us-core-narrative-status},
  schema
- {:zen.fhir/version "0.6.4",
+ {:zen.fhir/version "0.6.5",
   :confirms #{hl7-fhir-r4-core.CarePlan/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -39,7 +39,8 @@
     {:symbol hl7-fhir-r4-core.value-set.care-plan-intent/value-set,
      :strength :required}},
    :category
-   {:slicing
+   {:type zen/vector,
+    :slicing
     {:slices
      {"AssessPlan"
       {:schema {:type zen/vector, :minItems 1, :maxItems 1},
@@ -50,7 +51,6 @@
          #{{:system
             "http://hl7.org/fhir/us/core/CodeSystem/careplan-category",
             :code "assess-plan"}}}}}}},
-    :type zen/vector,
     :every #:fhir{:flags #{:MS}},
     :minItems 1},
    :subject

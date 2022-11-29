@@ -9,7 +9,7 @@
    hl7-fhir-r4-core.PractitionerRole
    hl7-fhir-us-core.us-core-careteam},
  schema
- {:zen.fhir/version "0.6.4",
+ {:zen.fhir/version "0.6.5",
   :confirms #{hl7-fhir-r4-core.Observation/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -21,7 +21,8 @@
   :keys
   {:status #:fhir{:flags #{:MS}},
    :category
-   {:slicing
+   {:type zen/vector,
+    :slicing
     {:slices
      {"us-core/social-history"
       {:schema {:type zen/vector, :minItems 1, :maxItems 1},
@@ -41,7 +42,6 @@
          #{{:system
             "http://hl7.org/fhir/us/core/CodeSystem/us-core-tags",
             :code "sdoh"}}}}}}},
-    :type zen/vector,
     :every #:fhir{:flags #{:MS}},
     :minItems 1},
    :code #:fhir{:flags #{:MS}},
@@ -53,8 +53,6 @@
    :effective
    {:fhir/polymorphic true,
     :exclusive-keys #{#{:instant :dateTime :Period :Timing}},
-    :type zen/map,
-    :keys {},
     :fhir/flags #{:MS}},
    :performer
    {:type zen/vector,
@@ -83,7 +81,5 @@
         :CodeableConcept
         :Quantity
         :boolean}},
-    :type zen/map,
-    :keys {},
     :fhir/flags #{:MS}}},
   :zen.fhir/type "Observation"}}

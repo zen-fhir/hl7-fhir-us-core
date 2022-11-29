@@ -13,7 +13,7 @@
    hl7-fhir-us-core.us-core-practitionerrole
    hl7-fhir-r4-core.value-set.formatcodes},
  schema
- {:zen.fhir/version "0.6.4",
+ {:zen.fhir/version "0.6.5",
   :confirms
   #{hl7-fhir-r4-core.DocumentReference/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -25,8 +25,8 @@
   "To promote interoperability and adoption through common implementation, this profile sets minimum expectations for searching and fetching patient documents including Clinical Notes using the DocumentReference resource. It identifies the mandatory core elements, extensions, vocabularies and value sets which **SHALL** be present in the DocumentReference resource when using this profile. It provides the floor for standards development for specific uses cases. Prior to reviewing this profile, implementers are encouraged to read the Clinical Notes Guidance to understand the overlap of US Core DocumentReference Profile and US Core DiagnosticReport Profile for Report and Note exchange.",
   :keys
   {:category
-   {:slicing {:slices {}},
-    :type zen/vector,
+   {:type zen/vector,
+    :slicing {:slices {}},
     :every #:fhir{:flags #{:MS}},
     :minItems 1},
    :date #:fhir{:flags #{:MS}},

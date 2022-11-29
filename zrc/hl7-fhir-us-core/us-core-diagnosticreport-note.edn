@@ -14,7 +14,7 @@
    hl7-fhir-us-core.us-core-practitionerrole
    hl7-fhir-us-core.us-core-observation-imaging},
  schema
- {:zen.fhir/version "0.6.4",
+ {:zen.fhir/version "0.6.5",
   :confirms
   #{hl7-fhir-r4-core.DiagnosticReport/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -26,8 +26,8 @@
   "To promote interoperability and adoption through common implementation, this profile sets minimum expectations for searching and fetching Diagnostic Reports and Notes using the DiagnosticReport resource. This profile identifies the mandatory core elements, extensions, vocabularies and value sets which **SHALL** be present in the DiagnosticReport when using this profile. It provides the floor for standards development for specific uses cases. Prior to reviewing this profile, implementers are encouraged to read the Clinical Notes Guidance to understand the overlap of US Core DiagnosticReport Profile for Report and Note exchange and US Core DocumentReference Profile.",
   :keys
   {:category
-   {:slicing {:slices {}},
-    :type zen/vector,
+   {:type zen/vector,
+    :slicing {:slices {}},
     :every #:fhir{:flags #{:MS}},
     :minItems 1},
    :encounter
@@ -54,8 +54,6 @@
    :effective
    {:fhir/polymorphic true,
     :exclusive-keys #{#{:dateTime :Period}},
-    :type zen/map,
-    :keys {},
     :fhir/flags #{:MS},
     :zen/desc
     "Diagnostically relevant time (typically the time of the procedure)"},

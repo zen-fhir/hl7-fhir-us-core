@@ -6,7 +6,7 @@
    hl7-fhir-us-core.us-core-patient
    hl7-fhir-us-core.value-set.us-core-sexual-orientation},
  schema
- {:zen.fhir/version "0.6.4",
+ {:zen.fhir/version "0.6.5",
   :confirms #{hl7-fhir-r4-core.Observation/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -33,8 +33,6 @@
    :effective
    {:fhir/polymorphic true,
     :exclusive-keys #{#{:instant :dateTime :Period :Timing}},
-    :type zen/map,
-    :keys {},
     :fhir/flags #{:MS}},
    :value
    {:type zen/map,
