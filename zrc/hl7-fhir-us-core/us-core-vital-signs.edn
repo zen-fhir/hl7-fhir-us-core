@@ -6,7 +6,7 @@
    hl7-fhir-r4-core.value-set.ucum-vitals-common
    hl7-fhir-r4-core.vitalsigns},
  schema
- {:zen.fhir/version "0.6.5",
+ {:zen.fhir/version "0.6.6",
   :confirms #{zen.fhir/Resource hl7-fhir-r4-core.vitalsigns/schema},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -55,6 +55,7 @@
     :minItems 1},
    :value
    {:fhir/polymorphic true,
+    :type zen/map,
     :exclusive-keys
     #{#{:time
         :SampledData
@@ -85,6 +86,7 @@
         :strength :extensible}},
       :value
       {:fhir/polymorphic true,
+       :type zen/map,
        :exclusive-keys
        #{#{:time
            :SampledData
@@ -109,6 +111,7 @@
    :status #:fhir{:flags #{:MS}},
    :effective
    {:fhir/polymorphic true,
+    :type zen/map,
     :exclusive-keys #{#{:dateTime :Period}},
     :fhir/flags #{:MS}},
    :code

@@ -10,7 +10,7 @@
    hl7-fhir-us-core.value-set.us-core-procedure-code
    hl7-fhir-r4-core.ServiceRequest},
  schema
- {:zen.fhir/version "0.6.5",
+ {:zen.fhir/version "0.6.6",
   :confirms
   #{hl7-fhir-r4-core.ServiceRequest/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -53,6 +53,7 @@
     {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
    :occurrence
    {:fhir/polymorphic true,
+    :type zen/map,
     :exclusive-keys #{#{:dateTime :Period :Timing}},
     :fhir/flags #{:MS}}},
   :zen.fhir/type "ServiceRequest"}}

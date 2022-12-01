@@ -6,7 +6,7 @@
    hl7-fhir-r4-core.value-set.event-status
    hl7-fhir-r4-core.Procedure},
  schema
- {:zen.fhir/version "0.6.5",
+ {:zen.fhir/version "0.6.6",
   :confirms #{hl7-fhir-r4-core.Procedure/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -34,6 +34,7 @@
     {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
    :performed
    {:fhir/polymorphic true,
+    :type zen/map,
     :exclusive-keys #{#{:string :dateTime :Range :Period :Age}},
     :fhir/flags #{:MS}}},
   :zen.fhir/type "Procedure"}}

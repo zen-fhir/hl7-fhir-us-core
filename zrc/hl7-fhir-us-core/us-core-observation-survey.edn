@@ -16,7 +16,7 @@
    hl7-fhir-us-core.us-core-careteam
    hl7-fhir-us-core.us-core-documentreference},
  schema
- {:zen.fhir/version "0.6.5",
+ {:zen.fhir/version "0.6.6",
   :confirms #{hl7-fhir-r4-core.Observation/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -69,6 +69,7 @@
      "Related Observations or QuestionnaireResponses that the observation is made from"}},
    :value
    {:fhir/polymorphic true,
+    :type zen/map,
     :exclusive-keys
     #{#{:time
         :SampledData
@@ -85,6 +86,7 @@
    :status #:fhir{:flags #{:MS}},
    :effective
    {:fhir/polymorphic true,
+    :type zen/map,
     :exclusive-keys #{#{:instant :dateTime :Period :Timing}},
     :fhir/flags #{:MS}},
    :code

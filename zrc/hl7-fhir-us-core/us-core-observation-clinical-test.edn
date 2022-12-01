@@ -5,7 +5,7 @@
    hl7-fhir-us-core.value-set.us-core-clinical-test-codes
    hl7-fhir-us-core.us-core-patient},
  schema
- {:zen.fhir/version "0.6.5",
+ {:zen.fhir/version "0.6.6",
   :confirms #{hl7-fhir-r4-core.Observation/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -45,10 +45,12 @@
     {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
    :effective
    {:fhir/polymorphic true,
+    :type zen/map,
     :exclusive-keys #{#{:instant :dateTime :Period :Timing}},
     :fhir/flags #{:MS}},
    :value
    {:fhir/polymorphic true,
+    :type zen/map,
     :exclusive-keys
     #{#{:time
         :SampledData
