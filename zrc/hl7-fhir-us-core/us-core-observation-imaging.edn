@@ -1,69 +1,54 @@
 {ns hl7-fhir-us-core.us-core-observation-imaging,
- import
- #{hl7-fhir-r4-core.Observation
-   zen.fhir
-   hl7-fhir-us-core.value-set.us-core-diagnosticreport-report-and-note-codes
-   hl7-fhir-us-core.us-core-patient},
- schema
- {:zen.fhir/version "0.6.6-7",
-  :confirms #{hl7-fhir-r4-core.Observation/schema zen.fhir/Resource},
-  :zen/tags #{zen.fhir/profile-schema zen/schema},
-  :zen.fhir/profileUri
-  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-imaging",
-  :require #{:category :subject},
-  :type zen/map,
-  :zen/desc
-  "The US Core Observation Imaging Result Profile is based upon the core FHIR Observation Resource, and, along with the US Core DiagnosticReport Profile for Report and Note exchange, meets the U.S. Core Data for Interoperability (USCDI) v2 ‘Diagnostic Imaging’ requirements. To promote interoperability and adoption through common implementation, this profile sets minimum expectations for the Observation resource to record, search, and fetch retrieve structured and unstructured (narrative) components of diagnostic imaging test results for a patient. These observations include reasons, findings, and impressions. It provides the floor for standards development for specific uses cases.",
-  :keys
-  {:status #:fhir{:flags #{:MS}},
-   :category
-   {:type zen/vector,
-    :slicing
-    {:slices
-     {"imaging"
-      {:schema {:type zen/vector, :minItems 1, :maxItems 1},
-       :filter
-       {:engine :match,
-        :match
-        {:coding
-         #{{:system
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            :code "imaging"}}}}}}},
-    :every #:fhir{:flags #{:MS}},
-    :minItems 1},
-   :code
-   {:fhir/flags #{:MS},
-    :zen.fhir/value-set
-    {:symbol
-     hl7-fhir-us-core.value-set.us-core-diagnosticreport-report-and-note-codes/value-set,
-     :strength :extensible},
-    :zen/desc "Imaging Name"},
-   :subject
-   {:fhir/flags #{:MS},
-    :confirms #{zen.fhir/Reference},
-    :zen.fhir/reference
-    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
-   :effective
-   {:fhir/polymorphic true,
-    :type zen/map,
-    :exclusive-keys #{#{:instant :dateTime :Period :Timing}},
-    :fhir/flags #{:MS}},
-   :value
-   {:fhir/polymorphic true,
-    :type zen/map,
-    :exclusive-keys
-    #{#{:time
-        :SampledData
-        :string
-        :dateTime
-        :Range
-        :integer
-        :Ratio
-        :Period
-        :CodeableConcept
-        :Quantity
-        :boolean}},
-    :fhir/flags #{:MS},
-    :zen/desc "Result Value"},
-   :dataAbsentReason #:fhir{:flags #{:MS}}},
-  :zen.fhir/type "Observation"}}
+ import #{hl7-fhir-r4-core.Observation
+          zen.fhir
+          hl7-fhir-us-core.value-set.us-core-diagnosticreport-report-and-note-codes
+          hl7-fhir-us-core.us-core-patient},
+ schema {:zen.fhir/version "0.6.6-8",
+         :confirms #{hl7-fhir-r4-core.Observation/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-imaging",
+         :require #{:category :subject},
+         :type zen/map,
+         :zen/desc "The US Core Observation Imaging Result Profile is based upon the core FHIR Observation Resource, and, along with the US Core DiagnosticReport Profile for Report and Note exchange, meets the U.S. Core Data for Interoperability (USCDI) v2 ‘Diagnostic Imaging’ requirements. To promote interoperability and adoption through common implementation, this profile sets minimum expectations for the Observation resource to record, search, and fetch retrieve structured and unstructured (narrative) components of diagnostic imaging test results for a patient. These observations include reasons, findings, and impressions. It provides the floor for standards development for specific uses cases.",
+         :keys {:status {:fhir/flags #{:MS}},
+                :category {:type zen/vector,
+                           :slicing {:slices {"imaging" {:schema {:type zen/vector,
+                                                                  :minItems 1,
+                                                                  :maxItems 1},
+                                                         :filter {:engine :match,
+                                                                  :match {:coding #{{:system "http://terminology.hl7.org/CodeSystem/observation-category",
+                                                                                     :code "imaging"}}}}}}},
+                           :every {:fhir/flags #{:MS}},
+                           :minItems 1},
+                :code {:fhir/flags #{:MS},
+                       :zen.fhir/value-set {:symbol hl7-fhir-us-core.value-set.us-core-diagnosticreport-report-and-note-codes/value-set,
+                                            :strength :extensible},
+                       :zen/desc "Imaging Name"},
+                :subject {:fhir/flags #{:MS},
+                          :confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
+                :effective {:fhir/polymorphic true,
+                            :type zen/map,
+                            :exclusive-keys #{#{:instant
+                                                :dateTime
+                                                :Period
+                                                :Timing}},
+                            :fhir/flags #{:MS}},
+                :value {:fhir/polymorphic true,
+                        :type zen/map,
+                        :exclusive-keys #{#{:time
+                                            :SampledData
+                                            :string
+                                            :dateTime
+                                            :Range
+                                            :integer
+                                            :Ratio
+                                            :Period
+                                            :CodeableConcept
+                                            :Quantity
+                                            :boolean}},
+                        :fhir/flags #{:MS},
+                        :zen/desc "Result Value"},
+                :dataAbsentReason {:fhir/flags #{:MS}}},
+         :zen.fhir/type "Observation"}}

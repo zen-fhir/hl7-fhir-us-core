@@ -1,59 +1,46 @@
 {ns hl7-fhir-us-core.us-core-servicerequest,
- import
- #{hl7-fhir-r4-core.Device
-   zen.fhir
-   hl7-fhir-us-core.us-core-practitioner
-   hl7-fhir-us-core.us-core-relatedperson
-   hl7-fhir-us-core.us-core-organization
-   hl7-fhir-us-core.us-core-patient
-   hl7-fhir-r4-core.PractitionerRole
-   hl7-fhir-us-core.value-set.us-core-procedure-code
-   hl7-fhir-r4-core.ServiceRequest},
- schema
- {:zen.fhir/version "0.6.6-7",
-  :confirms
-  #{hl7-fhir-r4-core.ServiceRequest/schema zen.fhir/Resource},
-  :zen/tags #{zen.fhir/profile-schema zen/schema},
-  :zen.fhir/profileUri
-  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-servicerequest",
-  :require #{:category :code},
-  :type zen/map,
-  :zen/desc
-  "This profile sets minimum expectations for recording, searching, and fetching  using the ServiceRequest resource to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
-  :keys
-  {:category
-   {:type zen/vector,
-    :slicing {:slices {}},
-    :every #:fhir{:flags #{:MS}},
-    :minItems 1},
-   :authoredOn #:fhir{:flags #{:MS}},
-   :requester
-   {:fhir/flags #{:MS},
-    :confirms #{zen.fhir/Reference},
-    :zen.fhir/reference
-    {:refers
-     #{hl7-fhir-us-core.us-core-organization/schema
-       hl7-fhir-us-core.us-core-relatedperson/schema
-       hl7-fhir-r4-core.PractitionerRole/schema
-       hl7-fhir-us-core.us-core-patient/schema
-       hl7-fhir-r4-core.Device/schema
-       hl7-fhir-us-core.us-core-practitioner/schema}}},
-   :status #:fhir{:flags #{:MS}},
-   :code
-   {:fhir/flags #{:MS},
-    :zen.fhir/value-set
-    {:symbol
-     hl7-fhir-us-core.value-set.us-core-procedure-code/value-set,
-     :strength :extensible}},
-   :intent #:fhir{:flags #{:MS}},
-   :subject
-   {:fhir/flags #{:MS},
-    :confirms #{zen.fhir/Reference},
-    :zen.fhir/reference
-    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
-   :occurrence
-   {:fhir/polymorphic true,
-    :type zen/map,
-    :exclusive-keys #{#{:dateTime :Period :Timing}},
-    :fhir/flags #{:MS}}},
-  :zen.fhir/type "ServiceRequest"}}
+ import #{hl7-fhir-r4-core.Device
+          zen.fhir
+          hl7-fhir-us-core.us-core-practitioner
+          hl7-fhir-us-core.us-core-relatedperson
+          hl7-fhir-us-core.us-core-organization
+          hl7-fhir-us-core.us-core-patient
+          hl7-fhir-r4-core.PractitionerRole
+          hl7-fhir-us-core.value-set.us-core-procedure-code
+          hl7-fhir-r4-core.ServiceRequest},
+ schema {:zen.fhir/version "0.6.6-8",
+         :confirms #{hl7-fhir-r4-core.ServiceRequest/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/us/core/StructureDefinition/us-core-servicerequest",
+         :require #{:category :code},
+         :type zen/map,
+         :zen/desc "This profile sets minimum expectations for recording, searching, and fetching  using the ServiceRequest resource to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
+         :keys {:category {:type zen/vector,
+                           :slicing {:slices {}},
+                           :every {:fhir/flags #{:MS}},
+                           :minItems 1},
+                :authoredOn {:fhir/flags #{:MS}},
+                :requester {:fhir/flags #{:MS},
+                            :confirms #{zen.fhir/Reference},
+                            :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-organization/schema
+                                                           hl7-fhir-us-core.us-core-relatedperson/schema
+                                                           hl7-fhir-r4-core.PractitionerRole/schema
+                                                           hl7-fhir-us-core.us-core-patient/schema
+                                                           hl7-fhir-r4-core.Device/schema
+                                                           hl7-fhir-us-core.us-core-practitioner/schema}}},
+                :status {:fhir/flags #{:MS}},
+                :code {:fhir/flags #{:MS},
+                       :zen.fhir/value-set {:symbol hl7-fhir-us-core.value-set.us-core-procedure-code/value-set,
+                                            :strength :extensible}},
+                :intent {:fhir/flags #{:MS}},
+                :subject {:fhir/flags #{:MS},
+                          :confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
+                :occurrence {:fhir/polymorphic true,
+                             :type zen/map,
+                             :exclusive-keys #{#{:dateTime
+                                                 :Period
+                                                 :Timing}},
+                             :fhir/flags #{:MS}}},
+         :zen.fhir/type "ServiceRequest"}}

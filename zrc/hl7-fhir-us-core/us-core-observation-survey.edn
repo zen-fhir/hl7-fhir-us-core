@@ -1,116 +1,89 @@
 {ns hl7-fhir-us-core.us-core-observation-survey,
- import
- #{hl7-fhir-r4-core.MolecularSequence
-   hl7-fhir-us-core.us-core-questionnaireresponse
-   hl7-fhir-r4-core.Observation
-   hl7-fhir-r4-core.ImagingStudy
-   zen.fhir
-   hl7-fhir-us-core.us-core-practitioner
-   hl7-fhir-us-core.us-core-relatedperson
-   hl7-fhir-us-core.us-core-observation-survey
-   hl7-fhir-us-core.us-core-organization
-   hl7-fhir-us-core.us-core-patient
-   hl7-fhir-r4-core.PractitionerRole
-   hl7-fhir-us-core.value-set.us-core-survey-codes
-   hl7-fhir-r4-core.Media
-   hl7-fhir-us-core.us-core-careteam
-   hl7-fhir-us-core.us-core-documentreference},
- schema
- {:zen.fhir/version "0.6.6-7",
-  :confirms #{hl7-fhir-r4-core.Observation/schema zen.fhir/Resource},
-  :zen/tags #{zen.fhir/profile-schema zen/schema},
-  :zen.fhir/profileUri
-  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-survey",
-  :require #{:category :subject},
-  :type zen/map,
-  :zen/desc
-  "To promote interoperability and adoption through common implementation, the US Core Observation Survey Profile sets minimum expectations for the Observation Resource to record, search, and fetch retrieve observations that represent the questions and responses to form/survey and assessment tools.  It can be used to represent individual responses, panels of multi-question surveys, and multi-select responses to “check all that apply” questions. It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile. It provides the floor for standards development for specific uses cases.",
-  :keys
-  {:category
-   {:type zen/vector,
-    :slicing
-    {:slices
-     {"survey"
-      {:schema {:type zen/vector, :minItems 1, :maxItems 1},
-       :filter
-       {:engine :match,
-        :match
-        {:coding
-         #{{:system
-            "http://terminology.hl7.org/CodeSystem/observation-category",
-            :code "survey"}}}}}}},
-    :every #:fhir{:flags #{:MS}},
-    :minItems 1},
-   :hasMember
-   {:type zen/vector,
-    :every
-    {:fhir/flags #{:MS},
-     :confirms #{zen.fhir/Reference},
-     :zen.fhir/reference
-     {:refers
-      #{hl7-fhir-us-core.us-core-questionnaireresponse/schema
-        hl7-fhir-us-core.us-core-observation-survey/schema
-        hl7-fhir-r4-core.MolecularSequence/schema}},
-     :zen/desc "Reference to panel or multi-select responses"}},
-   :derivedFrom
-   {:type zen/vector,
-    :every
-    {:fhir/flags #{:MS},
-     :confirms #{zen.fhir/Reference},
-     :zen.fhir/reference
-     {:refers
-      #{hl7-fhir-r4-core.Media/schema
-        hl7-fhir-r4-core.ImagingStudy/schema
-        hl7-fhir-us-core.us-core-questionnaireresponse/schema
-        hl7-fhir-us-core.us-core-observation-survey/schema
-        hl7-fhir-r4-core.MolecularSequence/schema
-        hl7-fhir-us-core.us-core-documentreference/schema}},
-     :zen/desc
-     "Related Observations or QuestionnaireResponses that the observation is made from"}},
-   :value
-   {:fhir/polymorphic true,
-    :type zen/map,
-    :exclusive-keys
-    #{#{:time
-        :SampledData
-        :string
-        :dateTime
-        :Range
-        :integer
-        :Ratio
-        :Period
-        :CodeableConcept
-        :Quantity
-        :boolean}},
-    :fhir/flags #{:MS}},
-   :status #:fhir{:flags #{:MS}},
-   :effective
-   {:fhir/polymorphic true,
-    :type zen/map,
-    :exclusive-keys #{#{:instant :dateTime :Period :Timing}},
-    :fhir/flags #{:MS}},
-   :code
-   {:fhir/flags #{:MS},
-    :zen.fhir/value-set
-    {:symbol hl7-fhir-us-core.value-set.us-core-survey-codes/value-set,
-     :strength :preferred}},
-   :subject
-   {:fhir/flags #{:MS},
-    :confirms #{zen.fhir/Reference},
-    :zen.fhir/reference
-    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
-   :performer
-   {:type zen/vector,
-    :every
-    {:fhir/flags #{:MS},
-     :confirms #{zen.fhir/Reference},
-     :zen.fhir/reference
-     {:refers
-      #{hl7-fhir-us-core.us-core-organization/schema
-        hl7-fhir-us-core.us-core-relatedperson/schema
-        hl7-fhir-r4-core.PractitionerRole/schema
-        hl7-fhir-us-core.us-core-patient/schema
-        hl7-fhir-us-core.us-core-practitioner/schema
-        hl7-fhir-us-core.us-core-careteam/schema}}}},
-   :dataAbsentReason #:fhir{:flags #{:MS}}},
-  :zen.fhir/type "Observation"}}
+ import #{hl7-fhir-r4-core.MolecularSequence
+          hl7-fhir-us-core.us-core-questionnaireresponse
+          hl7-fhir-r4-core.Observation
+          hl7-fhir-r4-core.ImagingStudy
+          zen.fhir
+          hl7-fhir-us-core.us-core-practitioner
+          hl7-fhir-us-core.us-core-relatedperson
+          hl7-fhir-us-core.us-core-observation-survey
+          hl7-fhir-us-core.us-core-organization
+          hl7-fhir-us-core.us-core-patient
+          hl7-fhir-r4-core.PractitionerRole
+          hl7-fhir-us-core.value-set.us-core-survey-codes
+          hl7-fhir-r4-core.Media
+          hl7-fhir-us-core.us-core-careteam
+          hl7-fhir-us-core.us-core-documentreference},
+ schema {:zen.fhir/version "0.6.6-8",
+         :confirms #{hl7-fhir-r4-core.Observation/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-survey",
+         :require #{:category :subject},
+         :type zen/map,
+         :zen/desc "To promote interoperability and adoption through common implementation, the US Core Observation Survey Profile sets minimum expectations for the Observation Resource to record, search, and fetch retrieve observations that represent the questions and responses to form/survey and assessment tools.  It can be used to represent individual responses, panels of multi-question surveys, and multi-select responses to “check all that apply” questions. It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile. It provides the floor for standards development for specific uses cases.",
+         :keys {:category {:type zen/vector,
+                           :slicing {:slices {"survey" {:schema {:type zen/vector,
+                                                                 :minItems 1,
+                                                                 :maxItems 1},
+                                                        :filter {:engine :match,
+                                                                 :match {:coding #{{:system "http://terminology.hl7.org/CodeSystem/observation-category",
+                                                                                    :code "survey"}}}}}}},
+                           :every {:fhir/flags #{:MS}},
+                           :minItems 1},
+                :hasMember {:type zen/vector,
+                            :every {:fhir/flags #{:MS},
+                                    :confirms #{zen.fhir/Reference},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-questionnaireresponse/schema
+                                                                   hl7-fhir-us-core.us-core-observation-survey/schema
+                                                                   hl7-fhir-r4-core.MolecularSequence/schema}},
+                                    :zen/desc "Reference to panel or multi-select responses"}},
+                :derivedFrom {:type zen/vector,
+                              :every {:fhir/flags #{:MS},
+                                      :confirms #{zen.fhir/Reference},
+                                      :zen.fhir/reference {:refers #{hl7-fhir-r4-core.Media/schema
+                                                                     hl7-fhir-r4-core.ImagingStudy/schema
+                                                                     hl7-fhir-us-core.us-core-questionnaireresponse/schema
+                                                                     hl7-fhir-us-core.us-core-observation-survey/schema
+                                                                     hl7-fhir-r4-core.MolecularSequence/schema
+                                                                     hl7-fhir-us-core.us-core-documentreference/schema}},
+                                      :zen/desc "Related Observations or QuestionnaireResponses that the observation is made from"}},
+                :value {:fhir/polymorphic true,
+                        :type zen/map,
+                        :exclusive-keys #{#{:time
+                                            :SampledData
+                                            :string
+                                            :dateTime
+                                            :Range
+                                            :integer
+                                            :Ratio
+                                            :Period
+                                            :CodeableConcept
+                                            :Quantity
+                                            :boolean}},
+                        :fhir/flags #{:MS}},
+                :status {:fhir/flags #{:MS}},
+                :effective {:fhir/polymorphic true,
+                            :type zen/map,
+                            :exclusive-keys #{#{:instant
+                                                :dateTime
+                                                :Period
+                                                :Timing}},
+                            :fhir/flags #{:MS}},
+                :code {:fhir/flags #{:MS},
+                       :zen.fhir/value-set {:symbol hl7-fhir-us-core.value-set.us-core-survey-codes/value-set,
+                                            :strength :preferred}},
+                :subject {:fhir/flags #{:MS},
+                          :confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
+                :performer {:type zen/vector,
+                            :every {:fhir/flags #{:MS},
+                                    :confirms #{zen.fhir/Reference},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-organization/schema
+                                                                   hl7-fhir-us-core.us-core-relatedperson/schema
+                                                                   hl7-fhir-r4-core.PractitionerRole/schema
+                                                                   hl7-fhir-us-core.us-core-patient/schema
+                                                                   hl7-fhir-us-core.us-core-practitioner/schema
+                                                                   hl7-fhir-us-core.us-core-careteam/schema}}}},
+                :dataAbsentReason {:fhir/flags #{:MS}}},
+         :zen.fhir/type "Observation"}}

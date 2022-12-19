@@ -1,40 +1,32 @@
 {ns hl7-fhir-us-core.us-core-procedure,
- import
- #{zen.fhir
-   hl7-fhir-us-core.us-core-patient
-   hl7-fhir-us-core.value-set.us-core-procedure-code
-   hl7-fhir-r4-core.value-set.event-status
-   hl7-fhir-r4-core.Procedure},
- schema
- {:zen.fhir/version "0.6.6-7",
-  :confirms #{hl7-fhir-r4-core.Procedure/schema zen.fhir/Resource},
-  :zen/tags #{zen.fhir/profile-schema zen/schema},
-  :zen.fhir/profileUri
-  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure",
-  :require #{:code},
-  :type zen/map,
-  :zen/desc
-  "The US Core Procedure Profile is based upon the core FHIR Procedure Resource and meets the U.S. Core Data for Interoperability (USCDI) v2 'Procedures' requirements. This profile sets minimum expectations for the Procedure resource to record, search, and fetch procedures associated with a patient to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
-  :keys
-  {:status
-   {:fhir/flags #{:MS},
-    :zen.fhir/value-set
-    {:symbol hl7-fhir-r4-core.value-set.event-status/value-set,
-     :strength :required}},
-   :code
-   {:fhir/flags #{:MS},
-    :zen.fhir/value-set
-    {:symbol
-     hl7-fhir-us-core.value-set.us-core-procedure-code/value-set,
-     :strength :extensible}},
-   :subject
-   {:fhir/flags #{:MS},
-    :confirms #{zen.fhir/Reference},
-    :zen.fhir/reference
-    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
-   :performed
-   {:fhir/polymorphic true,
-    :type zen/map,
-    :exclusive-keys #{#{:string :dateTime :Range :Period :Age}},
-    :fhir/flags #{:MS}}},
-  :zen.fhir/type "Procedure"}}
+ import #{zen.fhir
+          hl7-fhir-us-core.us-core-patient
+          hl7-fhir-us-core.value-set.us-core-procedure-code
+          hl7-fhir-r4-core.value-set.event-status
+          hl7-fhir-r4-core.Procedure},
+ schema {:zen.fhir/version "0.6.6-8",
+         :confirms #{hl7-fhir-r4-core.Procedure/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/us/core/StructureDefinition/us-core-procedure",
+         :require #{:code},
+         :type zen/map,
+         :zen/desc "The US Core Procedure Profile is based upon the core FHIR Procedure Resource and meets the U.S. Core Data for Interoperability (USCDI) v2 'Procedures' requirements. This profile sets minimum expectations for the Procedure resource to record, search, and fetch procedures associated with a patient to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
+         :keys {:status {:fhir/flags #{:MS},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4-core.value-set.event-status/value-set,
+                                              :strength :required}},
+                :code {:fhir/flags #{:MS},
+                       :zen.fhir/value-set {:symbol hl7-fhir-us-core.value-set.us-core-procedure-code/value-set,
+                                            :strength :extensible}},
+                :subject {:fhir/flags #{:MS},
+                          :confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
+                :performed {:fhir/polymorphic true,
+                            :type zen/map,
+                            :exclusive-keys #{#{:string
+                                                :dateTime
+                                                :Range
+                                                :Period
+                                                :Age}},
+                            :fhir/flags #{:MS}}},
+         :zen.fhir/type "Procedure"}}

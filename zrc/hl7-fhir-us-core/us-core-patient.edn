@@ -1,113 +1,75 @@
 {ns hl7-fhir-us-core.us-core-patient,
- import
- #{hl7-fhir-us-core.us-core-birthsex
-   zen.fhir
-   hl7-fhir-us-core.us-core-race
-   hl7-fhir-r4-core.Patient
-   hl7-fhir-r4-core.value-set.administrative-gender
-   hl7-fhir-us-core.us-core-genderIdentity
-   hl7-fhir-us-core.value-set.us-core-usps-state
-   hl7-fhir-us-core.value-set.simple-language
-   hl7-fhir-r4-core.value-set.contact-point-use
-   hl7-fhir-us-core.us-core-ethnicity
-   hl7-fhir-r4-core.value-set.contact-point-system},
- schema
- {:zen.fhir/version "0.6.6-7",
-  :confirms #{hl7-fhir-r4-core.Patient/schema zen.fhir/Resource},
-  :zen/tags #{zen.fhir/profile-schema zen/schema},
-  :zen.fhir/profileUri
-  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient",
-  :require #{:name :identifier :gender},
-  :type zen/map,
-  :zen/desc
-  "The US Core Patient Profile meets the U.S. Core Data for Interoperability (USCDI) v2 'Patient Demographics' requirements. This profile sets minimum expectations for the Patient resource to record, search, and fetch basic demographics and other administrative information about an individual patient. It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
-  :keys
-  {:address
-   {:type zen/vector,
-    :every
-    {:type zen/map,
-     :keys
-     {:city #:fhir{:flags #{:MS}},
-      :state
-      {:fhir/flags #{:MS},
-       :zen.fhir/value-set
-       {:symbol
-        hl7-fhir-us-core.value-set.us-core-usps-state/value-set,
-        :strength :extensible}},
-      :line {:type zen/vector, :every #:fhir{:flags #{:MS}}},
-      :postalCode {:fhir/flags #{:MS}, :zen/desc "US Zip Codes"},
-      :period #:fhir{:flags #{:MS}}},
-     :fhir/flags #{:MS}}},
-   :race
-   {:confirms #{hl7-fhir-us-core.us-core-race/schema},
-    :fhir/extensionUri
-    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race"},
-   :name
-   {:type zen/vector,
-    :every
-    {:type zen/map,
-     :keys
-     {:given {:type zen/vector, :every #:fhir{:flags #{:MS}}},
-      :family #:fhir{:flags #{:MS}}},
-     :fhir/flags #{:MS}},
-    :minItems 1},
-   :birthDate #:fhir{:flags #{:MS}},
-   :ethnicity
-   {:confirms #{hl7-fhir-us-core.us-core-ethnicity/schema},
-    :fhir/extensionUri
-    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity"},
-   :communication
-   {:type zen/vector,
-    :every
-    {:type zen/map,
-     :keys
-     {:language
-      {:fhir/flags #{:MS},
-       :zen.fhir/value-set
-       {:symbol hl7-fhir-us-core.value-set.simple-language/value-set,
-        :strength :extensible}}}}},
-   :identifier
-   {:type zen/vector,
-    :every
-    {:type zen/map,
-     :keys
-     {:system #:fhir{:flags #{:MS}},
-      :value
-      {:fhir/flags #{:MS},
-       :zen/desc "The value that is unique within the system."}},
-     :require #{:system :value},
-     :fhir/flags #{:MS}},
-    :minItems 1},
-   :genderIdentity
-   {:confirms #{hl7-fhir-us-core.us-core-genderIdentity/schema},
-    :fhir/extensionUri
-    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-genderIdentity"},
-   :telecom
-   {:type zen/vector,
-    :every
-    {:type zen/map,
-     :keys
-     {:system
-      {:fhir/flags #{:MS},
-       :zen.fhir/value-set
-       {:symbol
-        hl7-fhir-r4-core.value-set.contact-point-system/value-set,
-        :strength :required}},
-      :value #:fhir{:flags #{:MS}},
-      :use
-      {:fhir/flags #{:MS},
-       :zen.fhir/value-set
-       {:symbol hl7-fhir-r4-core.value-set.contact-point-use/value-set,
-        :strength :required}}},
-     :require #{:system :value}}},
-   :gender
-   {:fhir/flags #{:MS},
-    :zen.fhir/value-set
-    {:symbol
-     hl7-fhir-r4-core.value-set.administrative-gender/value-set,
-     :strength :required}},
-   :birthsex
-   {:confirms #{hl7-fhir-us-core.us-core-birthsex/schema},
-    :fhir/extensionUri
-    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex"}},
-  :zen.fhir/type "Patient"}}
+ import #{hl7-fhir-us-core.us-core-birthsex
+          zen.fhir
+          hl7-fhir-us-core.us-core-race
+          hl7-fhir-r4-core.Patient
+          hl7-fhir-r4-core.value-set.administrative-gender
+          hl7-fhir-us-core.us-core-genderIdentity
+          hl7-fhir-us-core.value-set.us-core-usps-state
+          hl7-fhir-us-core.value-set.simple-language
+          hl7-fhir-r4-core.value-set.contact-point-use
+          hl7-fhir-us-core.us-core-ethnicity
+          hl7-fhir-r4-core.value-set.contact-point-system},
+ schema {:zen.fhir/version "0.6.6-8",
+         :confirms #{hl7-fhir-r4-core.Patient/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/us/core/StructureDefinition/us-core-patient",
+         :require #{:name :identifier :gender},
+         :type zen/map,
+         :zen/desc "The US Core Patient Profile meets the U.S. Core Data for Interoperability (USCDI) v2 'Patient Demographics' requirements. This profile sets minimum expectations for the Patient resource to record, search, and fetch basic demographics and other administrative information about an individual patient. It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
+         :keys {:address {:type zen/vector,
+                          :every {:type zen/map,
+                                  :keys {:city {:fhir/flags #{:MS}},
+                                         :state {:fhir/flags #{:MS},
+                                                 :zen.fhir/value-set {:symbol hl7-fhir-us-core.value-set.us-core-usps-state/value-set,
+                                                                      :strength :extensible}},
+                                         :line {:type zen/vector,
+                                                :every {:fhir/flags #{:MS}}},
+                                         :postalCode {:fhir/flags #{:MS},
+                                                      :zen/desc "US Zip Codes"},
+                                         :period {:fhir/flags #{:MS}}},
+                                  :fhir/flags #{:MS}}},
+                :race {:confirms #{hl7-fhir-us-core.us-core-race/schema},
+                       :fhir/extensionUri "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race"},
+                :name {:type zen/vector,
+                       :every {:type zen/map,
+                               :keys {:given {:type zen/vector,
+                                              :every {:fhir/flags #{:MS}}},
+                                      :family {:fhir/flags #{:MS}}},
+                               :fhir/flags #{:MS}},
+                       :minItems 1},
+                :birthDate {:fhir/flags #{:MS}},
+                :ethnicity {:confirms #{hl7-fhir-us-core.us-core-ethnicity/schema},
+                            :fhir/extensionUri "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity"},
+                :communication {:type zen/vector,
+                                :every {:type zen/map,
+                                        :keys {:language {:fhir/flags #{:MS},
+                                                          :zen.fhir/value-set {:symbol hl7-fhir-us-core.value-set.simple-language/value-set,
+                                                                               :strength :extensible}}}}},
+                :identifier {:type zen/vector,
+                             :every {:type zen/map,
+                                     :keys {:system {:fhir/flags #{:MS}},
+                                            :value {:fhir/flags #{:MS},
+                                                    :zen/desc "The value that is unique within the system."}},
+                                     :require #{:system :value},
+                                     :fhir/flags #{:MS}},
+                             :minItems 1},
+                :genderIdentity {:confirms #{hl7-fhir-us-core.us-core-genderIdentity/schema},
+                                 :fhir/extensionUri "http://hl7.org/fhir/us/core/StructureDefinition/us-core-genderIdentity"},
+                :telecom {:type zen/vector,
+                          :every {:type zen/map,
+                                  :keys {:system {:fhir/flags #{:MS},
+                                                  :zen.fhir/value-set {:symbol hl7-fhir-r4-core.value-set.contact-point-system/value-set,
+                                                                       :strength :required}},
+                                         :value {:fhir/flags #{:MS}},
+                                         :use {:fhir/flags #{:MS},
+                                               :zen.fhir/value-set {:symbol hl7-fhir-r4-core.value-set.contact-point-use/value-set,
+                                                                    :strength :required}}},
+                                  :require #{:system :value}}},
+                :gender {:fhir/flags #{:MS},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4-core.value-set.administrative-gender/value-set,
+                                              :strength :required}},
+                :birthsex {:confirms #{hl7-fhir-us-core.us-core-birthsex/schema},
+                           :fhir/extensionUri "http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex"}},
+         :zen.fhir/type "Patient"}}

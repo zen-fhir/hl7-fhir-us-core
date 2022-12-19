@@ -1,45 +1,30 @@
 {ns hl7-fhir-us-core.us-core-goal,
- import
- #{zen.fhir
-   hl7-fhir-r4-core.Goal
-   hl7-fhir-us-core.value-set.us-core-goal-description
-   hl7-fhir-us-core.us-core-patient
-   hl7-fhir-r4-core.value-set.goal-status},
- schema
- {:zen/tags #{zen.fhir/profile-schema zen/schema},
-  :zen/desc
-  "This profile sets minimum expectations for the Goal resource to record, search, and fetch Goal information associated with a patient to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases",
-  :zen.fhir/type "Goal",
-  :zen.fhir/profileUri
-  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-goal",
-  :zen.fhir/version "0.6.6-7",
-  :confirms #{hl7-fhir-r4-core.Goal/schema zen.fhir/Resource},
-  :type zen/map,
-  :keys
-  {:lifecycleStatus
-   {:fhir/flags #{:MS},
-    :zen.fhir/value-set
-    {:symbol hl7-fhir-r4-core.value-set.goal-status/value-set,
-     :strength :required}},
-   :description
-   {:fhir/flags #{:MS},
-    :zen.fhir/value-set
-    {:symbol
-     hl7-fhir-us-core.value-set.us-core-goal-description/value-set,
-     :strength :extensible}},
-   :subject
-   {:fhir/flags #{:MS},
-    :confirms #{zen.fhir/Reference},
-    :zen.fhir/reference
-    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
-   :target
-   {:type zen/vector,
-    :every
-    {:type zen/map,
-     :keys
-     {:due
-      {:fhir/polymorphic true,
-       :type zen/map,
-       :exclusive-keys #{#{:date :Duration}},
-       :fhir/flags #{:MS}}},
-     :fhir/flags #{:MS}}}}}}
+ import #{zen.fhir
+          hl7-fhir-r4-core.Goal
+          hl7-fhir-us-core.value-set.us-core-goal-description
+          hl7-fhir-us-core.us-core-patient
+          hl7-fhir-r4-core.value-set.goal-status},
+ schema {:zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen/desc "This profile sets minimum expectations for the Goal resource to record, search, and fetch Goal information associated with a patient to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases",
+         :zen.fhir/type "Goal",
+         :zen.fhir/profileUri "http://hl7.org/fhir/us/core/StructureDefinition/us-core-goal",
+         :zen.fhir/version "0.6.6-8",
+         :confirms #{hl7-fhir-r4-core.Goal/schema zen.fhir/Resource},
+         :type zen/map,
+         :keys {:lifecycleStatus {:fhir/flags #{:MS},
+                                  :zen.fhir/value-set {:symbol hl7-fhir-r4-core.value-set.goal-status/value-set,
+                                                       :strength :required}},
+                :description {:fhir/flags #{:MS},
+                              :zen.fhir/value-set {:symbol hl7-fhir-us-core.value-set.us-core-goal-description/value-set,
+                                                   :strength :extensible}},
+                :subject {:fhir/flags #{:MS},
+                          :confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
+                :target {:type zen/vector,
+                         :every {:type zen/map,
+                                 :keys {:due {:fhir/polymorphic true,
+                                              :type zen/map,
+                                              :exclusive-keys #{#{:date
+                                                                  :Duration}},
+                                              :fhir/flags #{:MS}}},
+                                 :fhir/flags #{:MS}}}}}}

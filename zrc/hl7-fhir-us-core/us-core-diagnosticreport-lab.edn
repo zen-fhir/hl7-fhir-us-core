@@ -1,84 +1,57 @@
 {ns hl7-fhir-us-core.us-core-diagnosticreport-lab,
- import
- #{zen.fhir
-   hl7-fhir-us-core.us-core-practitioner
-   hl7-fhir-us-core.value-set.us-core-diagnosticreport-lab-codes
-   hl7-fhir-r4-core.DiagnosticReport
-   hl7-fhir-us-core.us-core-organization
-   hl7-fhir-us-core.us-core-patient
-   hl7-fhir-us-core.us-core-observation-lab
-   hl7-fhir-r4-core.value-set.diagnostic-report-status
-   hl7-fhir-us-core.us-core-careteam
-   hl7-fhir-us-core.us-core-practitionerrole},
- schema
- {:zen.fhir/version "0.6.6-7",
-  :confirms
-  #{hl7-fhir-r4-core.DiagnosticReport/schema zen.fhir/Resource},
-  :zen/tags #{zen.fhir/profile-schema zen/schema},
-  :zen.fhir/profileUri
-  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-diagnosticreport-lab",
-  :require #{:category :subject},
-  :type zen/map,
-  :zen/desc
-  "Laboratory results are grouped and summarized using the DiagnosticReport resource which typically reference Observation resource(s).  Each Observation resource represents an individual laboratory test and result value or component result values, or a nested panel (such as a microbial susceptibility panel) which references other observations.  They can also be presented in report form or as free text.  This profile sets minimum expectations for the DiagnosticReport resource to record, search, and fetch laboratory results associated with a patient to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile. It provides the floor for standards development for specific uses cases.",
-  :keys
-  {:category
-   {:type zen/vector,
-    :slicing
-    {:slices
-     {"LaboratorySlice"
-      {:schema {:type zen/vector, :minItems 1, :maxItems 1},
-       :filter
-       {:engine :match,
-        :match
-        {:coding
-         #{{:system "http://terminology.hl7.org/CodeSystem/v2-0074",
-            :code "LAB"}}}}}}},
-    :every #:fhir{:flags #{:MS}},
-    :minItems 1},
-   :status
-   {:fhir/flags #{:MS},
-    :zen.fhir/value-set
-    {:symbol
-     hl7-fhir-r4-core.value-set.diagnostic-report-status/value-set,
-     :strength :required}},
-   :result
-   {:type zen/vector,
-    :every
-    {:fhir/flags #{:MS},
-     :confirms #{zen.fhir/Reference},
-     :zen.fhir/reference
-     {:refers #{hl7-fhir-us-core.us-core-observation-lab/schema}}}},
-   :effective
-   {:fhir/polymorphic true,
-    :type zen/map,
-    :exclusive-keys #{#{:dateTime :Period}},
-    :fhir/flags #{:MS},
-    :zen/desc
-    "Diagnostically relevant time (typically the time of specimen collection)"},
-   :code
-   {:fhir/flags #{:MS},
-    :zen.fhir/value-set
-    {:symbol
-     hl7-fhir-us-core.value-set.us-core-diagnosticreport-lab-codes/value-set,
-     :strength :extensible},
-    :zen/desc "US Core Laboratory Report Order Code"},
-   :issued
-   {:fhir/flags #{:MS}, :zen/desc "When the report was released"},
-   :subject
-   {:fhir/flags #{:MS},
-    :confirms #{zen.fhir/Reference},
-    :zen.fhir/reference
-    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
-   :performer
-   {:type zen/vector,
-    :every
-    {:fhir/flags #{:MS},
-     :confirms #{zen.fhir/Reference},
-     :zen.fhir/reference
-     {:refers
-      #{hl7-fhir-us-core.us-core-practitionerrole/schema
-        hl7-fhir-us-core.us-core-organization/schema
-        hl7-fhir-us-core.us-core-practitioner/schema
-        hl7-fhir-us-core.us-core-careteam/schema}}}}},
-  :zen.fhir/type "DiagnosticReport"}}
+ import #{zen.fhir
+          hl7-fhir-us-core.us-core-practitioner
+          hl7-fhir-us-core.value-set.us-core-diagnosticreport-lab-codes
+          hl7-fhir-r4-core.DiagnosticReport
+          hl7-fhir-us-core.us-core-organization
+          hl7-fhir-us-core.us-core-patient
+          hl7-fhir-us-core.us-core-observation-lab
+          hl7-fhir-r4-core.value-set.diagnostic-report-status
+          hl7-fhir-us-core.us-core-careteam
+          hl7-fhir-us-core.us-core-practitionerrole},
+ schema {:zen.fhir/version "0.6.6-8",
+         :confirms #{hl7-fhir-r4-core.DiagnosticReport/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/us/core/StructureDefinition/us-core-diagnosticreport-lab",
+         :require #{:category :subject},
+         :type zen/map,
+         :zen/desc "Laboratory results are grouped and summarized using the DiagnosticReport resource which typically reference Observation resource(s).  Each Observation resource represents an individual laboratory test and result value or component result values, or a nested panel (such as a microbial susceptibility panel) which references other observations.  They can also be presented in report form or as free text.  This profile sets minimum expectations for the DiagnosticReport resource to record, search, and fetch laboratory results associated with a patient to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile. It provides the floor for standards development for specific uses cases.",
+         :keys {:category {:type zen/vector,
+                           :slicing {:slices {"LaboratorySlice" {:schema {:type zen/vector,
+                                                                          :minItems 1,
+                                                                          :maxItems 1},
+                                                                 :filter {:engine :match,
+                                                                          :match {:coding #{{:system "http://terminology.hl7.org/CodeSystem/v2-0074",
+                                                                                             :code "LAB"}}}}}}},
+                           :every {:fhir/flags #{:MS}},
+                           :minItems 1},
+                :status {:fhir/flags #{:MS},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4-core.value-set.diagnostic-report-status/value-set,
+                                              :strength :required}},
+                :result {:type zen/vector,
+                         :every {:fhir/flags #{:MS},
+                                 :confirms #{zen.fhir/Reference},
+                                 :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-observation-lab/schema}}}},
+                :effective {:fhir/polymorphic true,
+                            :type zen/map,
+                            :exclusive-keys #{#{:dateTime :Period}},
+                            :fhir/flags #{:MS},
+                            :zen/desc "Diagnostically relevant time (typically the time of specimen collection)"},
+                :code {:fhir/flags #{:MS},
+                       :zen.fhir/value-set {:symbol hl7-fhir-us-core.value-set.us-core-diagnosticreport-lab-codes/value-set,
+                                            :strength :extensible},
+                       :zen/desc "US Core Laboratory Report Order Code"},
+                :issued {:fhir/flags #{:MS},
+                         :zen/desc "When the report was released"},
+                :subject {:fhir/flags #{:MS},
+                          :confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
+                :performer {:type zen/vector,
+                            :every {:fhir/flags #{:MS},
+                                    :confirms #{zen.fhir/Reference},
+                                    :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-practitionerrole/schema
+                                                                   hl7-fhir-us-core.us-core-organization/schema
+                                                                   hl7-fhir-us-core.us-core-practitioner/schema
+                                                                   hl7-fhir-us-core.us-core-careteam/schema}}}}},
+         :zen.fhir/type "DiagnosticReport"}}

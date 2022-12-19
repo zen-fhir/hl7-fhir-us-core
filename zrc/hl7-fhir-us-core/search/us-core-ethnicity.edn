@@ -1,12 +1,11 @@
 {ns hl7-fhir-us-core.search.us-core-ethnicity,
  import #{zen.fhir},
- search
- {:zen/tags #{zen.fhir/search},
-  :fhir/id "us-core-ethnicity",
-  :fhir/url
-  "http://hl7.org/fhir/us/core/SearchParameter/us-core-ethnicity",
-  :fhir/type "token",
-  :name "ethnicity",
-  :expr
-  {:Patient
-   {:knife [], :jsonpath [], :data-types #{}, :template :token}}}}
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "us-core-ethnicity",
+         :fhir/url "http://hl7.org/fhir/us/core/SearchParameter/us-core-ethnicity",
+         :fhir/type "token",
+         :name "ethnicity",
+         :expr {:Patient {:knife [],
+                          :jsonpath [],
+                          :data-types #{},
+                          :template :token}}}}

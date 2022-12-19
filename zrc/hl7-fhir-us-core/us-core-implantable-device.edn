@@ -1,43 +1,31 @@
 {ns hl7-fhir-us-core.us-core-implantable-device,
- import
- #{hl7-fhir-r4-core.Device
-   zen.fhir
-   hl7-fhir-us-core.us-core-patient
-   hl7-fhir-r4-core.value-set.device-kind},
- schema
- {:zen.fhir/version "0.6.6-7",
-  :confirms #{hl7-fhir-r4-core.Device/schema zen.fhir/Resource},
-  :zen/tags #{zen.fhir/profile-schema zen/schema},
-  :zen.fhir/profileUri
-  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-implantable-device",
-  :require #{:patient :type},
-  :type zen/map,
-  :zen/desc
-  "The US Core Implantable Device Profile is based upon the core FHIR Device Resource and meets the U.S. Core Data for Interoperability (USCDI) v2 ‘Unique Device Identifier(s) for a Patient’s Implantable Device(s)’ requirements. To promote interoperability and adoption through common implementation, this profile sets minimum expectations for the Device resource to record, search, and fetch UDI information associated with a patient's implantable device(s). It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile. It provides the floor for standards development for specific uses cases.",
-  :keys
-  {:patient
-   {:fhir/flags #{:MS},
-    :confirms #{zen.fhir/Reference},
-    :zen.fhir/reference
-    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
-   :serialNumber #:fhir{:flags #{:MS}},
-   :type
-   {:fhir/flags #{:MS},
-    :zen.fhir/value-set
-    {:symbol hl7-fhir-r4-core.value-set.device-kind/value-set,
-     :strength :extensible}},
-   :distinctIdentifier #:fhir{:flags #{:MS}},
-   :lotNumber #:fhir{:flags #{:MS}},
-   :manufactureDate #:fhir{:flags #{:MS}},
-   :expirationDate #:fhir{:flags #{:MS}},
-   :udiCarrier
-   {:type zen/vector,
-    :every
-    {:type zen/map,
-     :keys
-     {:deviceIdentifier #:fhir{:flags #{:MS}},
-      :carrierHRF #:fhir{:flags #{:MS}}},
-     :require #{:deviceIdentifier},
-     :fhir/flags #{:MS}},
-    :maxItems 1}},
-  :zen.fhir/type "Device"}}
+ import #{hl7-fhir-r4-core.Device
+          zen.fhir
+          hl7-fhir-us-core.us-core-patient
+          hl7-fhir-r4-core.value-set.device-kind},
+ schema {:zen.fhir/version "0.6.6-8",
+         :confirms #{hl7-fhir-r4-core.Device/schema zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/us/core/StructureDefinition/us-core-implantable-device",
+         :require #{:patient :type},
+         :type zen/map,
+         :zen/desc "The US Core Implantable Device Profile is based upon the core FHIR Device Resource and meets the U.S. Core Data for Interoperability (USCDI) v2 ‘Unique Device Identifier(s) for a Patient’s Implantable Device(s)’ requirements. To promote interoperability and adoption through common implementation, this profile sets minimum expectations for the Device resource to record, search, and fetch UDI information associated with a patient's implantable device(s). It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile. It provides the floor for standards development for specific uses cases.",
+         :keys {:patient {:fhir/flags #{:MS},
+                          :confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
+                :serialNumber {:fhir/flags #{:MS}},
+                :type {:fhir/flags #{:MS},
+                       :zen.fhir/value-set {:symbol hl7-fhir-r4-core.value-set.device-kind/value-set,
+                                            :strength :extensible}},
+                :distinctIdentifier {:fhir/flags #{:MS}},
+                :lotNumber {:fhir/flags #{:MS}},
+                :manufactureDate {:fhir/flags #{:MS}},
+                :expirationDate {:fhir/flags #{:MS}},
+                :udiCarrier {:type zen/vector,
+                             :every {:type zen/map,
+                                     :keys {:deviceIdentifier {:fhir/flags #{:MS}},
+                                            :carrierHRF {:fhir/flags #{:MS}}},
+                                     :require #{:deviceIdentifier},
+                                     :fhir/flags #{:MS}},
+                             :maxItems 1}},
+         :zen.fhir/type "Device"}}

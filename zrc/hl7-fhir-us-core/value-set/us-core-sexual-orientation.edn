@@ -1,20 +1,16 @@
 {ns hl7-fhir-us-core.value-set.us-core-sexual-orientation,
  import #{zen.fhir},
- value-set
- {:zen/tags #{zen.fhir/value-set},
-  :zen/desc
-  "The US Core Sexual Orientation Value Set includes concepts to describe a person’s sexual orientation (who they are attracted to).",
-  :zen.fhir/version "0.6.6-7",
-  :fhir/code-systems
-  #{{:fhir/url "http://snomed.info/sct", :zen.fhir/content :bundled}
-    {:fhir/url "http://terminology.hl7.org/CodeSystem/v3-NullFlavor",
-     :zen.fhir/content :bundled}},
-  :uri
-  "http://hl7.org/fhir/us/core/ValueSet/us-core-sexual-orientation",
-  :version "5.0.1",
-  :ftr
-  {:module "ig",
-   :source-urls ["node_modules/hl7.fhir.us.core"],
-   :source-type :igs,
-   :ftr-path "ftr",
-   :tag "init"}}}
+ value-set {:zen/tags #{zen.fhir/value-set},
+            :zen/desc "The US Core Sexual Orientation Value Set includes concepts to describe a person’s sexual orientation (who they are attracted to).",
+            :zen.fhir/version "0.6.6-8",
+            :fhir/code-systems #{{:fhir/url "http://snomed.info/sct",
+                                  :zen.fhir/content :bundled}
+                                 {:fhir/url "http://terminology.hl7.org/CodeSystem/v3-NullFlavor",
+                                  :zen.fhir/content :bundled}},
+            :uri "http://hl7.org/fhir/us/core/ValueSet/us-core-sexual-orientation",
+            :version "5.0.1",
+            :ftr {:module "ig",
+                  :source-urls ["node_modules/hl7.fhir.us.core"],
+                  :source-type :igs,
+                  :ftr-path "ftr",
+                  :tag "init"}}}

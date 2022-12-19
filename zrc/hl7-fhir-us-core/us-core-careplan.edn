@@ -1,61 +1,40 @@
 {ns hl7-fhir-us-core.us-core-careplan,
- import
- #{hl7-fhir-r4-core.value-set.request-status
-   hl7-fhir-r4-core.CarePlan
-   zen.fhir
-   hl7-fhir-r4-core.value-set.care-plan-intent
-   hl7-fhir-us-core.us-core-patient
-   hl7-fhir-us-core.value-set.us-core-narrative-status},
- schema
- {:zen.fhir/version "0.6.6-7",
-  :confirms #{hl7-fhir-r4-core.CarePlan/schema zen.fhir/Resource},
-  :zen/tags #{zen.fhir/profile-schema zen/schema},
-  :zen.fhir/profileUri
-  "http://hl7.org/fhir/us/core/StructureDefinition/us-core-careplan",
-  :require #{:category :text},
-  :type zen/map,
-  :zen/desc
-  "This profile sets minimum expectations for the CarePlan resource to record, search, and fetch assessment and plan of treatment data associated with a patient to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
-  :keys
-  {:text
-   {:type zen/map,
-    :keys
-    {:status
-     {:fhir/flags #{:MS},
-      :zen.fhir/value-set
-      {:symbol
-       hl7-fhir-us-core.value-set.us-core-narrative-status/value-set,
-       :strength :required}},
-     :div #:fhir{:flags #{:MS}}},
-    :fhir/flags #{:MS}},
-   :status
-   {:fhir/flags #{:MS},
-    :zen.fhir/value-set
-    {:symbol hl7-fhir-r4-core.value-set.request-status/value-set,
-     :strength :required}},
-   :intent
-   {:fhir/flags #{:MS},
-    :zen.fhir/value-set
-    {:symbol hl7-fhir-r4-core.value-set.care-plan-intent/value-set,
-     :strength :required}},
-   :category
-   {:type zen/vector,
-    :slicing
-    {:slices
-     {"AssessPlan"
-      {:schema {:type zen/vector, :minItems 1, :maxItems 1},
-       :filter
-       {:engine :match,
-        :match
-        {:coding
-         #{{:system
-            "http://hl7.org/fhir/us/core/CodeSystem/careplan-category",
-            :code "assess-plan"}}}}}}},
-    :every #:fhir{:flags #{:MS}},
-    :minItems 1},
-   :subject
-   {:fhir/flags #{:MS},
-    :confirms #{zen.fhir/Reference},
-    :zen.fhir/reference
-    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}}},
-  :zen.fhir/type "CarePlan"}}
+ import #{hl7-fhir-r4-core.value-set.request-status
+          hl7-fhir-r4-core.CarePlan
+          zen.fhir
+          hl7-fhir-r4-core.value-set.care-plan-intent
+          hl7-fhir-us-core.us-core-patient
+          hl7-fhir-us-core.value-set.us-core-narrative-status},
+ schema {:zen.fhir/version "0.6.6-8",
+         :confirms #{hl7-fhir-r4-core.CarePlan/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/us/core/StructureDefinition/us-core-careplan",
+         :require #{:category :text},
+         :type zen/map,
+         :zen/desc "This profile sets minimum expectations for the CarePlan resource to record, search, and fetch assessment and plan of treatment data associated with a patient to promote interoperability and adoption through common implementation.  It identifies which core elements, extensions, vocabularies and value sets **SHALL** be present in the resource when using this profile.  It provides the floor for standards development for specific uses cases.",
+         :keys {:text {:type zen/map,
+                       :keys {:status {:fhir/flags #{:MS},
+                                       :zen.fhir/value-set {:symbol hl7-fhir-us-core.value-set.us-core-narrative-status/value-set,
+                                                            :strength :required}},
+                              :div {:fhir/flags #{:MS}}},
+                       :fhir/flags #{:MS}},
+                :status {:fhir/flags #{:MS},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4-core.value-set.request-status/value-set,
+                                              :strength :required}},
+                :intent {:fhir/flags #{:MS},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4-core.value-set.care-plan-intent/value-set,
+                                              :strength :required}},
+                :category {:type zen/vector,
+                           :slicing {:slices {"AssessPlan" {:schema {:type zen/vector,
+                                                                     :minItems 1,
+                                                                     :maxItems 1},
+                                                            :filter {:engine :match,
+                                                                     :match {:coding #{{:system "http://hl7.org/fhir/us/core/CodeSystem/careplan-category",
+                                                                                        :code "assess-plan"}}}}}}},
+                           :every {:fhir/flags #{:MS}},
+                           :minItems 1},
+                :subject {:fhir/flags #{:MS},
+                          :confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-patient/schema}}}},
+         :zen.fhir/type "CarePlan"}}
