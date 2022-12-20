@@ -4,6 +4,6 @@
  schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
          :zen/desc "This extension provides concepts to describe the gender a person identifies as.",
          :zen.fhir/profileUri "http://hl7.org/fhir/us/core/StructureDefinition/us-core-genderIdentity",
-         :zen.fhir/version "0.6.6-8",
+         :zen.fhir/version "0.6.7",
          :zen.fhir/value-set {:symbol us-nlm-vsac.value-set.2.16.840.1.113762.1.4.1021.32/value-set,
                               :strength :extensible}}}
