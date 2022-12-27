@@ -9,7 +9,7 @@
           hl7-fhir-us-core.us-core-patient
           hl7-fhir-us-core.us-core-careteam
           hl7-fhir-us-core.us-core-practitionerrole},
- schema {:zen.fhir/version "0.6.7-3",
+ schema {:zen.fhir/version "0.6.7-4",
          :confirms #{hl7-fhir-r4-core.CareTeam/schema
                      zen.fhir/Resource},
          :zen/tags #{zen.fhir/profile-schema zen/schema},
