@@ -1,9 +1,12 @@
 {ns hl7-fhir-us-core.us-core-genderIdentity,
  import #{zen.fhir
-          us-nlm-vsac.value-set.2.16.840.1.113762.1.4.1021.32},
+          us-nlm-vsac.value-set.2.16.840.1.113762.1.4.1021.32
+          hl7-fhir-r4-core.patient-genderIdentity},
  schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
          :zen/desc "This extension provides concepts to describe the gender a person identifies as.",
+         :zen.fhir/type "CodeableConcept",
          :zen.fhir/profileUri "http://hl7.org/fhir/us/core/StructureDefinition/us-core-genderIdentity",
-         :zen.fhir/version "0.6.8",
+         :zen.fhir/version "0.6.9",
+         :confirms #{hl7-fhir-r4-core.patient-genderIdentity/schema},
          :zen.fhir/value-set {:symbol us-nlm-vsac.value-set.2.16.840.1.113762.1.4.1021.32/value-set,
                               :strength :extensible}}}
