@@ -5,7 +5,11 @@
          :fhir/url "http://hl7.org/fhir/us/core/SearchParameter/us-core-patient-gender-identity",
          :fhir/type "token",
          :name "gender-identity",
-         :expr {:Patient {:knife [],
-                          :jsonpath [],
+         :expr {:Patient {:knife [["extension"
+                                   {:url "http://hl7.org/fhir/StructureDefinition/patient-genderIdentity"}
+                                   "extension"
+                                   "value"
+                                   "code"]],
+                          :jsonpath ["$.\"extension\"?(@.\"url\"==\"http://hl7.org/fhir/StructureDefinition/patient-genderIdentity\").\"extension\".\"value\".\"code\"[*]"],
                           :data-types #{},
                           :template :token}}}}

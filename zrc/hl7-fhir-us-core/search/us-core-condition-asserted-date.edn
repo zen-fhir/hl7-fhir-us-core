@@ -5,8 +5,11 @@
          :fhir/url "http://hl7.org/fhir/us/core/SearchParameter/us-core-condition-asserted-date",
          :fhir/type "date",
          :name "asserted-date",
-         :expr {:Condition {:knife [],
-                            :jsonpath [],
+         :expr {:Condition {:knife [["extension"
+                                     {:url "http://hl7.org/fhir/StructureDefinition/condition-assertedDate"}
+                                     "extension"
+                                     "valueDateTime"]],
+                            :jsonpath ["$.\"extension\"?(@.\"url\"==\"http://hl7.org/fhir/StructureDefinition/condition-assertedDate\").\"extension\".\"valueDateTime\"[*]"],
                             :data-types #{},
                             :template :date,
                             :sql {:where [:or]}}}}}

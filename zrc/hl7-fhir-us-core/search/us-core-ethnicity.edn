@@ -5,7 +5,11 @@
          :fhir/url "http://hl7.org/fhir/us/core/SearchParameter/us-core-ethnicity",
          :fhir/type "token",
          :name "ethnicity",
-         :expr {:Patient {:knife [],
-                          :jsonpath [],
+         :expr {:Patient {:knife [["extension"
+                                   {:url "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity"}
+                                   "extension"
+                                   "value"
+                                   "code"]],
+                          :jsonpath ["$.\"extension\"?(@.\"url\"==\"http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity\").\"extension\".\"value\".\"code\"[*]"],
                           :data-types #{},
                           :template :token}}}}
