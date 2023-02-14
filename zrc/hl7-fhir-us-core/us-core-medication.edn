@@ -2,7 +2,7 @@
  import #{zen.fhir
           us-nlm-vsac.value-set.2.16.840.1.113762.1.4.1010.4
           hl7-fhir-r4-core.Medication},
- schema {:zen.fhir/version "0.6.12-1",
+ schema {:zen.fhir/version "0.16.13-2",
          :confirms #{hl7-fhir-r4-core.Medication/schema
                      zen.fhir/Resource},
          :zen/tags #{zen.fhir/profile-schema zen/schema},
