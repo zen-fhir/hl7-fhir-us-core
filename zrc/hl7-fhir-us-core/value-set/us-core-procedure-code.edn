@@ -2,7 +2,7 @@
  import #{zen.fhir},
  value-set {:zen/tags #{zen.fhir/value-set},
             :zen/desc "Concepts from CPT, SNOMED CT, HCPCS Level II Alphanumeric Codes, ICD-10-PCS,CDT and LOINC code systems that can be used to indicate the type of procedure performed.",
-            :zen.fhir/version "0.6.15",
+            :zen.fhir/version "0.6.16-2",
             :fhir/code-systems #{{:fhir/url "http://www.ada.org/cdt",
                                   :zen.fhir/content :not-present}
                                  {:fhir/url "http://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets",
@@ -17,8 +17,10 @@
                                   :zen.fhir/content :not-present}},
             :uri "http://hl7.org/fhir/us/core/ValueSet/us-core-procedure-code",
             :version "5.0.1",
-            :ftr {:module "ig",
-                  :source-urls ["node_modules/hl7.fhir.us.core"],
-                  :source-type :igs,
+            :ftr {:module "hl7-fhir-us-core",
+                  :source-url "https://storage.googleapis.com",
+                  :source-type :cloud-storage,
                   :ftr-path "ftr",
-                  :tag "init"}}}
+                  :tag "init",
+                  :validation-index {:type :nippy,
+                                     :file "index.nippy"}}}}
