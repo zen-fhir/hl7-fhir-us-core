@@ -4,7 +4,7 @@
           hl7-fhir-r4-core.string
           hl7-fhir-r4-core.Coding
           hl7-fhir-us-core.value-set.detailed-race},
- schema {:zen.fhir/version "0.6.17-4",
+ schema {:zen.fhir/version "0.6.18-1",
          :zen/tags #{zen/schema zen.fhir/structure-schema},
          :zen.fhir/profileUri "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race",
          :require #{:text},
