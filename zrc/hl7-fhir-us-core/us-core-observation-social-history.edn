@@ -6,8 +6,12 @@
           hl7-fhir-us-core.us-core-organization
           hl7-fhir-us-core.us-core-patient
           hl7-fhir-r4-core.PractitionerRole
+          hl7-fhir-us-core.us-core-observation-social-history
           hl7-fhir-us-core.us-core-careteam},
- schema {:zen.fhir/version "0.6.18-1",
+ referenceRange-schema {:zen/tags #{zen/schema
+                                    zen.fhir/structure-schema},
+                        :zen.fhir/version "0.6.19"},
+ schema {:zen.fhir/version "0.6.19",
          :confirms #{hl7-fhir-r4-core.Observation/schema
                      zen.fhir/Resource},
          :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -63,5 +67,6 @@
                                             :CodeableConcept
                                             :Quantity
                                             :boolean}},
-                        :fhir/flags #{:MS}}},
+                        :fhir/flags #{:MS}},
+                :referenceRange {:confirms #{hl7-fhir-us-core.us-core-observation-social-history/referenceRange-schema}}},
          :zen.fhir/type "Observation"}}

@@ -1,11 +1,15 @@
 {ns hl7-fhir-us-core.us-core-smokingstatus,
  import #{hl7-fhir-r4-core.Observation
+          hl7-fhir-us-core.us-core-smokingstatus
           zen.fhir
           hl7-fhir-us-core.us-core-patient
           hl7-fhir-us-core.value-set.us-core-smoking-status-observation-codes
           hl7-fhir-us-core.value-set.us-core-observation-smoking-status-status
           us-nlm-vsac.value-set.2.16.840.1.113883.11.20.9.38},
- schema {:zen.fhir/version "0.6.18-1",
+ referenceRange-schema {:zen/tags #{zen/schema
+                                    zen.fhir/structure-schema},
+                        :zen.fhir/version "0.6.19"},
+ schema {:zen.fhir/version "0.6.19",
          :confirms #{hl7-fhir-r4-core.Observation/schema
                      zen.fhir/Resource},
          :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -40,5 +44,6 @@
                                                  :zen.fhir/value-set {:symbol us-nlm-vsac.value-set.2.16.840.1.113883.11.20.9.38/value-set,
                                                                       :strength :preferred},
                                                  :zen/desc "Coded Responses from Smoking Status Value Set"}},
-                        :require #{:CodeableConcept}}},
+                        :require #{:CodeableConcept}},
+                :referenceRange {:confirms #{hl7-fhir-us-core.us-core-smokingstatus/referenceRange-schema}}},
          :zen.fhir/type "Observation"}}

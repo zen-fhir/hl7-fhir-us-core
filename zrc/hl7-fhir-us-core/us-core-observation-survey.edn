@@ -14,7 +14,10 @@
           hl7-fhir-r4-core.Media
           hl7-fhir-us-core.us-core-careteam
           hl7-fhir-us-core.us-core-documentreference},
- schema {:zen.fhir/version "0.6.18-1",
+ referenceRange-schema {:zen/tags #{zen/schema
+                                    zen.fhir/structure-schema},
+                        :zen.fhir/version "0.6.19"},
+ schema {:zen.fhir/version "0.6.19",
          :confirms #{hl7-fhir-r4-core.Observation/schema
                      zen.fhir/Resource},
          :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -31,6 +34,7 @@
                                                                                     :code "survey"}}}}}}},
                            :every {:fhir/flags #{:MS}},
                            :minItems 1},
+                :referenceRange {:confirms #{hl7-fhir-us-core.us-core-observation-survey/referenceRange-schema}},
                 :hasMember {:type zen/vector,
                             :every {:fhir/flags #{:MS},
                                     :confirms #{zen.fhir/Reference},
