@@ -5,12 +5,12 @@
           hl7-fhir-r4-core.value-set.ucum-bodylength},
  referenceRange-schema {:zen/tags #{zen/schema
                                     zen.fhir/structure-schema},
-                        :zen.fhir/version "0.6.19"},
+                        :zen.fhir/version "0.6.20-2"},
  schema {:zen/tags #{zen.fhir/profile-schema zen/schema},
          :zen/desc "To promote interoperability and adoption through common implementation, this profile sets minimum expectations for the Observation resource to record, search, and fetch body height observations with a standard LOINC code and UCUM units of measure. It is based on the US Core Vital Signs Profile and identifies the *additional* mandatory core elements, extensions, vocabularies and value sets which **SHALL** be present in the Observation resource when using this profile. It provides the floor for standards development for specific uses cases.",
          :zen.fhir/type "Observation",
          :zen.fhir/profileUri "http://hl7.org/fhir/us/core/StructureDefinition/us-core-body-height",
-         :zen.fhir/version "0.6.19",
+         :zen.fhir/version "0.6.20-2",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-us-core.us-core-vital-signs/schema},
          :type zen/map,
