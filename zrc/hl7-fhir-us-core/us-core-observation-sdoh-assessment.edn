@@ -5,12 +5,12 @@
           hl7-fhir-us-core.us-core-observation-sdoh-assessment},
  referenceRange-schema {:zen/tags #{zen/schema
                                     zen.fhir/structure-schema},
-                        :zen.fhir/version "0.6.23"},
+                        :zen.fhir/version "0.6.23-1"},
  schema {:zen/tags #{zen.fhir/profile-schema zen/schema},
          :zen/desc "The US Core Observation SDOH Assessment Profile meets the U.S. Core Data for Interoperability (USCDI) v2 'SDOH Assessments' requirements.  This profile is based on the US Core Observation Survey Profile and sets minimum expectations for representing responses to assessment tools such as the *Protocol for Responding to and Assessing Patients’ Assets, Risks, and Experiences (PRAPARE) Survey*.  It can be used to represent individual responses, panels of multi-question surveys, and multi-select responses to “check all that apply” questions. It identifies the *additional* core elements, extensions, vocabularies and value sets which SHALL be present in the Observation resource when using this profile. It provides the floor for standards development for specific uses cases.",
          :zen.fhir/type "Observation",
          :zen.fhir/profileUri "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-sdoh-assessment",
-         :zen.fhir/version "0.6.23",
+         :zen.fhir/version "0.6.23-1",
          :confirms #{hl7-fhir-us-core.us-core-observation-survey/schema
                      zen.fhir/Resource},
          :type zen/map,
