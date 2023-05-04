@@ -3,12 +3,8 @@
           zen.fhir
           hl7-fhir-r4-core.value-set.observation-status
           hl7-fhir-us-core.us-core-patient
-          hl7-fhir-us-core.value-set.us-core-sexual-orientation
-          hl7-fhir-us-core.us-core-observation-sexual-orientation},
- referenceRange-schema {:zen/tags #{zen/schema
-                                    zen.fhir/structure-schema},
-                        :zen.fhir/version "0.6.23-1"},
- schema {:zen.fhir/version "0.6.23-1",
+          hl7-fhir-us-core.value-set.us-core-sexual-orientation},
+ schema {:zen.fhir/version "0.6.24",
          :confirms #{hl7-fhir-r4-core.Observation/schema
                      zen.fhir/Resource},
          :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -37,6 +33,5 @@
                         :keys {:CodeableConcept {:fhir/flags #{:MS},
                                                  :zen.fhir/value-set {:symbol hl7-fhir-us-core.value-set.us-core-sexual-orientation/value-set,
                                                                       :strength :extensible},
-                                                 :zen/desc "Sexual Orientation"}}},
-                :referenceRange {:confirms #{hl7-fhir-us-core.us-core-observation-sexual-orientation/referenceRange-schema}}},
+                                                 :zen/desc "Sexual Orientation"}}}},
          :zen.fhir/type "Observation"}}

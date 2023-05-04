@@ -2,12 +2,8 @@
  import #{hl7-fhir-r4-core.Observation
           zen.fhir
           hl7-fhir-us-core.value-set.us-core-clinical-test-codes
-          hl7-fhir-us-core.us-core-patient
-          hl7-fhir-us-core.us-core-observation-clinical-test},
- referenceRange-schema {:zen/tags #{zen/schema
-                                    zen.fhir/structure-schema},
-                        :zen.fhir/version "0.6.23-1"},
- schema {:zen.fhir/version "0.6.23-1",
+          hl7-fhir-us-core.us-core-patient},
+ schema {:zen.fhir/version "0.6.24",
          :confirms #{hl7-fhir-r4-core.Observation/schema
                      zen.fhir/Resource},
          :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -54,6 +50,5 @@
                                             :boolean}},
                         :fhir/flags #{:MS},
                         :zen/desc "Result Value"},
-                :dataAbsentReason {:fhir/flags #{:MS}},
-                :referenceRange {:confirms #{hl7-fhir-us-core.us-core-observation-clinical-test/referenceRange-schema}}},
+                :dataAbsentReason {:fhir/flags #{:MS}}},
          :zen.fhir/type "Observation"}}
