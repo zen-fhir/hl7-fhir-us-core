@@ -1,6 +1,6 @@
 {ns hl7-fhir-us-core.pediatric-weight-for-height,
  import #{zen.fhir hl7-fhir-us-core.us-core-vital-signs},
- schema {:zen.fhir/version "0.6.28",
+ schema {:zen.fhir/version "0.6.29",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-us-core.us-core-vital-signs/schema},
          :zen/tags #{zen.fhir/profile-schema zen/schema},
